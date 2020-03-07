@@ -1,0 +1,29 @@
+<div id="research-status" style="overflow-y: scroll;max-height: 70vh">
+<h3>{{title}}</h3>
+<table  id="customers">
+	<tr>
+		<th>
+			Status
+		</th>
+		<th>
+			Remarks
+		</th>
+		<th>
+			Date
+		</th>
+	</tr>
+	<tr  *ngFor="let c of status">
+			<td>
+				{{c.name}}
+			</td>
+			<td>
+				{{c.remarks}}
+			</td>
+			<td>
+				{{c.datecreated | date :'mediumDate'}} <!--@ {{c.datecreated| date :'shortTime'}}-->
+			</td>
+	</tr>
+</table>
+</div>
+<br>
+<button mat-raised-button style="float: right;" (click)="noclick(1)" color="primary">Close</button>

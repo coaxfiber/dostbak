@@ -1,0 +1,249 @@
+
+<div id="reg">
+<mat-drawer-container style="background-image: url('assets/St.jpg');background-repeat: no-repeat; background-size: cover;height: calc(100vh - 128px);" class="example-container">
+<mat-card style="width: 600px;margin: 50px auto;padding:0">
+
+
+<!-- 
+    Login template using Angular Material
+    @author Shashank Tiwari 
+-->
+ 
+ 
+    <!-- Writing markup for login starts -->
+        <div class="login-container">
+ 
+            <!-- Template Header starts -->
+            <div class="login-box-header">
+                <h3>Registration</h3>
+            </div>
+            <!-- Template Header ends -->
+            <mat-horizontal-stepper [linear]="true" #stepper>
+			  <mat-step>
+			      <ng-template matStepLabel>Login Credentials</ng-template>
+			      
+		                <!-- Markup for getting Username starts -->
+		                <mat-grid-list cols="9" rowHeight="70px">
+		                    <mat-grid-tile [rowspan]="1" class="login-icon">
+		                        <mat-icon>lock</mat-icon>
+		                    </mat-grid-tile>
+		                    <mat-grid-tile [colspan]="7">
+		                        <mat-form-field class="justifier">
+		                            <input autocomplete="off"  matInput placeholder="Email Address" text="text" [(ngModel)]="email">
+		                        </mat-form-field>
+		                    </mat-grid-tile>
+		                </mat-grid-list>
+		                <!-- Markup for getting Username ends -->
+		 
+		                <!-- Markup for getting Password starts -->
+		                <mat-grid-list cols="9" rowHeight="70px">
+		                    <mat-grid-tile [rowspan]="1"  class="login-icon">
+		                        <mat-icon>remove_red_eye</mat-icon>
+		                    </mat-grid-tile>
+		                    <mat-grid-tile [colspan]="7">
+		                        <mat-form-field class="justifier">
+		                            <input autocomplete="off"  matInput placeholder="Password" text="password" type="password"  [(ngModel)]="pword">
+		                        </mat-form-field>
+		                    </mat-grid-tile>
+		                </mat-grid-list>
+
+		                <mat-grid-list cols="9" rowHeight="70px">
+		                    <mat-grid-tile [rowspan]="1"  class="login-icon">
+		                        <mat-icon>remove_red_eye</mat-icon>
+		                    </mat-grid-tile>
+		                    <mat-grid-tile [colspan]="7">
+		                        <mat-form-field class="justifier">
+		                            <input autocomplete="off"  matInput placeholder="Confirm Password" text="password" type="password"  [(ngModel)]="cpword">
+		                        </mat-form-field>
+		                    </mat-grid-tile>
+		                </mat-grid-list>
+
+		                <mat-grid-list cols="9" rowHeight="70px">
+		                    <mat-grid-tile [rowspan]="1"  class="login-icon">
+		                        <mat-icon>domain</mat-icon>
+		                    </mat-grid-tile>
+		                    <mat-grid-tile [colspan]="7">
+						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						              <mat-label>Current School/Company</mat-label>
+						              <mat-select  [(ngModel)]="inputcompany">
+						                <mat-option value="{{f.id}}"  *ngFor="let f of company">
+						                  {{f.name}}
+						                </mat-option>
+						              </mat-select>
+						            </mat-form-field>	
+		                    </mat-grid-tile>
+		                </mat-grid-list>
+
+		                <!-- Markup for getting Password ends -->
+			      <div>
+			        <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="nexttopinfo(stepper)">Next</button>
+			        <button class="buttonblue" mat-raised-button style="float: left;margin: 10px" (click)="goBack()">Back</button>
+			      </div>
+			  </mat-step>
+			  <mat-step>
+			      <ng-template matStepLabel>Personal Information</ng-template>
+			      
+			      <table cellspacing="0" style="width: 100%">
+			      	<tr>
+			      		<td style="width: 30%">
+					      <mat-form-field class="npinput"  style="width: 100%">
+				              <input autocomplete="off"  matInput placeholder="Last name" required  [(ngModel)]="lname">
+				          </mat-form-field>
+			      		</td>
+			      		<td style="width: 40%">
+					      <mat-form-field class="npinput"  style="width: 100%">
+				              <input autocomplete="off"  matInput placeholder="First name" required  [(ngModel)]="fname">
+				          </mat-form-field>
+			      			
+			      		</td>
+			      		<td style="width: 25%">
+					      <mat-form-field class="npinput"  style="width: 100%">
+				              <input autocomplete="off"  matInput placeholder="Middle name"  [(ngModel)]="mname">
+				          </mat-form-field>
+			      		</td>
+			      		<td style="width: 5%">
+					      <mat-form-field class="npinput"  style="width: 100%">
+				              <input autocomplete="off"  matInput placeholder="Suffix" [(ngModel)]="sname">
+				          </mat-form-field>
+			      		</td>
+			      	</tr>
+			      	<tr>
+			      		<td colspan="4" style="width: 40%">	
+			      			<table style="width:100%">
+			      				<tr><td style="width: 33%">
+						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						              <mat-label>Gender</mat-label>
+						              <mat-select  [(ngModel)]="gender">
+						                <mat-option value="M">
+						                  Male
+						                </mat-option>
+						                <mat-option value="F">
+						                  Female
+						                </mat-option>
+						              </mat-select>
+						            </mat-form-field>	
+			      				</td>
+					      		<td style="width: 33%">	
+						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						              <mat-label>Civil Status</mat-label>
+						              <mat-select  [(ngModel)]="civilstatus">
+						                <mat-option value="Single">
+						                  Single
+						                </mat-option>
+						                <mat-option value="Married">
+						                  Married
+						                </mat-option>
+						                <mat-option value="Divorced">
+						                  Divorced
+						                </mat-option>
+						                <mat-option value="Widowed">
+						                  Widowed
+						                </mat-option>
+						              </mat-select>
+						            </mat-form-field>	
+					      		</td>
+					      		<td>
+						            <mat-form-field class="npinput" style="width: 100%">
+						              <input autocomplete="off"  matInput placeholder="Citizenship" required type="text" [(ngModel)]="citizenship">
+						              <mat-hint>E.G. Filipino</mat-hint>
+				            		</mat-form-field>
+					      		</td>
+					      	</tr>
+					      </table>
+					  	</td>
+			      	</tr>
+			      	<tr>
+			      		<td colspan="4">
+		      				<table style="width: 100%">
+		      					<tr>
+		      						<td style="width: 50%">
+							            <mat-form-field class="npinput" style="width: 100%">
+							              <input autocomplete="off"  matInput placeholder="Telephone Number" type="text" [(ngModel)]="telno">
+					            		</mat-form-field>
+		      						</td>
+		      						<td style="width: 50%">
+							            <mat-form-field class="npinput" style="width: 100%">
+							              <input autocomplete="off"  matInput placeholder="Cellphone Number" type="text" [(ngModel)]="mobileno">
+					            		</mat-form-field>
+		      						</td>
+		      					</tr>
+		      				</table>
+			      		</td>
+			      	</tr>
+			      	<tr>
+			      		<td colspan="4">
+			      			
+							  <table cellspacing="0" style="width: 100%">
+							  <tr>
+							    <td width="30%">
+							  	<mat-form-field style="width: 100%">
+							      <input autocomplete="off"  matInput placeholder="Street" [(ngModel)]="street1" name="lrno">
+							    </mat-form-field></td>
+							  	<td style="padding-left: 10px">
+							    <mat-form-field style="width: calc(100% - 50px)">
+							      <input autocomplete="off"  autofocus matInput  placeholder="Permanent Address" [(ngModel)]="perma" readonly="readonly">
+							      
+							    </mat-form-field>
+							    <button mat-mini-fab color="primary"  (click)="openDialog(1)">
+								    <mat-icon>search</mat-icon>
+								  </button>
+							  	</td>
+							  </tr>
+							  </table>
+			      		</td>
+			      	</tr>
+			      	<tr>
+			      		<td colspan="4">
+			      			
+							  <table cellspacing="0" style="width: 100%">
+							  <tr>
+							    <td width="30%">
+							  	<mat-form-field style="width: 100%">
+							      <input autocomplete="off"  matInput placeholder="Street" [(ngModel)]="street2" name="lrno">
+							    </mat-form-field></td>
+							  	<td style="padding-left: 10px">
+							    <mat-form-field style="width: calc(100% - 50px)">
+							      <input autocomplete="off"  autofocus matInput  placeholder="Residential Address" [(ngModel)]="resi" readonly="readonly"  (click)="checkthis()">
+							      <mat-hint><mat-checkbox (change)='checkbox()' disabled='{{!check}}'>Same as permanent address</mat-checkbox></mat-hint>
+							    </mat-form-field>
+							    <button mat-mini-fab color="primary"  (click)="openDialog(2)">
+								    <mat-icon>search</mat-icon>
+								  </button>
+							  	</td>
+							  </tr>
+							  </table>
+			      		</td>
+			      	</tr>
+			      </table>
+			      <br><br>
+			      <div>
+			        <button  class="buttonblue" mat-raised-button style="margin: 10px" matStepperPrevious>Back</button> 
+			        <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="nexttosubmit(stepper)">Next</button>
+			      </div>
+			  </mat-step>
+			  <mat-step>
+			    <ng-template matStepLabel>Done</ng-template>
+			    <p>
+			    	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			    </p>
+			    <p>- loremipsum</p>
+			    <div>
+			        <button  class="buttonblue" mat-raised-button style="margin: 10px" matStepperPrevious>Back</button> 
+			       <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="submit()">Register</button>
+			      
+			    </div>
+			  </mat-step>
+			</mat-horizontal-stepper>
+            <!-- Template Body starts -->
+            <div class="login-box-body" style="margin: 10px">
+ 	
+                
+            </div>
+            <!-- Template Body ends -->
+            
+        </div>
+
+</mat-card>
+</mat-drawer-container>
+
+</div>

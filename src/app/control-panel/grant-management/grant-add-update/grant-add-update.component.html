@@ -1,0 +1,84 @@
+<div>
+  	<h4>{{title}}</h4>
+	<hr>
+</div> 
+
+<table class="example-full-width" cellspacing="0" style="width: 100%">
+		  <tr>
+		    <td width="100%">
+		  		<mat-form-field style="width: 100%">
+			      <input matInput placeholder="Call for proposal name" type="text" [(ngModel)]="name" name="role" value="">
+			    </mat-form-field></td>
+		  </tr>
+		  <tr>
+		    <td width="100%">
+		  		<mat-form-field style="width: 100%">
+			      <input matInput placeholder="Description" type="text" [(ngModel)]="desc" name="role" value="">
+			    </mat-form-field></td>
+		  </tr>
+		  <tr>
+		  	
+		    <td width="100%">
+		    	<table style="width: 100%">
+		    		<tr>
+		    			<td style="width: 50%">
+		    				<mat-form-field style="width: 100%">
+							  <input matInput [matDatepicker]="picker1" placeholder="Start Date" [(ngModel)]="sdate" readonly="readonly">
+							  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+							  <mat-datepicker #picker1></mat-datepicker>
+							</mat-form-field>
+		    			</td>
+		    			<td>
+		    				<mat-form-field style="width: 100%">
+							  <input matInput [matDatepicker]="picker2" placeholder="End Date"[(ngModel)]="edate" readonly="readonly">
+							  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+							  <mat-datepicker #picker2></mat-datepicker>
+							</mat-form-field>
+		    			</td>
+		    		</tr>
+		    	</table>
+		  		</td>
+		  </tr>
+		  <tr>
+		  	
+		    <td width="100%">
+		    	<table style="width: 100%">
+		    		<tr>
+		    			<td style="width: 50%">
+		    				<mat-form-field style="width: 100%">
+							  <input matInput [matDatepicker]="picker3" placeholder="Final Evaluation Start date "[(ngModel)]="fesdate" readonly="readonly">
+							  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+							  <mat-datepicker #picker3></mat-datepicker>
+							</mat-form-field>
+		    			</td>
+		    			<td>
+		    				<mat-form-field style="width: 100%">
+							  <input matInput [matDatepicker]="picker4" placeholder="Final Evaluation End date" [(ngModel)]="feedate" readonly="readonly">
+							  <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+							  <mat-datepicker #picker4></mat-datepicker>
+							</mat-form-field>
+		    			</td>
+		    		</tr>
+		    	</table>
+		  		</td>
+		  </tr>
+		  <tr>
+		  	<td>
+		  		
+						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						              <mat-label>Funding Agency</mat-label>
+						              <mat-select  [(ngModel)]="fagency" disabled="disabled">
+						                <mat-option value="{{f.id}}"  *ngFor="let f of fundingagency">
+						                  {{f.name}}
+						                </mat-option>
+						              </mat-select>
+						            </mat-form-field>
+		  	</td>
+		  </tr>
+		  </table>
+
+ <div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="noclick()" color="warning">Close</button>
+  <button mat-raised-button (click)="addcallforproposal(1)" class="buttonblue"  *ngIf="data.x==0">Save</button>
+  <button mat-raised-button (click)="addcallforproposal(2)" class="buttonblue"  *ngIf="data.x==1">Update</button>
+</div>

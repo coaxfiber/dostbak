@@ -1,0 +1,69 @@
+  <div style="padding:  20px 0 0 20px;">
+  <h4>Company Management</h4>
+  <hr>
+  </div>
+  <div id="roles" style="overflow-y: scroll;max-height: calc(100vh - 235px)">
+
+		      <table style="width: 100%">
+					<tr>
+						<td >
+							<button mat-raised-button color="primary" style="margin:10px" (click)="openDialog(3,null)"><i class="material-icons">
+							add_circle
+							</i> Add Company</button>
+									</td>
+						<td style="text-align: right;width: 30%">
+							 <mat-form-field style="width:calc(100% - 50px)">
+							<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+
+							    </mat-form-field>
+						    <button mat-mini-fab color="primary">
+							    <mat-icon><mat-icon>filter_list</mat-icon></mat-icon>
+							  </button>
+						</td>
+					</tr>
+				</table>
+		  <mat-table #table [dataSource]="dataSource" matSort>
+
+		   <ng-container matColumnDef="id">
+		      <mat-header-cell *matHeaderCellDef style="flex: 0 0 90px;">Company ID </mat-header-cell>
+		      <mat-cell *matCellDef="let element" style="flex: 0 0 90px;">
+		      	{{element.id}}
+			  </mat-cell>
+		    </ng-container>
+
+		    <ng-container matColumnDef="name">
+		      <mat-header-cell *matHeaderCellDef style="min-width: 200px !important">Name</mat-header-cell>
+		      <mat-cell *matCellDef="let element" style="min-width: 200px !important">
+		      	{{element.name}}
+			  </mat-cell>
+		    </ng-container>
+		    <ng-container matColumnDef="address" >
+		      <mat-header-cell *matHeaderCellDef style="min-width: 220px !important">Address</mat-header-cell>
+		      <mat-cell *matCellDef="let element" style="min-width: 220px !important">
+		      	{{element.street}} {{element.address}}
+			  </mat-cell>
+		    </ng-container>
+		    <ng-container matColumnDef="action">
+		      <mat-header-cell *matHeaderCellDef style="flex: 0 0 80px">- Action -</mat-header-cell>
+		      <mat-cell *matCellDef="let element" style="flex: 0 0 80px">
+		      	<b><input type="button" [matMenuTriggerFor]="menu" style="color: white;background-color: #294a70;border: none;width: 60px;padding-top: 5px;padding-bottom: 5px;" value="Options"></b>
+		        <mat-menu #menu="matMenu">
+		          <button mat-menu-item (click)='openDialog(1,element)'>View Details</button>
+		          <button mat-menu-item (click)='openDialog(2,element)'>Update</button>
+		          <button mat-menu-item (click)='removecompany(element.id)'>Remove</button>
+		        </mat-menu>
+			  </mat-cell>
+		    </ng-container>
+
+
+						 
+			          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		        </mat-table>
+		        <mat-paginator 
+				         #paginator
+				        [length]="100"
+		              [pageSize]="10"
+		              [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+				</mat-paginator>
+</div>

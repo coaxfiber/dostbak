@@ -1,0 +1,32 @@
+#viewresearch{
+	p{
+		margin-bottom: 10px;
+		margin-top: 0
+	}
+	h4
+	{
+		margin-top: 10px;
+		margin-bottom: 10px
+	}
+	
+  #apptable {
+  border-collapse: collapse;
+  width: 100%;
+}
+    #apptable td, #apptable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #apptable tr:nth-child(even){background-color: #f2f2f2;}
+
+  #apptable tr:hover {background-color: #ddd;}
+
+  #apptable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #294a70;
+    color: white;
+  }
+}

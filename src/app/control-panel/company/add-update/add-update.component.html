@@ -1,0 +1,142 @@
+<div>
+  	<h4>{{title}}</h4>
+	<hr>
+</div> 
+<div style="max-height: calc(100vh - 320px);overflow-y: scroll;">
+	<table class="apptable" *ngIf="data.type==1">
+		<tr>
+			<td>Company ID:</td>
+			<td>
+				{{data.data.id}}
+			</td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td>
+				{{data.data.name}}
+			</td>
+		</tr>
+		<tr>
+			<td>Address:</td>
+			<td>
+				{{data.data.street}} {{data.data.address}}
+			</td>
+		</tr>
+		<tr>
+			<td>Phone Number:</td>
+			<td>
+				{{data.data.phone}}
+			</td>
+		</tr>
+		<tr>
+			<td>Mobile Number:</td>
+			<td>
+				{{data.data.mobile}}
+			</td>
+		</tr>
+		<tr>
+			<td>Email Address</td>
+			<td>
+				{{data.data.email}}
+			</td>
+		</tr>
+		<tr>
+			<td>Fax Number:</td>
+			<td>
+				{{data.data.fax}}
+			</td>
+		</tr>
+		<tr>
+			<td>Industry Code:</td>
+			<td>
+				{{data.data.industryname}}
+			</td>
+		</tr>
+	</table>
+
+	<div *ngIf="data.type==2||data.type==3">
+		  <table class="example-full-width" cellspacing="0" style="width: 100%">
+		  <tr>
+		    <td width="100%">
+		  		<mat-form-field style="width: 100%">
+			      <input matInput placeholder="Company Name" type="text" [(ngModel)]="name" name="role" value="">
+			    </mat-form-field></td>
+		  	<!--<mat-form-field class="example-full-width">
+		      <input matInput placeholder="LR Number" value="" [(ngModel)]="options.value.lrno" name="lrno" required>
+		    </mat-form-field>-->
+		  </tr>
+		  <tr>
+		  	
+		    <td width="100%">
+		  		<mat-form-field style="width: 100%">
+			      <input matInput placeholder="Email Address" type="text" [(ngModel)]="email" name="role" value="">
+			    </mat-form-field></td>
+		  </tr>
+		  <tr>
+		  	<td>
+		  		<table style="width: 100%">
+					  <tr>
+					  	
+					    <td style="width: 33.33%">
+					  		<mat-form-field style="width: 100%">
+						      <input matInput placeholder="Phone Number" type="text" [(ngModel)]="phone" name="role" value="">
+						    </mat-form-field></td>
+					  	
+					    <td  style="width: 33.33%">
+					  		<mat-form-field style="width: 100%">
+						      <input matInput placeholder="Mobile Number" type="text" [(ngModel)]="mobile" name="role" value="">
+						    </mat-form-field></td>
+					  	
+					    <td  style="width: 33.34%">
+					  		<mat-form-field style="width: 100%">
+						      <input matInput placeholder="Fax Number" type="text" [(ngModel)]="fax" name="role" value="">
+						    </mat-form-field></td>
+					  </tr>
+		  		</table>
+		  	</td>
+		  </tr>
+
+		  <tr>
+		  	
+		    <td width="100%">
+		    	<table cellspacing="0" style="width: 100%">
+				  <tr>
+				    <td width="30%">
+				  	<mat-form-field style="width: 100%">
+				      <input autocomplete="off"  matInput placeholder="Street" [(ngModel)]="street" name="lrno">
+				    </mat-form-field></td>
+				  	<td style="padding-left: 10px">
+				    <mat-form-field style="width: calc(100% - 50px)">
+				      <input autocomplete="off"  autofocus matInput  placeholder="Residential Address" [(ngModel)]="perma" readonly="readonly">
+				    </mat-form-field>
+				    <button mat-mini-fab color="primary"  (click)="openDialog(2)">
+					    <mat-icon>search</mat-icon>
+					  </button>
+				  	</td>
+				  </tr>
+				  </table>
+		    </td>
+		  </tr>
+		  <tr>
+		  	<td>
+		  		
+						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						              <mat-label>Industry</mat-label>
+						              <mat-select  [(ngModel)]="industry">
+						                <mat-option value="{{f.id}}"  *ngFor="let f of industrylist">
+						                  {{f.name}}
+						                </mat-option>
+						              </mat-select>
+						            </mat-form-field>
+		  	</td>
+		  </tr>
+		  </table>
+	</div>
+</div>
+
+ <div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="noclick()" color="warning">Close</button>
+  <button mat-raised-button (click)="save(1)" class="buttonblue"  *ngIf="data.type==3">Save</button>
+  <button mat-raised-button (click)="save(2)" class="buttonblue"  *ngIf="data.type==2">Update</button>
+</div>
+<br><br><br>

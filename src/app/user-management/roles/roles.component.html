@@ -1,0 +1,71 @@
+  <div style="padding:  20px 0 0 20px;">
+  <h4>Role Management</h4>
+  <hr>
+  </div><div id="roles" style="overflow-y: scroll;max-height: calc(100vh - 235px)">
+<table>
+	<tr>
+		<td>
+			<button mat-raised-button color="primary" style="margin:10px" (click)="openDialog()"><i class="material-icons">
+add_circle
+</i> Add Role</button>
+		</td>
+		<td style="text-align: right;">
+			 <mat-form-field>
+			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+
+			    </mat-form-field>
+		    <button mat-mini-fab color="primary">
+			    <mat-icon><mat-icon>filter_list</mat-icon></mat-icon>
+			  </button>
+		</td>
+	</tr>
+</table>
+  	
+
+
+  	<mat-table #table [dataSource]="dataSource" matSort>
+
+   <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+      <div class="rolerow"  *ngIf="element.id!=1&&element.id!=2">
+       <b>{{element.name}}</b> <br>
+        <div class="action">
+      <a href="javascript:void(0)" class="actionlink" (click)="openDialogUpdate(element.id,element.name,element.desc)"> Assign/Update Role</a> | <a href="javascript:void(0)" class="actionlink" style="color: orange" (click)="removeRole(element.id)">
+        Remove</a>
+    </div>
+    </div>
+
+      <div class="rolerow" *ngIf="element.id==1||element.id==2">
+       <b>{{element.name}}</b> <br>
+        <div class="action" >
+      <a href="javascript:void(0)" class="actionlink" (click)="openDialogUpdate(element.id,element.name,element.desc)"> Assign/Update Role</a>
+    </div>
+    </div>
+	  </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="desc">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+      <div class="rolerow">
+       <b>{{element.desc}}</b>
+	  </div>
+	  </mat-cell>
+    </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+        
+        <mat-spinner style="margin-left: auto;margin-right: auto;" *ngIf="tableArr===undefined"></mat-spinner>
+        <mat-paginator 
+		         #paginator
+		        [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+		</mat-paginator>
+
+	</div>

@@ -1,0 +1,13 @@
+  <div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="onNoClickclose()" color="warning">Close</button>
+</div>
+  <h4>Proposal - Pending Approval</h4>
+  <hr>
+<div style="max-height: calc(100vh - 320px);overflow-y: scroll;" id="viewresearch">
+          PDF DOCUMENT
+</div>
+
+        <div mat-dialog-actions style="float: right;margin-right: 20px">
+            <button mat-raised-button (click)="approve(2)" >With Issues</button>
+            <button mat-button class="buttonblue" (click)="approve(3)" >Approve Research</button>
+        </div>

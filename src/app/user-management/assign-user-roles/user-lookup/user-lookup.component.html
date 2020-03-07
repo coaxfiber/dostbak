@@ -1,0 +1,44 @@
+  <div>
+  <h4>User Look-up</h4>
+  <hr>
+  </div>
+  <table style="width: 97%;background-color: white;">
+  <tr>
+    <td style="text-align: left;width: 400px" >
+       <mat-form-field style="width: 300px !important">
+      <input matInput placeholder="Search name/email"  [(ngModel)]="email" (keydown)="keyDownFunction($event)">
+          </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="keyDownFunction('onoutfocus')">
+          <mat-icon><mat-icon>search</mat-icon></mat-icon>
+        </button>
+    </td>
+  </tr>
+</table>
+<div  style="height: calc(100vh - 500px);overflow-y: scroll;">
+		  	<table class="tabledesign">
+		  		<tr>
+		  		<th>Name</th>
+		  		<th>Email</th>
+		  		<th style="text-align: center;"> - Action - </th>
+		  		</tr>
+		  		<tr *ngFor="let a of userarray">
+		  			<td>
+		  				{{a.fname}} {{a.mname}} {{a.lname}} {{a.suffix}}
+		  			</td>
+		  			<td>
+		  				{{a.email}}
+		  			</td>
+		  			<td style="text-align: center;">
+		  				<button style="background-color: #294a70;color: white" mat-button  (click)="select(a.email)">
+		  					<i class="material-icons">
+						select_all
+						</i> Select</button>
+		  			</td>
+		  		</tr>
+		  	</table>
+        <mat-spinner style="margin-left: auto;margin-right: auto;" *ngIf="userarray===undefined"></mat-spinner>
+		  </div>
+<div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="onNoClick()" color="warning">Close</button>
+</div>
+ 

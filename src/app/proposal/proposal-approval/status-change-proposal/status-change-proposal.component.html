@@ -1,0 +1,15 @@
+  
+  <h4>{{head}}</h4>
+  <hr>
+  <div>
+  	<h4 style="margin-bottom: 10px">Title: {{title}}</h4>
+  	
+  			<mat-form-field  class="npinput" style="width: 100%" *ngIf='type==2'> 
+              <textarea matInput placeholder="Remarks" style="height: 80px"  [(ngModel)]="remarks" ></textarea>
+            </mat-form-field>
+            <p  *ngIf='type==3'>You are about to approve this Proposal.</p>
+  </div>
+        <div mat-dialog-actions style="float: right;">
+  			<button mat-raised-button (click)="onNoClickclose()" color="warning">Close</button>
+            <button mat-button class="buttonblue" (click)="changestat()" >{{button}}</button>
+        </div>

@@ -1,0 +1,67 @@
+<mat-drawer-container style="background-image: url('assets/St.jpg');background-repeat: no-repeat; background-size: cover;height: calc(100vh - 128px);" class="example-container">
+<mat-card style="width: 350px;margin: 50px auto;padding:0">
+
+
+<!-- 
+    Login template using Angular Material
+    @author Shashank Tiwari 
+-->
+ 
+ 
+    <!-- Writing markup for login starts -->
+        <div class="login-container">
+ 
+            <!-- Template Header starts -->
+            <div class="login-box-header">
+                <h3>Login</h3>
+            </div>
+            <!-- Template Header ends -->
+            
+            <!-- Template Body starts -->
+            <div class="login-box-body" style="margin: 10px">
+ 
+                <!-- Markup for getting Username starts -->
+                <mat-grid-list cols="9" rowHeight="75px">
+                    <mat-grid-tile [rowspan]="1" class="login-icon">
+                        <mat-icon>lock</mat-icon>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="7">
+                        <mat-form-field class="justifier">
+                            <input matInput placeholder="Email Address" text="text" [(ngModel)]="username">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <!-- Markup for getting Username ends -->
+ 
+                <!-- Markup for getting Password starts -->
+                <mat-grid-list cols="9" rowHeight="100px">
+                    <mat-grid-tile [rowspan]="1"  class="login-icon">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="7">
+                        <mat-form-field class="justifier">
+                            <input matInput placeholder="Password" text="password" type="password"  [(ngModel)]="password">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <!-- Markup for getting Password ends -->
+
+                <table style="float: left;margin: 10px">
+                    <tr>
+                        <td><a  routerLink="../registration" style="text-decoration: none;color: #294a70;font-size: 13px;">Register</a></td>
+                    </tr>
+                </table>
+                <button  type='submit' class="buttonblue"   mat-raised-button style="float: right;margin: 10px" (click)="login()"> 
+                    <mat-icon>input</mat-icon> Login
+                </button>
+                <br>
+                <br>
+                <br>
+                
+            </div>
+            <!-- Template Body ends -->
+            
+        </div>
+
+</mat-card>
+</mat-drawer-container>

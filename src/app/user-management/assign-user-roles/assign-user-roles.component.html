@@ -1,0 +1,36 @@
+  <div style="padding:  20px 0 0 20px;">
+  <h4>Assign User Roles</h4>
+  <hr>
+  </div>
+  <div id="roles" style="overflow-y: scroll;max-height: calc(100vh - 235px)">
+
+<table style="width: 97%;margin-left: 20px;background-color: white;">
+  <tr>
+    <td style="text-align: left;width: 400px" >
+       <mat-form-field style="width: 300px !important">
+      <input matInput placeholder="Username/Email Address"  [(ngModel)]="email" (keydown)="keyDownFunction($event)">
+          </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="openDialogUserLookUp()">
+          <mat-icon><mat-icon>search</mat-icon></mat-icon>
+        </button>
+    </td>
+  </tr>
+</table>
+
+<table style="width: 100%" *ngIf="pinfo!=undefined" >
+	<tr>
+		<td style="width: 168px;padding-left:25px ">
+			<img [src]="image" width="150" *ngIf="image!=undefined" >
+		    	<img src="assets/noimage.jpg" width="150" *ngIf="image==undefined" />
+		</td>
+		<td *ngIf="pinfo!=undefined" >
+			<div *ngIf="pinfo.id!=null" >
+				<h3 style="margin-bottom: 0">{{pinfo.lname}}, {{pinfo.fname}} {{pinfo.mname}} {{pinfo.ext}}</h3><p style="margin-top: 5px">{{company}}</p>
+				<button mat-raised-button color="primary" *ngIf="name!=''" (click)="openDialogManageRole()">Manage Role</button>
+			</div>
+		</td>
+	</tr>
+</table>
+
+
+</div>

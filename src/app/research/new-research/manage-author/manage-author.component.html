@@ -1,0 +1,49 @@
+<h3>Add Research Author</h3>
+<table style="width: 100%">
+	<tr>
+		<td style="width: 110px">
+			First Name: 
+		</td>
+		<td>
+			<mat-form-field class="npinput"  style="width: 100%">
+              <input matInput placeholder="First Name"  [(ngModel)]="fname" >
+              <mat-hint></mat-hint>
+            </mat-form-field>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Middle Name: 
+		</td>
+		<td>
+			<mat-form-field class="npinput"  style="width: 100%">
+              <input matInput placeholder="Middle Name"  [(ngModel)]="mname" >
+              <mat-hint></mat-hint>
+            </mat-form-field>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Last Name: 
+		</td>
+		<td>
+			<mat-form-field class="npinput"  style="width: 100%">
+              <input matInput placeholder="Last Name"  [(ngModel)]="lname" >
+              <mat-hint></mat-hint>
+            </mat-form-field>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Suffix: 
+		</td>
+		<td>
+			<mat-form-field class="npinput"  style="width: 100%">
+              <input matInput placeholder="Suffix"  [(ngModel)]="sname" >
+              <mat-hint></mat-hint>
+            </mat-form-field>
+		</td>
+	</tr>
+</table>
+            <button mat-button class="buttonblue" (click)="noclick(0)" >Back</button>
+            <button mat-button class="buttonblue" style="float: right;" (click)="noclick(1)">Save</button>

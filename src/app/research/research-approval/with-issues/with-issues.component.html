@@ -1,0 +1,141 @@
+  <div style="padding:  20px 0 0 20px;">
+  
+  <h4>Researches - With Issues</h4>
+  <hr>
+  </div>
+<style type="text/css">
+  .matcontainer{
+    overflow-y: hidden !important;
+  }
+</style>
+<table style="width: 97%;margin: auto;background-color: white;">
+  <tr><td style="width: 150px  !important">
+<mat-form-field  class="npinput2"  style="width: 150px  !important">
+                    <mat-label>Research Type</mat-label>
+                    <mat-select  [(ngModel)]="level" >
+
+                      <mat-option value="" (click)='applyFilter3("")' >
+                        - All -
+                      </mat-option>
+                      <mat-option value="{{c.id}}"  *ngFor="let c of degreelevel" (click)='applyFilter3(c.id)' >
+                        {{c.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td style="width: 200px  !important">
+  
+<mat-form-field  class="npinput2"  style="width: 200px  !important">
+                    <mat-label>Company</mat-label>
+                    <mat-select  [(ngModel)]="inputcompany" >
+
+                      <mat-option value="" (click)='applyFilter4("")' >
+                        - All -
+                      </mat-option>
+                      <mat-option value="{{c.id}}"  *ngFor="let c of company" (click)='applyFilter4(c.name)' >
+                        {{c.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+    </td>
+    <td></td>
+    <td style="text-align: right;width: 237px" >
+       <mat-form-field style="width: 180px !important">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search"  [(ngModel)]="title" >
+
+          </mat-form-field>
+        <button mat-mini-fab color="primary">
+          <mat-icon><mat-icon>filter_list</mat-icon></mat-icon>
+        </button>
+    </td>
+  </tr>
+</table>
+<div id='research' style="overflow-y: scroll;" class="overflowys">
+
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+   <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef style="min-width: 200px">Research Title</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="min-width: 200px">
+      <div class="rolerow" style="padding-right:15px;min-width: 200px">
+       <b>{{element.title}}</b>
+    </div>
+    </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="level">
+      <mat-header-cell *matHeaderCellDef style="flex: 0 0 200px;"> &nbsp; &nbsp;Research Type </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: 0 0 200px;">
+      <div class="rolerow" style="padding-right:15px">
+       <b>{{element.level}}</b>
+    </div>
+    </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="company">
+      <mat-header-cell *matHeaderCellDef  style="flex: 0 0 240px;padding-left: ">  &nbsp; &nbsp;Institution/Company </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: 0 0 240px;">
+      <div class="rolerow" style="padding-right:15px">
+       <b>{{element.company}}</b>
+    </div>
+    </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="datecreated" >
+      <mat-header-cell *matHeaderCellDef style="width: 200px;flex: 0 0 130px;"> &nbsp; &nbsp; Date Created </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="width: 200px;flex: 0 0 130px;">
+      <div class="rolerow" style="padding-right:15px">
+       <b>{{element.datecreated| date :'mediumDate' }} @ <br>{{element.datecreated| date :'shortTime'}}</b>
+    </div>
+    </mat-cell>
+    </ng-container>
+
+
+   <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef style="width: 150px;flex: 0 0 90px;">  &nbsp; &nbsp;Status </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="width: 150px;flex: 0 0 90px;">
+      <div class="rolerow" style="padding-right:15px">
+      <!--<b>{{element.status[0].status}}</b>-->
+      <b>With issue</b>
+    </div>
+    </mat-cell>
+    </ng-container>
+
+
+   <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef style="width: 150px;flex: 0 0 80px;">  &nbsp; - Action - </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="width: 150px;flex: 0 0 75px;">
+      <div class="rolerow">
+       <b><input type="button" [matMenuTriggerFor]="menu" style="color: white;background-color: #294a70;border: none;width: 60px;padding-top: 5px;padding-bottom: 5px;" value="Options"></b>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)='ViewHistory(element.title,element.status)'>View Status History</button>
+          <button mat-menu-item (click)='Viewpdf(element.id)'>View PDF Document</button>
+        </mat-menu>
+    </div>
+    </mat-cell>
+    </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        
+        </mat-table>
+        <mat-spinner style="margin-left: auto;margin-right: auto;" *ngIf="tableArr===undefined"></mat-spinner>
+         <div *ngIf="tableArr!=undefined">
+          <p *ngIf="tableArr.length===0" style="text-align: center;"><i>- No researches to show -</i></p>
+        </div>
+        <style type="text/css">
+        .mat-paginator-page-size{
+          display:none !important ;
+        }</style>
+        <mat-paginator 
+             #paginator
+            [length]="100"
+              [pageSize]="10">
+    </mat-paginator>
+
+</div>
+

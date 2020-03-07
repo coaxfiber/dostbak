@@ -1,0 +1,332 @@
+  <div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="noclick()" color="warning">Close</button>
+</div>
+  <h4>Submit Research</h4>
+  <hr><div id="new-research">
+  <div class="oveflowys" style="overflow-y: scroll;max-height: calc(100vh - 240px);">
+	<mat-horizontal-stepper   labelPostion="botton" [linear]="true" #stepper>
+      <mat-step>
+          <ng-template matStepLabel>Research Details</ng-template>
+          <div>
+
+            <mat-form-field class="npinput">
+              <input matInput placeholder="Research Title" required [(ngModel)]="inputtitle">
+            </mat-form-field>
+
+            <div style="height: 10px;"></div>
+            <mat-form-field  class="npinput">
+              <textarea matInput placeholder="Abstract" required style="height: 80px;"  [(ngModel)]="inputabstract" ></textarea>
+            </mat-form-field>
+
+
+            <br>
+           
+            <table style="width: 100%">
+              <tr>
+                <td style="width: 50%"> 
+                  <mat-form-field  class="npinput2">
+                    <mat-label>Research Type</mat-label>
+                    <mat-select  [(ngModel)]="inputdegreelevel">
+                      <mat-option value="{{c.id}}"  *ngFor="let c of degreelevel">
+                        {{c.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table><p><b>Company: </b>{{global.useraccess.companyname}}</p>
+          </div>
+
+          <div>
+            <br>
+            <button mat-button type="submit" class="buttonblue" (click)="add(stepper)">Next</button>
+          </div>
+      </mat-step>
+      <mat-step>
+
+          <ng-template matStepLabel>Other Information</ng-template>
+
+          <h4>Title: {{inputtitle}}</h4>
+          <p><b>Abstract:</b> {{inputabstract}}</p><br>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Author
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+                    <table style="width: 100%">
+                      <tr>
+                        <td style="width: 70%">
+
+                            <form class="example-form">
+                                <mat-form-field class="npinput2" style="width: 100%">
+                                  <input type="text" placeholder="Author" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                  <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async;let i = index" [value]="option" (click)="selectauthor(i)">
+                                      {{option}} <input type="button" (click)="swalConfirm(authoridoptions[i].id,'Delete Author...',6,null,null,null)" style="float:right;color: white;background-color: #FF0000;border: none;margin-top: 15px" value="delete">
+                                    </mat-option>
+                                  </mat-autocomplete>
+                                </mat-form-field>
+                              </form>
+
+                          </td>
+                      <td style="width: 130px">
+                          <button mat-raised-button (click)="insertauthor()" class="buttonblue" >
+                              <mat-icon style="font-size:20px">add</mat-icon> Add Author</button>
+                         
+                      </td>
+                      <td>
+                        <button  class="buttonblue" style="border-radius: 10px;border: none;height: 32px;padding-top: 5px;" (click)="openDialogauthor()"><mat-icon style="font-size:20px">assignment_ind</mat-icon></button>
+                      </td>
+                      </tr>
+                    </table>
+
+                    <div  *ngIf="authorsarrayinresearch!=undefined" >
+                      <div  *ngIf="authorsarrayinresearch[0].id!=null" >
+                        <table style="width: 100%">
+                          <tr  *ngFor="let list of authorsarrayinresearch">
+                            <td style="width: 70%"><b>{{list.name}}</b></td>
+                          <td style="width: 30%">
+                              <button  mat-button (click)="swalConfirm(list.id,'Remove Author?',1,null,null,null)"  class="buttonred" >
+                                  <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                          </td>
+                          </tr>
+                        </table>
+                    </div>
+                    </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Keywords
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                   <table style="width: 100%">
+                        <tr>
+                          <td style="width: 70%">
+
+                            <form class="example-form">
+                                <mat-form-field class="npinput2" style="width: 100%">
+                                  <input type="text" placeholder="Keyword" aria-label="Number" matInput [formControl]="myControl2" [matAutocomplete]="auto2">
+                                  <mat-autocomplete #auto2="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions2 | async;let i = index" [value]="option">
+                                      {{option}}
+                                    </mat-option>
+                                  </mat-autocomplete>
+                                </mat-form-field>
+                              </form>
+                      </td>
+                        <td style="width: 30%">
+                            <button mat-raised-button (click)="insertkeyword()" class="buttonblue" >
+                                <mat-icon style="font-size:20px">add</mat-icon> Add Keyword</button>
+                        </td>
+                        </tr>
+                      </table>
+
+                      <div  *ngIf="keywordarray!=undefined" >
+                        <div  *ngIf="keywordarray[0].id!=null" >
+                          <table style="width: 100%">
+                            <tr  *ngFor="let list of keywordarray">
+                              <td style="width: 70%"><b>{{list.keyword}}</b></td>
+                            <td style="width: 30%">
+                                <button  mat-button (click)="swalConfirm(list.id,'Remove Keyword?',2,null,null,null)"  class="buttonred" >
+                                    <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                            </td>
+                            </tr>
+                          </table>
+                      </div>
+                      </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Discipline
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                   <table style="width: 100%">
+                        <tr>
+                          <td style="width: 70%">
+                              <mat-form-field  class="npinput2" style="width: 100%">
+                                <mat-label>Discipline</mat-label>
+                                <mat-select  [(ngModel)]="inputdiscipline">
+                                  <mat-option value="{{c.id}}"  *ngFor="let c of discipline">
+                                    {{c.desc}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field></td>
+                        <td style="width: 30%">
+                            <button mat-raised-button (click)="insertdiscipline()" class="buttonblue" >
+                                <mat-icon style="font-size:20px">add</mat-icon> Add Discipline</button>
+                        </td>
+                        </tr>
+                      </table>
+
+                      <div  *ngIf="disciplinearrayinresearch!=undefined" >
+                        <div  *ngIf="disciplinearrayinresearch[0].id!=null" >
+                          <table style="width: 100%">
+                            <tr  *ngFor="let list of disciplinearrayinresearch">
+                              <td style="width: 70%"><b>{{list.desc}}</b></td>
+                            <td style="width: 30%">
+                                <button  mat-button (click)="swalConfirm(list.id,'Remove Discipline?',3,null,null,null)"  class="buttonred" >
+                                    <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                            </td>
+                            </tr>
+                          </table>
+                      </div>
+                      </div>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    File Upload
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                   <p><b>Main Document</b> <small>(PDF File.)</small></p>
+            <form [formGroup]="form">
+              <div class="form-group">
+                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput class="inputfile" />
+                <label for="avatar">{{maindoclabel}}</label>
+                <button mat-button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+              </div>
+            </form>
+
+
+
+            <p><b>Supporting Documents</b> <small>(PDF File, Optional)</small></p>
+            <form [formGroup]="form2">
+              <div class="form-group">
+                <input type="file" id="avatar2" (change)="onFileChange2($event)" #fileInput2 class="inputfile" />
+                <label for="avatar2">{{supdoclabel}}</label>
+                <button mat-button type="button" class="btn btn-sm btn-default" (click)="clearFile2()">clear file</button>&nbsp;&nbsp;
+                <button mat-button class="buttonblue" (click)='insertdocument()' >Add</button>
+              </div>
+              </form>
+              <div style="height: 10px"></div>
+          <div  *ngIf="documentarray!=undefined" >
+            <div  *ngIf="documentarray[0].id!=null" >
+              <table style="width: 100%">
+                <tr  *ngFor="let list of documentarray">
+                  <td style="width: 70%"><b>{{list.name}}</b></td>
+                <td style="width: 30%">
+                    <button  mat-button (click)="swalConfirm(list.id,'Remove Supporting Document?',5,null,null,null)"  class="buttonred" >
+                        <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                </td>
+                </tr>
+              </table>
+          </div>
+          </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Funding Agency
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <table style="width: 100%">
+                        <tr>
+                          <td style="width: 70%">
+
+                        <mat-form-field class="npinput2"  style="width: 100%">
+                          <input matInput placeholder="Funding Agency"  [(ngModel)]="inputfundingagency" >
+                        </mat-form-field></td>
+                        <td style="width: 30%">
+                            <button mat-raised-button (click)="insertfundingagency()" class="buttonblue" >
+                                <mat-icon style="font-size:20px">add</mat-icon> Add Funding Agency</button>
+                        </td>
+                        </tr>
+                      </table>
+
+                      <div  *ngIf="fundingagencyarrayinresearch!=undefined" >
+                        <div  *ngIf="fundingagencyarrayinresearch[0].id!=null" >
+                          <table style="width: 100%">
+                            <tr  *ngFor="let list of fundingagencyarrayinresearch">
+                              <td style="width: 70%"><b>{{list.name}}</b></td>
+                            <td style="width: 30%">
+                                <button  mat-button (click)="swalConfirm(list.id,'Remove Funding Agency?',4,null,null,null)"  class="buttonred" >
+                                    <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                            </td>
+                            </tr>
+                          </table>
+                      </div>
+                      </div>
+              </mat-expansion-panel>
+               
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Publication Information
+                  </mat-panel-title>
+                    <mat-panel-description>
+                      (Optional)
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                   <table style="width: 100%">
+                        <tr>
+                          <td style="width: 70%">
+                              <mat-form-field class="npinput"  style="width: 100%">
+                                <input matInput placeholder="Title"  [(ngModel)]="pubtitle" >
+                              </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 70%">
+                              <mat-form-field class="npinput"  style="width: 31%">
+                                <input matInput placeholder="Volume"  [(ngModel)]="pubvolume" >
+                              </mat-form-field>&nbsp; &nbsp;
+                              <mat-form-field class="npinput"  style="width: 31%">
+                                <input matInput placeholder="Issue"  [(ngModel)]="pubissue" >
+                              </mat-form-field>&nbsp; &nbsp;
+                              <mat-form-field class="npinput"  style="width: 31%">
+                                <input matInput placeholder="Page"  [(ngModel)]="page" >
+                              </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 30%">
+                              <mat-form-field class="npinput"  style="width: 30%">
+                                <input matInput placeholder="Year" type="number" [(ngModel)]="pubyear" >
+                              </mat-form-field>
+                              &nbsp; &nbsp;
+                              <mat-form-field class="npinput"  style="width: 67%">
+                                <input matInput placeholder="Publisher"  [(ngModel)]="pubpublisher" >
+                              </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 70%">
+                            </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 70%">
+                              <mat-form-field class="npinput"  style="width: 100%">
+                                <input matInput placeholder="Place of publication"  [(ngModel)]="place" >
+                              </mat-form-field>
+                            </td>
+                        </tr>
+                      </table>
+                      <table style="width: 100%">
+                        <tr>
+                          <td style="width: 70%">
+                            
+                          </td>
+                          <td style="width: 30%"></td>
+                        </tr>
+                      </table>
+              </mat-expansion-panel>
+          </mat-accordion>
+
+          
+            
+              <br>
+              <!--<p>Note: Add <a href="#">Publishing Information</a> if the Research has been published</p>
+              --><br><br>
+            <button mat-button matStepperPrevious class="buttonblue" >Back</button>
+            <button mat-button class="buttonblue" style="float: right;"  (click)="researchdone(1)">Submit</button>
+            <button mat-button style="float: right;" (click)="researchdone(0)">Save as Draft</button>
+     
+      </mat-step>
+    </mat-horizontal-stepper>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+  <div>
+  	<h4>Assign/Update Roles</h4>
+  <hr>
+  </div>
+  <div style="max-height: calc(100vh - 320px);overflow-y: scroll;">
+
+		  <table class="example-full-width" cellspacing="0" style="width: 100%">
+		  <tr>
+		    <td width="100%">
+		  		<mat-form-field style="width: 100%">
+			      <input matInput placeholder="Role" type="text" [(ngModel)]="role" name="role" value="" [disabled]='disabled'>
+			    </mat-form-field></td>
+		  	<!--<mat-form-field class="example-full-width">
+		      <input matInput placeholder="LR Number" value="" [(ngModel)]="options.value.lrno" name="lrno" required>
+		    </mat-form-field>-->
+		  </tr>
+		  <tr>
+		  	
+		    <td width="100%">
+		  		<mat-form-field style="width: 100%">
+			      <input matInput placeholder="Description" type="text" [(ngModel)]="desc" name="role" value="" [disabled]='disabled'>
+			    </mat-form-field></td>
+		  </tr>
+		  <tr>
+		  	<td>
+		  		
+                  <mat-form-field  class="npinput2" style="width: 100%">
+		        	<mat-label>Assign View Domain</mat-label>
+			              <mat-select  [(ngModel)]="inputcompany" [disabled]='disabled'>
+			                <mat-option value="">
+			                  - No domain -
+			                </mat-option>
+			                <mat-option value="{{f.id}}"  *ngFor="let f of global.company">
+			                  {{f.name}}
+			                </mat-option>
+			              </mat-select>
+                  </mat-form-field>
+		  	</td>
+		  </tr>
+		  </table>
+		  
+		  <div>
+		  </div>
+
+		  <mat-table #table [dataSource]="dataSource" matSort>
+
+		   <ng-container matColumnDef="name">
+		      <mat-header-cell *matHeaderCellDef> Application Module </mat-header-cell>
+		      <mat-cell *matCellDef="let element">
+		      <div class="rolerow" style="padding-left: 10px">
+				  	<mat-checkbox  (change)="checkbox($event,element.id)" [checked]="checked(element.id)" [disabled]='disabled'>{{element.name}}</mat-checkbox>
+			  </div>
+			  </mat-cell>
+		    </ng-container>
+
+		    <ng-container matColumnDef="filter">
+		      <mat-header-cell *matHeaderCellDef style="width: 400px">
+		      	<div style="float: right;">
+		      	<!--<mat-form-field style="width: 150px">
+					<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+			    </mat-form-field>-->
+				<button mat-mini-fab color="primary">
+			    	<mat-icon><mat-icon>search</mat-icon></mat-icon>
+			  	</button>
+			  	</div>
+		      </mat-header-cell>
+		      <mat-cell *matCellDef="let element">
+		      <div class="rolerow" style="padding-left: 10px">
+			  </div>
+			  </mat-cell>
+		    </ng-container>
+
+
+			 
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		        </mat-table>
+ </div>
+<div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="onNoClick()" color="warning">Close</button>
+  <button mat-raised-button cdkFocusInitial color="primary" (click)="saveRole()" >Save</button>
+</div>

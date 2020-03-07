@@ -1,0 +1,66 @@
+  <div>
+  <h4>Role Management</h4>
+  <hr>
+  </div>
+		  <div style="max-height: calc(100vh - 320px);overflow-y: scroll;">
+
+		  <table class="example-full-width" cellspacing="0">
+		  <tr>
+		    <td width="110" style="padding-left: 10px;padding-right: 10px;">
+		    	<img [src]="data.image" width="100" *ngIf="data.image!=undefined"/>
+		    	<img src="assets/noimage.jpg" width="100" *ngIf="data.image==undefined"/>
+		    </td>
+		  	<!--<mat-form-field class="example-full-width">
+		      <input matInput placeholder="LR Number" value="" [(ngModel)]="options.value.lrno" name="lrno" required>
+		    </mat-form-field>-->
+		    <td>
+		    	<h3 style="margin-bottom: 0">{{pinfo.lname}}, {{pinfo.fname}} {{pinfo.mname}} {{pinfo.ext}}</h3><p style="margin-top: 5px">{{data.company}}</p>
+		    </td>
+		  </tr>
+		  </table>
+		  <mat-table #table [dataSource]="dataSource" matSort>
+
+		   <ng-container matColumnDef="name">
+		      <mat-header-cell *matHeaderCellDef> Assign Roles: </mat-header-cell>
+		      <mat-cell *matCellDef="let element">
+		      <div class="rolerow" style="padding-left: 10px">
+		       <mat-checkbox  onclick="return false;"  [checked]='check(element.id)' (click)="tempArray(element.id);"> {{element.name}}</mat-checkbox>
+			  </div>
+			  </mat-cell>
+		    </ng-container>
+
+		    <ng-container matColumnDef="filter">
+		      <mat-header-cell *matHeaderCellDef style="width: 400px">
+		      	<div style="float: right;">
+		      	<mat-form-field style="width: 200px">
+					<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+			    </mat-form-field>
+				<button mat-mini-fab color="primary">
+			    	<mat-icon><mat-icon>search</mat-icon></mat-icon>
+			  	</button>
+			  	</div>
+		      </mat-header-cell>
+		      <mat-cell *matCellDef="let element">
+		      <div class="rolerow" style="padding-left: 10px">
+			  </div>
+			  </mat-cell>
+		    </ng-container>
+
+
+			 
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		        </mat-table>
+		        <mat-paginator 
+				         #paginator
+				        [length]="100"
+		              [pageSize]="5"
+		              [pageSizeOptions]="[5]">
+				</mat-paginator>
+			</div>
+
+<div mat-dialog-actions style="float: right">
+  <button mat-raised-button (click)="onNoClick()" color="warning">Close</button>
+  <button mat-raised-button cdkFocusInitial color="primary" (click)="saveRole()" >Save</button>
+</div>
+ 

@@ -1,0 +1,169 @@
+
+<mat-drawer-container class="example-container" id='main'>
+  <mat-drawer mode="side" opened="true"  #drawer>
+  	<div style="" id="coverp">
+	<div style="" id="fullname">
+		<table style="width: 100%">
+			<tr>
+        <td colspan="2" style="text-align: center;">
+          <img [src]="image" width="80" id="photop" onError="this.src='assets/noimage.jpg'" style="margin:auto;" />
+        </td>
+      </tr>
+      <tr>
+				<td style="text-align: center;"  colspan="2">
+				  {{user.fname}} {{user.mname}} {{user.surname}} {{user.ext}}<br>
+          <small *ngIf="global.useraccess!=undefined">{{inputcompany}}</small>
+				</td>
+			</tr>
+      <tr>
+        <td style="width: 45%">
+          <small><a mat-button color='default' style="font-size: 10px" (click)="openDialogeditprofile()">&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  <i class="material-icons iconsize">edit</i> Edit Profile</a></small>
+        </td>
+        <td  style="text-align: center;" >
+          <small><a mat-button color='default' style="font-size: 10px" (click)="openDialogchangepassword()"><i class="material-icons iconsize">lock</i> Change Password</a></small>
+        </td>
+      </tr>
+		</table>
+	</div> 
+</div>
+  
+          
+
+        <div *ngIf='proposal===1'>
+        <p style="margin: 10px 10px 0 10px"></p>
+        <mat-chip-list>
+          <mat-chip class="buttonblue"  (click)="openDialogUpdate()" style="margin-left: 50px;margin-bottom: 10px;margin-top:0px;background-color: #294a70;color:white;padding-right: 10px;width: 180px;">&nbsp;&nbsp;<i class="material-icons iconsize">add</i>&nbsp; Submit Proposal&nbsp; &nbsp; </mat-chip>
+        </mat-chip-list>
+          
+        <div style="margin-left: 10px;margin-right: 10px">
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'proposals-Draft'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">all_inbox</i> Draft</a>
+          <a mat-button [routerLink]="['../main',{outlets:{div:'proposals-Pending'}}]"  >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending Approval</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'proposals-Published'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Published</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'proposals-WithIssues'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
+          <!--<a mat-button style="text-decoration: line-through;"  [routerLink]="['../main',{outlets:{div:'proposals-Trash'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">delete</i> Trash</a>-->
+        </div>
+          <br>
+        </div>
+
+      <div *ngIf='research===1'>
+        <mat-chip-list style>
+          <mat-chip class="buttonblue"  (click)="openDialogUpdate2()" style="margin-left: 50px;margin-bottom: 10px;margin-top:10px;background-color: #294a70;color:white;padding-right: 10px;width: 180px;">&nbsp;&nbsp; <i class="material-icons iconsize">add</i>&nbsp; Submit Research</mat-chip>
+        </mat-chip-list>
+
+        
+        <div style="margin-left: 10px;margin-right: 10px">
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Draft'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">all_inbox</i> Draft</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Pending'}}]"  >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending Approval</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Published'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Published</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-WithIssues'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Trash'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">delete</i> Trash</a>
+        </div>
+
+        <br>
+      </div>
+
+<div *ngIf='proposalapproval===1'>
+  
+      <mat-expansion-panel  [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">verified_user</i><b>&nbsp; Grants Management</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        
+        <div style="margin-left: 10px;margin-right: 10px">
+          <a mat-button [routerLink]="['../main',{outlets:{div:'proposal-Management-Pending'}}]"  >&nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending</a>
+          <a mat-button [routerLink]="['../main',{outlets:{div:'proposal-Management-WithIssues'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
+          <a mat-button [routerLink]="['../main',{outlets:{div:'proposal-Management-Published'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Approved</a>
+        </div>
+      </mat-expansion-panel>
+</div>
+<div *ngIf='researchapproval===1'>
+  
+      <mat-expansion-panel  [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">verified_user</i><b>&nbsp; Research Management</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div style="margin-left: 10px;margin-right: 10px">
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-PendingApproval'}}]"  >&nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-WithIssue'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'Published'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Published</a>
+        </div>
+
+      </mat-expansion-panel>
+</div>
+
+  
+
+
+      <div *ngIf='usermanagement===1'>
+
+      <!--<mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">settings_applications</i><b>&nbsp; Control Panel</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item><button mat-button  [routerLink]="['../main',{outlets:{div:'discipline'}}]">Discipline</button></mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><button mat-button>Application module</button>
+          </mat-list-item>
+          <mat-divider></mat-divider> 
+          <mat-list-item><button mat-button>Mode of Implementation</button></mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-expansion-panel>-->
+
+
+      <mat-expansion-panel  [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">contacts</i><b>&nbsp; User Management</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div style="margin-left: 10px;margin-right: 10px">
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'assign-user-roles'}}]" ><i class="material-icons iconsize">assignment_ind</i> Assign User Roles</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'roles'}}]"  ><i class="material-icons iconsize" >memory</i> Roles</a>
+        </div>
+
+      </mat-expansion-panel>
+    </div>
+
+     <div *ngIf='controlpanel===1'>
+      <mat-expansion-panel  [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <i class="material-icons">build</i><b>&nbsp; Control Panel</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div style="margin-left: 10px;margin-right: 10px">
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'Company-Management'}}]" ><i class="material-icons iconsize">domain</i> Company Manager</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'Call-for-proposals'}}]" ><i class="material-icons iconsize">speaker_notes</i> Grant Manager</a>
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'discipline'}}]" ><i class="material-icons iconsize">reorder</i> Project Discipline</a>
+        </div>
+
+      </mat-expansion-panel>
+    </div>
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+  	<div style="margin-left: 10px;margin-top: 8px;" class="hnav">
+
+    </div>
+    <style type="text/css">
+.matcontainer{overflow-y: scroll;}</style>
+  	<mat-card class="matcontainer" style="padding: 0;overflow: hidden;"> 
+
+    <router-outlet name="div"></router-outlet>
+		
+  	</mat-card></mat-drawer-content>
+</mat-drawer-container>
