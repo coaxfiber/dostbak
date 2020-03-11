@@ -63,7 +63,13 @@ more2="More"
                               .map(response => response.json())
                               .subscribe(res => {
                                this.global.company = res;
-                               this.global.swalClose();
+                               this.http.get(this.global.api + 'api.php?action=FundingAgency_List',
+                                     this.global.option)
+                                        .map(response => response.json())
+                                        .subscribe(res => {
+                                          this.global.fundingagency= res;
+                                           this.global.swalClose();
+                                    });
                               });
                       });
                   });

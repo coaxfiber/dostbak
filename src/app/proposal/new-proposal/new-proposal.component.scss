@@ -26,19 +26,15 @@
     background-color: #262626;
     display: inline-block;
     padding: 10px;
-
-
-		}
-		.inputfile + label {
+	}
+	.inputfile + label {
 	cursor: pointer; /* "hand" cursor */
-}
+	}
 
-		.inputfile:focus + label,
-		.inputfile + label:hover {
-		    background-color: #294a70;
-
-		}
-
+	.inputfile:focus + label,
+	.inputfile + label:hover {
+	 background-color: #294a70;
+	}
 }
 	.mat-form-field-infix {
 		width: 100px !important;

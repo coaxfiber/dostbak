@@ -39,7 +39,7 @@ dataSource;
             this.dataSource.paginator = this.paginator;
           },Error=>{
            this.global.swalAlertError();
-		   console.log(Error)
+		       console.log(Error)
 		  });
   }
 	applyFilter(filterValue: string) {

@@ -5,6 +5,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import { DomSanitizer } from '@angular/platform-browser';
 import {SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
 const swal = Swal;
 
@@ -29,7 +30,9 @@ export class GlobalService {
 
    company
    agency
-  constructor(@Inject(SESSION_STORAGE) private storage: WebStorageService,private router: Router,private http: Http) { 	
+
+   fundingagency=[]
+  constructor(private domSanitizer: DomSanitizer,@Inject(SESSION_STORAGE) private storage: WebStorageService,private router: Router,private http: Http) { 	
     if(this.storage.get('token')!=null){
       this.requestToken();
     }
@@ -134,5 +137,26 @@ export class GlobalService {
   swalinfo(bat){
 
    swal('', bat);
+  }
+  sanitize(x: string,filetype)
+  {
+    var file
+    file = this.domSanitizer.bypassSecurityTrustUrl('data:'+filetype+';base64,'+x);
+    return file
+  }
+
+  dlfiletype(filetype){
+           if (filetype=="docx"||filetype=="application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+              filetype="docx"
+            }else if (filetype=="doc"||filetype=="application/msword") {
+              filetype="doc"
+            }else if (filetype=="pdf"||filetype=="application/pdf") {
+              filetype="pdf"
+            }else if (filetype=="xlsx"||filetype=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+              filetype="xlsx"
+            }else if (filetype=="xls"||filetype=="application/vnd.ms-excel") {
+              filetype="xls"
+            }
+    return filetype
   }
 }

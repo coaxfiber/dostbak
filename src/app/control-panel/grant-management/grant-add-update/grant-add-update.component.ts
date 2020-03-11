@@ -62,29 +62,29 @@ export class GrantAddUpdateComponent implements OnInit {
   addcallforproposal(wwwd){
 
 
-let current_datetime = this.sdate
-let formatted_date = (current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
-var sd = formatted_date.toString()
-current_datetime = this.edate
-formatted_date = (current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
-var ed = formatted_date.toString()
-current_datetime = this.fesdate
-formatted_date =  (current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
-var fesd = formatted_date.toString()
-current_datetime = this.feedate
-formatted_date =(current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
-var feed = formatted_date.toString()
+          let current_datetime = this.sdate
+          let formatted_date = (current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
+          var sd = formatted_date.toString()
+          current_datetime = this.edate
+          formatted_date = (current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
+          var ed = formatted_date.toString()
+          current_datetime = this.fesdate
+          formatted_date =  (current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
+          var fesd = formatted_date.toString()
+          current_datetime = this.feedate
+          formatted_date =(current_datetime.getMonth() + 1) +"-" + current_datetime.getDate() +  "-" + current_datetime.getFullYear()
+          var feed = formatted_date.toString()
 
-var x=''
-if (this.name=='') {
-  x=x+"*Call for proposal name is required!<br>"
-}
-if (this.desc=='') {
-  x=x+"*Description is required!<br>"
-}
+          var x=''
+          if (this.name=='') {
+            x=x+"*Call for proposal name is required!<br>"
+          }
+          if (this.desc=='') {
+            x=x+"*Description is required!<br>"
+          }
 
-if (x=='') {
-  if (this.data.x==1) {
+          if (x=='') {
+            if (this.data.x==1) {
                 let urlSearchParams = new URLSearchParams();
                       urlSearchParams.append("name",this.name.toString());
                       urlSearchParams.append("id",this.name.toString());
@@ -112,66 +112,64 @@ if (x=='') {
                  console.log(Error)
                  this.global.swalAlertError()
                });
-  }else{
-                let urlSearchParams = new URLSearchParams();
-                      urlSearchParams.append("name",this.name.toString());
-                      urlSearchParams.append("desc",this.desc.toString());
-                      urlSearchParams.append("sdate",sd);
-                      urlSearchParams.append("edate",ed);
-                      urlSearchParams.append("fesdate",fesd);
-                      urlSearchParams.append("feedate",feed);
-                      urlSearchParams.append("fagency",this.fagency.toString());
-                    let body = urlSearchParams.toString()
-                var header = new Headers();
-                    header.append("Accept", "application/json");
-                    header.append("Content-Type", "application/x-www-form-urlencoded");    
-                    let option = new RequestOptions({ headers: header });
-            this.global.swalLoading('');
+            }else{
+                          let urlSearchParams = new URLSearchParams();
+                                urlSearchParams.append("name",this.name.toString());
+                                urlSearchParams.append("desc",this.desc.toString());
+                                urlSearchParams.append("sdate",sd);
+                                urlSearchParams.append("edate",ed);
+                                urlSearchParams.append("fesdate",fesd);
+                                urlSearchParams.append("feedate",feed);
+                                urlSearchParams.append("fagency",this.fagency.toString());
+                              let body = urlSearchParams.toString()
+                          var header = new Headers();
+                              header.append("Accept", "application/json");
+                              header.append("Content-Type", "application/x-www-form-urlencoded");    
+                              let option = new RequestOptions({ headers: header });
+                      this.global.swalLoading('');
 
-             this.http.post(this.global.api + 'api.php?action=spCallForProposal_Insert',
-             body,option)
-                .map(response => response.json())
-                .subscribe(res => { 
-                  console.log(res)
-                  this.dialogRef.close(1)
-                  this.global.swalSuccess('Discipline has been Added!')
-               },Error=>{
-                 console.log(Error)
-                 this.global.swalAlertError()
-               });
-              }
-  // code...
-}else{
-  this.global.swalAlert("Alert!", x,"warning")
-}
-      
-  }
+                       this.http.post(this.global.api + 'api.php?action=spCallForProposal_Insert',
+                       body,option)
+                          .map(response => response.json())
+                          .subscribe(res => { 
+                            console.log(res)
+                            this.dialogRef.close(1)
+                            this.global.swalSuccess('Call for proposals has been Added!')
+                         },Error=>{
+                           console.log(Error)
+                           this.global.swalAlertError()
+                         });
+                        }
+            // code...
+          }else{
+            this.global.swalAlert("Alert!", x,"warning")
+          }
+                
+            }
 
   updatecallforproposal(){
+        let current_datetime = this.sdate
+        let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
+        var sd = formatted_date.toString()
+        current_datetime = this.edate
+        formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
+        var ed = formatted_date.toString()
+        current_datetime = this.fesdate
+        formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
+        var fesd = formatted_date.toString()
+        current_datetime = this.feedate
+        formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
+        var feed = formatted_date.toString()
 
+        var x=''
+        if (this.name=='') {
+          x=x+"*Call for proposal name is required!<br>"
+        }
+        if (this.desc=='') {
+          x=x+"*Description is required!<br>"
+        }
 
-let current_datetime = this.sdate
-let formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
-var sd = formatted_date.toString()
-current_datetime = this.edate
-formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
-var ed = formatted_date.toString()
-current_datetime = this.fesdate
-formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
-var fesd = formatted_date.toString()
-current_datetime = this.feedate
-formatted_date = current_datetime.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear()
-var feed = formatted_date.toString()
-
-var x=''
-if (this.name=='') {
-  x=x+"*Call for proposal name is required!<br>"
-}
-if (this.desc=='') {
-  x=x+"*Description is required!<br>"
-}
-
-if (x=='') {
+        if (x=='') {
                 let urlSearchParams = new URLSearchParams();
                       urlSearchParams.append("id",this.id.toString());
                       urlSearchParams.append("name",this.name.toString());
@@ -188,22 +186,20 @@ if (x=='') {
                     let option = new RequestOptions({ headers: header });
             this.global.swalLoading('');
 
-             this.http.post(this.global.api + 'api.php?action=spCallForProposal_Update',
+             this.http.post(this.global.api + 'api.php?action=spCallForProposal_update',
              body,option)
                 .map(response => response.json())
                 .subscribe(res => { 
                   console.log(res)
                   this.dialogRef.close(1)
-                  this.global.swalSuccess('Discipline has been Updated!')
+                  this.global.swalSuccess('Call for proposals has been Updated!')
                },Error=>{
                  console.log(Error)
                  this.global.swalAlertError()
                });
-
-  // code...
-}else{
-  this.global.swalAlert("Alert!", x,"warning")
-}
+        }else{
+          this.global.swalAlert("Alert!", x,"warning")
+        }
       
   }
 }

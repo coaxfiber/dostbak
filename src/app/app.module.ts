@@ -58,6 +58,7 @@ import { ProposalsStatusViewComponent } from './proposal/proposals/proposals-sta
 import { ProposalDocumentComponent } from './proposal/proposals/proposal-document/proposal-document.component';
 import { ViewProposalDetailsComponent } from './proposal/proposal-approval/view-proposal-details/view-proposal-details.component';
 import { StatusChangeProposalComponent } from './proposal/proposal-approval/status-change-proposal/status-change-proposal.component';
+import { AddUpdateAttachmentComponent } from './control-panel/grant-management/add-update-attachment/add-update-attachment.component';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import { StatusChangeProposalComponent } from './proposal/proposal-approval/stat
     ProposalDocumentComponent,
     ViewProposalDetailsComponent,
     StatusChangeProposalComponent,
+    AddUpdateAttachmentComponent,
   ],
    entryComponents: [
     UpdateProjectComponent,
@@ -138,7 +140,8 @@ import { StatusChangeProposalComponent } from './proposal/proposal-approval/stat
     ProposalsStatusViewComponent,
     ProposalDocumentComponent,
     ViewProposalDetailsComponent,
-    StatusChangeProposalComponent
+    StatusChangeProposalComponent,
+    AddUpdateAttachmentComponent
    ],
   imports: [
     BrowserModule,

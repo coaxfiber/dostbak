@@ -23,8 +23,6 @@ export class NewProposalComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   @ViewChild('fileInput',{static:false}) fileInput: ElementRef;
-
-
   yeararr=[];
 
 	proj=false;
@@ -109,6 +107,9 @@ lname=''
 suffix=''
 proponenttypeinput='2'
 
+//G!start
+  
+//G!end
   constructor(public dialogRef: MatDialogRef<NewProposalComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder,public global: GlobalService,private http: Http,private route: ActivatedRoute, private router: Router) {
     this.http.get(this.global.api + 'api.php?action=FundingAgency_List',
          this.global.option)
@@ -170,9 +171,7 @@ proponenttypeinput='2'
   }
 
 onFileChange(event) {
-
-  
-    let reader = new FileReader();
+  let reader = new FileReader();
     if(event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
       reader.readAsDataURL(file);

@@ -1,7 +1,8 @@
 
-<mat-drawer-container class="example-container" id='main'>
-  <mat-drawer mode="side" opened="true"  #drawer>
-  	<div style="" id="coverp">
+<mat-drawer-container id='main'>
+  <mat-drawer mode="side" opened="true" #drawer>
+<div style="width: 285px">
+<div style="" id="coverp">
 	<div style="" id="fullname">
 		<table style="width: 100%">
 			<tr>
@@ -28,7 +29,7 @@
 </div>
   
           
-
+<div style="height: calc(100vh - 500px) !importa">
         <div *ngIf='proposal===1'>
         <p style="margin: 10px 10px 0 10px"></p>
         <mat-chip-list>
@@ -150,8 +151,9 @@
         </div>
 
       </mat-expansion-panel>
-    </div>
-
+      </div>
+  </div>
+</div>
   </mat-drawer>
 
   <mat-drawer-content>
