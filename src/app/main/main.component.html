@@ -1,6 +1,6 @@
 
 <mat-drawer-container id='main'>
-  <mat-drawer mode="side" opened="true" #drawer>
+<mat-drawer mode="side" opened="true" #drawer>
 <div style="width: 285px">
 <div style="" id="coverp">
 	<div style="" id="fullname">
@@ -64,15 +64,12 @@
       </div>
 
 <div *ngIf='proposalapproval===1'>
-  
       <mat-expansion-panel  [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <i class="material-icons">verified_user</i><b>&nbsp; Grants Management</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
-
-        
         <div style="margin-left: 10px;margin-right: 10px">
           <a mat-button [routerLink]="['../main',{outlets:{div:'proposal-Management-Pending'}}]"  >&nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending</a>
           <a mat-button [routerLink]="['../main',{outlets:{div:'proposal-Management-WithIssues'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
@@ -80,46 +77,22 @@
         </div>
       </mat-expansion-panel>
 </div>
-<div *ngIf='researchapproval===1'>
-  
-      <mat-expansion-panel  [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <i class="material-icons">verified_user</i><b>&nbsp; Research Management</b>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <div *ngIf='researchapproval===1'>
+            <mat-expansion-panel  [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <i class="material-icons">verified_user</i><b>&nbsp; Research Management</b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
 
-        <div style="margin-left: 10px;margin-right: 10px">
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-PendingApproval'}}]"  >&nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending</a>
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-WithIssue'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'Published'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Published</a>
-        </div>
-
-      </mat-expansion-panel>
-</div>
-
-  
-
-
+              <div style="margin-left: 10px;margin-right: 10px">
+                <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-PendingApproval'}}]"  >&nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending</a>
+                <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-WithIssue'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
+                <a mat-button  [routerLink]="['../main',{outlets:{div:'Published'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Published</a>
+              </div>
+            </mat-expansion-panel>
+      </div>
       <div *ngIf='usermanagement===1'>
-
-      <!--<mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <i class="material-icons">settings_applications</i><b>&nbsp; Control Panel</b>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-list>
-          <mat-list-item><button mat-button  [routerLink]="['../main',{outlets:{div:'discipline'}}]">Discipline</button></mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item><button mat-button>Application module</button>
-          </mat-list-item>
-          <mat-divider></mat-divider> 
-          <mat-list-item><button mat-button>Mode of Implementation</button></mat-list-item>
-          <mat-divider></mat-divider>
-        </mat-list>
-      </mat-expansion-panel>-->
-
 
       <mat-expansion-panel  [expanded]="true">
         <mat-expansion-panel-header>
@@ -132,7 +105,6 @@
           <a mat-button  [routerLink]="['../main',{outlets:{div:'assign-user-roles'}}]" ><i class="material-icons iconsize">assignment_ind</i> Assign User Roles</a>
           <a mat-button  [routerLink]="['../main',{outlets:{div:'roles'}}]"  ><i class="material-icons iconsize" >memory</i> Roles</a>
         </div>
-
       </mat-expansion-panel>
     </div>
 
@@ -149,7 +121,6 @@
           <a mat-button  [routerLink]="['../main',{outlets:{div:'Call-for-proposals'}}]" ><i class="material-icons iconsize">speaker_notes</i> Grant Manager</a>
           <a mat-button  [routerLink]="['../main',{outlets:{div:'discipline'}}]" ><i class="material-icons iconsize">reorder</i> Project Discipline</a>
         </div>
-
       </mat-expansion-panel>
       </div>
   </div>
@@ -162,10 +133,10 @@
 
     </div>
     <style type="text/css">
-.matcontainer{overflow-y: scroll;}</style>
-  	<mat-card class="matcontainer" style="padding: 0;overflow: hidden;"> 
-
-    <router-outlet name="div"></router-outlet>
-		
-  	</mat-card></mat-drawer-content>
+      .matcontainer{overflow-y: scroll;}
+    </style>
+    	<mat-card class="matcontainer" style="padding: 0;overflow: hidden;"> 
+      <router-outlet name="div"></router-outlet>
+    	</mat-card>
+  </mat-drawer-content>
 </mat-drawer-container>

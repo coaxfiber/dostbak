@@ -209,6 +209,9 @@ more2="More"
 
 
   ngOnInit() {
+    if (this.global.getSession()==null) {
+      this.global.logout();
+    }
   }
 
   clickevent(event){
