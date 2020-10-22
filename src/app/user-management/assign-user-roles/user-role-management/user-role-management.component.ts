@@ -24,7 +24,7 @@ pinfo
 	displayedColumns = ['name','filter'];
       @ViewChild(MatSort,{static:false}) sort: MatSort;
        @ViewChild('paginator',{static:false}) paginator: MatPaginator;
-  constructor(public dialogRef: MatDialogRef<UserRoleManagementComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) { 
+  constructor(public dialogRef: MatDialogRef<UserRoleManagementComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) { 
           this.pinfo = data.pinfo;
             this.http.get(this.global.api+'api.php?action=spUser_Role_List&id='+data.id,this.global.option)
                   .map(response => response.json())

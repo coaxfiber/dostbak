@@ -17,7 +17,7 @@ export class ChangeStatusComponent implements OnInit {
 	remarks="";
 	head
 	button='';
-  constructor(public dialogRef: MatDialogRef<ChangeStatusComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) { 
+  constructor(public dialogRef: MatDialogRef<ChangeStatusComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) { 
   		this.researchid = data.id;
   		this.title = data.title;
   		this.type = data.type;

@@ -21,7 +21,7 @@ dataSource;
 	displayedColumns = ['id','name','address','action'];
       @ViewChild(MatSort, {static: false}) sort: MatSort;
        @ViewChild('paginator', {static: false}) paginator: MatPaginator;
-  constructor(public dialog: MatDialog,private global: GlobalService,private http: Http) { }
+  constructor(public dialog: MatDialog,public global: GlobalService,private http: Http) { }
 
   ngOnInit() {
   	this.createtable()

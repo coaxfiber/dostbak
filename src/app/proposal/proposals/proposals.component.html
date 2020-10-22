@@ -1,5 +1,5 @@
   <div style="padding:  20px 0 0 20px;">
-  <h4>Proposals - Draft</h4>
+  <h4>Proposals -ww Draft</h4>
   <hr>
   </div>
 <style type="text/css">
@@ -77,7 +77,7 @@
       <div class="rolerow">
        <b><input type="button" [matMenuTriggerFor]="menu" style="color: white;background-color: #294a70;border: none;width: 60px;padding-top: 5px;padding-bottom: 5px;" value="Options"></b>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openDialogUpdate(element.id)">Update Proposal</button>
+          <button mat-menu-item (click)="openDialogUpdate(element)">Update Proposal</button>
           <button mat-menu-item  (click)="removeRole(element.id)">Delete</button>
           <button mat-menu-item (click)='ViewHistory(element.GeneralTitle,element.status)'>View Status History</button>
           <button mat-menu-item (click)='Viewpdf(element.id)'>View PDF Document</button>

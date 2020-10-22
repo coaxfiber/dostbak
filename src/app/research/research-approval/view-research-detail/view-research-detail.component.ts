@@ -71,7 +71,7 @@ counter=2;
       avatar: null
     });
   }
-  constructor(public dialogRef: MatDialogRef<ViewResearchDetailComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder, private router: Router,private global: GlobalService,private http: Http) {
+  constructor(public dialogRef: MatDialogRef<ViewResearchDetailComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder, private router: Router,public global: GlobalService,private http: Http) {
    	this.researchid=data.data.id;
   	this.inputdegreelevel = data.data.level;
   	this.inputtitle = data.data.title;

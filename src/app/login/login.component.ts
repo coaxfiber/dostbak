@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   key = 1
   header = new Headers();
   user
-  constructor(private http: Http, private global: GlobalService,private router: Router) { 
+  constructor(private http: Http, public global: GlobalService,private router: Router) { 
     if (window.location.href.includes("registration")) {
       this.router.navigate(['registration']);
     }else
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
                   header.append("Accept", "application/json");
                   header.append("Content-Type", "application/x-www-form-urlencoded");    
                   let option = new RequestOptions({ headers: header });
-
+                  
        this.http.post(this.global.api + 'api.php?action=login',
        body,option)
           .map(response => response.json())

@@ -21,7 +21,7 @@
 		  	
               <p><b>Attachment File</b></p>
               <div *ngIf="data.x==1&&avatar!=null">
-              	<a [href]="global.sanitize(formdoc,global.dlfiletype(fext))" download="{{name}}.{{global.dlfiletype(filetype) }}">
+              	<a [href]="global.sanitize(avatar,global.dlfiletype(filetype))" download="{{name}}.{{global.dlfiletype(filetype) }}">
               	<button mat-raised-button class="buttonblue">
 		  			Download(.{{ global.dlfiletype(filetype) }})
 		  		</button></a>&nbsp;

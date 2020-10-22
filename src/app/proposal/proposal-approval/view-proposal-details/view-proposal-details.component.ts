@@ -71,7 +71,7 @@ counter=2;
       avatar: null
     });
   }
-  constructor(public dialogRef: MatDialogRef<ViewProposalDetailsComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder, private router: Router,private global: GlobalService,private http: Http) {
+  constructor(public dialogRef: MatDialogRef<ViewProposalDetailsComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder, private router: Router,public global: GlobalService,private http: Http) {
   
   	console.log(data.x)
 

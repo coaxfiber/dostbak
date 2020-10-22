@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
 	street2=''
 	company
 	inputcompany='';
-  constructor(public dialog: MatDialog,private global: GlobalService,private http: Http,private router: Router) {
+  constructor(public dialog: MatDialog,public global: GlobalService,private http: Http,private router: Router) {
   	this.email = "";
   	this.pword = "";
   	this.cpword = "";

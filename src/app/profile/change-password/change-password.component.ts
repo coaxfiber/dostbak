@@ -15,7 +15,7 @@ export class ChangePasswordComponent implements OnInit {
 	npword=''
 	cpword=''
 	x=true
-  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<ChangePasswordComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http,) { }
+  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<ChangePasswordComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http,) { }
 
   ngOnInit() {
   }

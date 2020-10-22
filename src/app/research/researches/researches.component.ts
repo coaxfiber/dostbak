@@ -40,7 +40,7 @@ export class ResearchesComponent implements OnInit {
       status
 
 
-  constructor(public dialog: MatDialog,private global: GlobalService,private http: Http,private router: Router) {
+  constructor(public dialog: MatDialog,public global: GlobalService,private http: Http,private router: Router) {
     
     this.http.get(this.global.api + 'api.php?action=degreelevel',
          this.global.option)

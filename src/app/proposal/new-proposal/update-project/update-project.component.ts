@@ -109,21 +109,17 @@ lname=''
 suffix=''
 proponenttypeinput='2'
 
-  constructor(public dialogRef: MatDialogRef<UpdateProjectComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder,private global: GlobalService,private http: Http,private route: ActivatedRoute, private router: Router) {
-    console.log(this.data.list)
+  constructor(public dialogRef: MatDialogRef<UpdateProjectComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public dialog: MatDialog, private fb: FormBuilder,public global: GlobalService,private http: Http,private route: ActivatedRoute, private router: Router) {
+    console.log(this.data)
     this.title = this.data.progtitle;
     this.projectid = this.data.projectid
-    this.projecttitle = this.data.list.ptitle;
-    this.projectduration = this.data.list.duration;
-    this.esummary = this.data.list.duration;
+    //this.projecttitle = this.data.list.ptitle;
+    //this.projectduration = this.data.list.duration;
+    //this.esummary = this.data.list.duration;
     this.getcooperating(this.projectid); 
     this.getproponent(this.projectid); 
 
-    this.rndstation=this.data.list.duration;
-    this.rndstation=this.data.list.duration;
-    this.rndstation=this.data.list.duration;
-    this.rndstation=this.data.list.duration;
-    this.rndstation=this.data.list.duration;
+    //this.rndstation=this.data.list.duration;
 
     this.http.get(this.global.api + 'api.php?action=company_List',
          this.global.option)

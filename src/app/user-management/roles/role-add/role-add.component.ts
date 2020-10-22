@@ -17,7 +17,7 @@ export class RoleAddComponent implements OnInit {
   role:string='';
   access:any;
   temparr:any;
-  constructor(public dialogRef: MatDialogRef<RoleAddComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) { 
+  constructor(public dialogRef: MatDialogRef<RoleAddComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) { 
     
    }
   saveRole(){

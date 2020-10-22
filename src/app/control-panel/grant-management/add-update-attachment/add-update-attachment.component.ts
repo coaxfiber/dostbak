@@ -29,7 +29,7 @@ export class AddUpdateAttachmentComponent implements OnInit {
 	fundingagency=[]
 	majoralabel="Choose a file...";
   avatar
-  constructor(private fb: FormBuilder,public dialog: MatDialog,public dialogRef: MatDialogRef<AddUpdateAttachmentComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) { }
+  constructor(private fb: FormBuilder,public dialog: MatDialog,public dialogRef: MatDialogRef<AddUpdateAttachmentComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) { }
   
   ngOnInit() {
       this.fagency = this.data.fagency;

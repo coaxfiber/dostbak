@@ -18,7 +18,7 @@ export class UserLookupComponent implements OnInit {
 	userarray=[]
 	temparr
 	email=''
-  constructor(public dialogRef: MatDialogRef<UserLookupComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) {  }
+  constructor(public dialogRef: MatDialogRef<UserLookupComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) {  }
 
   ngOnInit() {
   	this.userarray=undefined

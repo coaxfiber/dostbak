@@ -7,6 +7,7 @@ import { ViewChild,ElementRef } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ProposalsStatusViewComponent } from './proposals-status-view/proposals-status-view.component';
 import { ProposalDocumentComponent } from './proposal-document/proposal-document.component';
+import { UpdateProjectComponent } from './../new-proposal/update-project/update-project.component';
 
 const swal = Swal;
 @Component({
@@ -37,6 +38,13 @@ displayedColumns = ['title','fagency','datecreated','status','action'];
     }
 
 openDialogUpdate(x){
+ const dialogRef = this.dialog.open(UpdateProjectComponent, {
+      width: '99%',data:x, disableClose: false });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result==1) { 
+      }
+    });
 
 }
 ViewHistory(title,status){

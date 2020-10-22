@@ -29,7 +29,7 @@ displayedColumns = ['title','user','fagency','datecreated','status','action'];
       
       draft=[];
       submmited=[];
-  constructor(public dialog: MatDialog,private global: GlobalService,private http: Http) {
+  constructor(public dialog: MatDialog,public global: GlobalService,private http: Http) {
         }
     
 

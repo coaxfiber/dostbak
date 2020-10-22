@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   company
   inputcompany=''
-  constructor(private http: Http,private global: GlobalService) {
+  constructor(private http: Http,public global: GlobalService) {
   	this.http.get(this.global.api + 'api.php?action=company_List',
          this.global.option)
             .map(response => response.json())

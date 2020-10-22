@@ -22,7 +22,7 @@ export class GrantAddUpdateComponent implements OnInit {
   desc=''
   serializedDate = new FormControl((new Date()).toISOString());
   id
-  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<GrantAddUpdateComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) { }
+  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<GrantAddUpdateComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) { }
   fundingagency
   fagency
   sdate

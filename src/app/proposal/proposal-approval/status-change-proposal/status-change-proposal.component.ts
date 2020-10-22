@@ -17,7 +17,7 @@ export class StatusChangeProposalComponent implements OnInit {
 	remarks="";
 	head
 	button='';
-  constructor(public dialogRef: MatDialogRef<StatusChangeProposalComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private global: GlobalService,private http: Http) { 
+  constructor(public dialogRef: MatDialogRef<StatusChangeProposalComponent>,@Inject(MAT_DIALOG_DATA) public data: any,public global: GlobalService,private http: Http) { 
   		this.id = data.id;
   		this.title = data.title;
   		this.type = data.type;

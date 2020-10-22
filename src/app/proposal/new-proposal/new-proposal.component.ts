@@ -375,12 +375,12 @@ let x=''
   		x=x+"*Funding Agency is required\n";
   	}if (this.proj==false&&this.prog==false) {
       x=x+"*Must select a proposal type!\n";
-    }console.log(this.global.user.psgc1)
+    }
 
   	if (x==''&&this.proposalcounter==false) {
                   let urlSearchParams = new URLSearchParams();
                     urlSearchParams.append("GeneralTitle",this.title);
-        			     	urlSearchParams.append('LeadAgency', this.agencies);
+        			     	urlSearchParams.append('LeadAgency', this.fagency);
         			     	urlSearchParams.append('Street', this.global.user.street1);
         			     	urlSearchParams.append('Address_PSGC', this.global.user.psgc1);
         			     	urlSearchParams.append('Telephone', this.telephone);
@@ -401,7 +401,6 @@ let x=''
 	     body,option)
           .map(response => response.json())
           .subscribe(res => {
-                  console.log(res)
              this.global.swalClose();
              this.proposalid=res.id;
              this.http.get(this.global.api + 'api.php?action=programinsert&proposalid='+this.proposalid, option)

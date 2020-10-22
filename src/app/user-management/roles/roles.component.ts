@@ -47,7 +47,7 @@ export class RolesComponent implements OnInit {
           });
       }
 
-  constructor(public dialog: MatDialog,private domSanitizer: DomSanitizer,private global: GlobalService,private http: Http) {
+  constructor(public dialog: MatDialog,private domSanitizer: DomSanitizer,public global: GlobalService,private http: Http) {
      
   }
 applyFilter(filterValue: string) {

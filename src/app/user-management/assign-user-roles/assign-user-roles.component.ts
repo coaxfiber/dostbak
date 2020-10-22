@@ -23,7 +23,7 @@ export class AssignUserRolesComponent implements OnInit {
 	company
 
 	pinfo
-  constructor(public dialog: MatDialog,private global: GlobalService,private http: Http) { }
+  constructor(public dialog: MatDialog,public global: GlobalService,private http: Http) { }
 
   ngOnInit() {
        

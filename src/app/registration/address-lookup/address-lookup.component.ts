@@ -21,7 +21,7 @@ export class AddressLookupComponent implements OnInit {
 	bar=''
 	bara=''
 	zip
-  constructor(public dialogRef: MatDialogRef<AddressLookupComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private http: Http,private global: GlobalService) {
+  constructor(public dialogRef: MatDialogRef<AddressLookupComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private http: Http,public global: GlobalService) {
 	
 	this.http.get(this.global.api+'api.php?action=spProvince_Select',this.global.option)
 	  .map(response => response.json())

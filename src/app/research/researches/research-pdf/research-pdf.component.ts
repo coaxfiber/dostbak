@@ -16,7 +16,7 @@ export class ResearchPdfComponent implements OnInit {
 pdf
 link;
 
-  constructor(private http: Http,private global: GlobalService,private domSanitizer: DomSanitizer,public dialogRef: MatDialogRef<ResearchPdfComponent>,@Inject(MAT_DIALOG_DATA) public data: any,) {
+  constructor(private http: Http,public global: GlobalService,private domSanitizer: DomSanitizer,public dialogRef: MatDialogRef<ResearchPdfComponent>,@Inject(MAT_DIALOG_DATA) public data: any,) {
   	if (data.pdf!=undefined) {
   	this.pdf = data.pdf;
   	this.link = this.global.api+ "getpdf.php?data="+this.pdf;
