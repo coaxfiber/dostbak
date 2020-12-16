@@ -1,0 +1,212 @@
+
+<style type="text/css">
+.imgfea {
+  margin-left: auto;margin-right: auto;
+    height: 150px;box-shadow: 2px 2px 2px 2px #333;;
+  }
+img.noStretch{
+    object-fit: cover;
+  }</style>
+
+    <div class="hero" id="highlighted" style="background-image: url(assets/img/buntun2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;">
+      <div class="inner">
+        <!--Slideshow-->
+        <div id="highlighted-slider" class="container">
+          <div class="item-slider" data-toggle="owlcarousel" data-owlcarousel-settings='{"singleItem":true, "navigation":true, "transitionStyle":"fadeUp"}'>
+            <!--Slideshow content-->
+            <!--Slide 1-->
+            <!--Slide 2-->
+            <div class="item">
+              <div class="row">
+                <div class="col-md-6 text-right-md item-caption">
+                  <h2 class="h1 text-weight-light">
+                      <span class="text-primary">CVRDKMS</span> Website
+                    </h2>
+                  <h4>
+                      Developed by USL CICT Team
+                    </h4>
+                  <p>Cagayan Valley Research and Development Knowledge Management System is a proposed development of an online repository and research grant monitoring system that aims to promote scholarly studies in the region</p>
+                  <a href="http://192.168.0.29/dost/index" class="btn btn-more btn-lg"><i class="fa fa-plus"></i> Learn More</a>
+                </div>
+                <div class="col-md-6 hidden-xs">
+                  <img src="assets/img/slides/slide2.png" alt="Slide 2" class="center-block img-responsive">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- ======== @Region: #content ======== -->
+  <div id="content" style="margin-top: 0 !important">
+
+    <div class="block block-pd-sm block-bg-grey-dark block-bg-overlay block-bg-overlay-6 text-center" data-block-bg-img="https://picjumbo.imgix.net/HNCK1088.jpg?q=40&amp;w=1650&amp;sharp=30" data-stellar-background-ratio="0.3" *ngIf="count!=''">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+              <div class="row google-logo text-center">
+               
+      <h3 class="h-lg m-t-0 m-b-lg" style="margin-bottom: 13px !important">
+          KnowledgeHub Search
+        </h3>
+                  
+                </div>
+                <div class="row google-form text-center">
+                    <div class="form-group">
+                  <table style="width:100%;margin-bottom: 10px">
+                    <tr>
+                      <td style="width: 180px">
+                        <select class="form-control input-lg" [(ngModel)]='global.searchfilter' style="width: 180px;">
+                          <option selected="" value="Title">Title</option>
+                          <option value="Abstract">Abstract</option>
+                          <option value="Author">Author</option>
+                          <option value="Company">Company</option>
+                          <option value="Keyword">Keyword</option>
+                          <option value="Program Discipline">Program Discipline</option>
+                        </select>
+                      </td>
+                      <td>                        
+                        <input  class="form-control input-lg" [(ngModel)]='search' (keyup)="keysearch($event)">
+                      </td>
+                    </tr>
+                  </table>    
+
+                  <div class="btn-group">
+                  <button class="btn btn-default" (click)="keysearch('onoutfocus')">Search</button><!-- 
+                  <a type="button" href="https://www.google.com/doodles" class="btn btn-default">I'm Feeling Lucky</a> -->
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mission Statement -->
+    <!--<div class="mission text-center block block-pd-sm block-bg-noise">
+      <div class="container">
+        <h2 class="text-shadow-white">
+            
+        <h1 class="jumbotron-heading">CVRDKMS</h1>
+        <p class="lead text-muted mb-0">Cagayan Valley Research and Development Knowledge Management System (CVRDKMS) is the DOST RO2’s official platform for collecting, preserving, and sharing scholarly articles.</p>
+            <a href="about.html" class="btn btn-more"><i class="fa fa-plus"></i>Read more</a>
+          </h2>
+      </div>
+    </div>--> <!-- Services -->
+    <div class="services block block-bg-gradient block-border-bottom">
+      <div class="container">
+        <h2 class="block-title">
+            Our Services
+          </h2>
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <span class="fa-stack fa-5x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-group fa-stack-1x fa-inverse"></i> </span>
+            <h4 class="text-weight-strong">
+                Search and Download Research
+              </h4>
+            <p>Find articles from our research collections contributed by participating agencies/ institutions in the region.</p>
+            <p>
+              <a href="#" class="btn btn-more i-right">Learn More <i class="fa fa-angle-right"></i></a>
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <span class="fa-stack fa-5x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-pencil fa-stack-1x fa-inverse"></i> </span>
+            <h4 class="text-weight-strong">
+                Submit Research
+              </h4>
+            <p>Member institutions/agencies upload their research collections here to improve visibility and impact of their scholarly outputs.</p>
+            <p>
+              <a href="#" class="btn btn-more i-right">Learn More <i class="fa fa-angle-right"></i></a>
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <span class="fa-stack fa-5x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-cogs fa-stack-1x fa-inverse"></i> </span>
+            <h4 class="text-weight-strong">
+                Submit Proposal
+              </h4>
+            <p>Submit your program or project proposals to get funding grants.</p>
+            <p>
+              <a href="#" class="btn btn-more i-right">Learn More <i class="fa fa-angle-right"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <div class="block block-pd-sm block-bg-grey-dark block-bg-overlay block-bg-overlay-6 text-center" data-block-bg-img="https://picjumbo.imgix.net/HNCK1088.jpg?q=40&amp;w=1650&amp;sharp=30" data-stellar-background-ratio="0.3" *ngIf="count!=''">
+      <h2 class="h-xlg h1 m-a-0">
+          <span data-counter-up>{{count}}</span>
+        </h2>
+      <h3 class="h-lg m-t-0 m-b-lg">
+          Of Published Researches!
+        </h3>
+      <p>
+        <a href="javascript:void(0)" [routerLink]="['../All-Researches']" class="btn btn-more btn-lg i-right">Published Researches! <i class="fa fa-angle-right"></i></a>
+      </p>
+    </div>
+    
+    <!--Showcase-->
+    <div class="showcase block block-border-bottom-grey">
+      <div class="container"> 
+        <div class="row" style="margin-top: 7px;">
+              <div class="col-6 col-md-8">
+         <h2 class="block-title">
+            Recently Published Researches
+          </h2>
+        </div><!-- 
+              <div class="col-6 col-md-4" style="text-align: right;"><a href="researches.php"><button type="button" class="btn btn-primary btn-sm" ><i class="fa fa-search"></i> View More</button></a></div> -->
+            </div>
+        <p></p>
+        <div  *ngIf="array.length!=0">
+        <div class="item-carousel" data-toggle="owlcarousel" data-owlcarousel-settings='{"items":4, "pagination":false, "navigation":true, "itemsScaleUp":true}'>
+         
+          <div class="item" *ngFor="let c of array" style="width: 275px;margin-bottom: 10px">
+            <a href="javascript:void(0)" class="overlay-wrapper" (click)="global.openresearch(c.id)">
+              <div style="height: 155px;overflow: hidden;">
+                <img src="assets/img/pro.jpg" alt="Project 1 image" class="img-responsive underlay" style="width: 275px">
+              </div>
+                <span class="overlay">
+                  <span class="overlay-content"> <span style="padding: 5px">{{c.name}}</span> </span>
+                </span>
+              </a>
+            <div class="item-details bg-noise">
+              <h4 class="item-title" style="font-size: 15px;height: 50px; overflow: hidden;overflow-y: auto;">
+                  <a href="javascript:void(0)" (click)="global.openresearch(c.id)">{{c.name}}</a>
+                </h4>
+              <a href="javascript:void(0)" class="btn btn-more" (click)="global.openresearch(c.id)"><i class="fa fa-plus"></i>View Research</a>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </div>
+    </div>
+   
+<!--     <div class="block block-pd-sm block-bg-grey-dark block-bg-overlay block-bg-overlay-6 text-center" data-block-bg-img="https://picjumbo.imgix.net/HNCK1088.jpg?q=40&amp;w=1650&amp;sharp=30" data-stellar-background-ratio="0.3">
+      <h2 class="h-xlg h1 m-a-0">
+          <span data-counter-up><?php
+              $stmt = $db->prepare("exec spRPTResearch_TotalCount_byStatus @statusID = 3");  
+              $stmt->execute();
+              $row = $stmt ->fetch();
+           echo $row[0]; ?></span>
+        </h2>
+      <h3 class="h-lg m-t-0 m-b-lg">
+          Of Published Researches!
+        </h3>
+      <p>
+        <a href="#" class="btn btn-more btn-lg i-right">Apply today! <i class="fa fa-angle-right"></i></a>
+      </p>
+    </div> -->
+    <!--Customer testimonial & Latest Blog posts-->
+  </div>
+  <!-- /content -->

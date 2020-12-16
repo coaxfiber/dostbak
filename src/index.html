@@ -2,17 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Salikha - Dashboard</title>
+  <title>CVKHub</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="assets/css/css.css?family=Roboto:400,100,300,500,700,900" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/lib/owlcarousel/owl.theme.min.css" rel="stylesheet">
+  <link href="assets/lib/owlcarousel/owl.transitions.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+      <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body>
 	<div id="loader">
-        <img src="/assets/loading.gif" style="margin-left: calc(50% - 72px);margin-top: calc(50vh - 72px)">
+        <img src="assets/loading.gif" style="margin-left: calc(50% - 72px);margin-top: calc(50vh - 72px)">
   </div>
   <app-root></app-root>
+
+  <script src="assets/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+    $('#example').DataTable();
+    } );
+  </script>
+  <script src="assets/js/jquery.dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+
+  
+  <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="assets/lib/stellar/stellar.min.js"></script>
+  <script src="assets/lib/waypoints/waypoints.min.js"></script>
+  <script src="assets/lib/counterup/counterup.min.js"></script>
+  <script src="assets/contactform/contactform.js"></script>
+
+  <!-- Template Specisifc Custom Javascript File -->
+  <script src="assets/js/custom.js"></script>
+
+  <!--Custom scripts demo background & colour switcher - OPTIONAL -->
+  <script src="assets/js/color-switcher.js"></script>
+
+  <!--Contactform script -->
+  <script src="assets/contactform/contactform.js"></script>
 </body>
 </html>

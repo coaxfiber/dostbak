@@ -59,6 +59,14 @@ import { ProposalDocumentComponent } from './proposal/proposals/proposal-documen
 import { ViewProposalDetailsComponent } from './proposal/proposal-approval/view-proposal-details/view-proposal-details.component';
 import { StatusChangeProposalComponent } from './proposal/proposal-approval/status-change-proposal/status-change-proposal.component';
 import { AddUpdateAttachmentComponent } from './control-panel/grant-management/add-update-attachment/add-update-attachment.component';
+import { FrontComponent } from './pages/front/front.component';
+import { ResearchComponent } from './pages/research/research.component';
+import { ResearchPopupComponent } from './pages/research/research-popup/research-popup.component';
+import { ResearchBycompanyComponent } from './pages/research-bycompany/research-bycompany.component';
+import { OverviewComponent } from './pages/overview/overview.component';
+import { DevelopersComponent } from './pages/developers/developers.component';
+import { SearchComponent } from './pages/search/search.component';
+import { ResearchesPageComponent } from './pages/researches-page/researches-page.component';
 
 
 @NgModule({
@@ -116,6 +124,14 @@ import { AddUpdateAttachmentComponent } from './control-panel/grant-management/a
     ViewProposalDetailsComponent,
     StatusChangeProposalComponent,
     AddUpdateAttachmentComponent,
+    FrontComponent,
+    ResearchComponent,
+    ResearchPopupComponent,
+    ResearchBycompanyComponent,
+    OverviewComponent,
+    DevelopersComponent,
+    SearchComponent,
+    ResearchesPageComponent,
   ],
    entryComponents: [
     UpdateProjectComponent,
@@ -141,7 +157,8 @@ import { AddUpdateAttachmentComponent } from './control-panel/grant-management/a
     ProposalDocumentComponent,
     ViewProposalDetailsComponent,
     StatusChangeProposalComponent,
-    AddUpdateAttachmentComponent
+    AddUpdateAttachmentComponent,
+    ResearchPopupComponent
    ],
   imports: [
     BrowserModule,

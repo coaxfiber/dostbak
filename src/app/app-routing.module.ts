@@ -33,12 +33,48 @@ import { ProposalPublishedOwnerComponent } from './proposal/proposals/proposal-p
 import { ProposalPublishedComponent } from './proposal/proposal-approval/proposal-published/proposal-published.component';
 import { ProposalWithIssuesComponent } from './proposal/proposal-approval/proposal-with-issues/proposal-with-issues.component';
 import { ProposalPendingComponent } from './proposal/proposal-approval/proposal-pending/proposal-pending.component';
+import { FrontComponent } from './pages/front/front.component';
+import { ResearchComponent } from './pages/research/research.component';
+import { ResearchBycompanyComponent } from './pages/research-bycompany/research-bycompany.component';
 
+import { OverviewComponent } from './pages/overview/overview.component';
+import { DevelopersComponent } from './pages/developers/developers.component';
+
+import { SearchComponent } from './pages/search/search.component';
+import { ResearchesPageComponent } from './pages/researches-page/researches-page.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'All-Researches',
+    component: ResearchesPageComponent
+  },
+  {
+    path: 'Search',
+    component: SearchComponent
+  },
+  {
+    path: 'Overview',
+    component: OverviewComponent
+  },
+  {
+    path: 'Developers',
+    component: DevelopersComponent
+  },
+  {
+    path: 'research',
+    component: ResearchComponent
+  },
+  {
+    path: 'research-by-company',
+    component: ResearchBycompanyComponent
+  },
+  {
+    path: 'home',
+    component: FrontComponent
   },
   {
     path: 'registration',
@@ -48,6 +84,7 @@ const routes: Routes = [
     path: 'main',
     component: MainComponent,
       children: [
+        { path: '', component: HomeComponent, outlet: 'div' },
         { path: 'home', component: HomeComponent, outlet: 'div' },
         { path: 'new-proposal', component: NewProposalComponent, outlet: 'div' },
         { path: 'new-research', component: NewResearchComponent, outlet: 'div' },
@@ -81,7 +118,7 @@ const routes: Routes = [
       ]
   },
   {
-    path: '**', component: LoginComponent
+    path: '**', component: FrontComponent
   }
 ];
 

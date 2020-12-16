@@ -12,8 +12,8 @@ const swal = Swal;
 @Injectable()
 export class GlobalService {
 	token: any;
-  //api = "http://localhost/backend-dost/";
   api = "http://localhost/backend-dost/";
+  //api = "http://usl.edu.ph/pages/testdost/backend-dost/";
 	header = new Headers();
   option:any;
 
@@ -32,6 +32,10 @@ export class GlobalService {
    agency
 
    fundingagency=[]
+
+   disciplinelist
+   companylist
+
   constructor(private domSanitizer: DomSanitizer,@Inject(SESSION_STORAGE) private storage: WebStorageService,private router: Router,private http: Http) { 	
     if(this.storage.get('token')!=null){
       this.requestToken();
@@ -158,5 +162,22 @@ export class GlobalService {
               filetype="xls"
             }
     return filetype
+  }
+
+  search=''
+  searchfilter='Title'
+
+  researchpageid=''
+  openresearch(x){
+    this.researchpageid=x
+    console.log(x)
+    this.router.navigate(['../research', { q: x }]);
+  }
+
+  openresearchbydiscipline(x){
+    this.router.navigate(['../research', { discipline: x }]);
+  }
+  openresearchbycompany(x){
+    this.router.navigate(['../research-by-company', { company: x }]);
   }
 }

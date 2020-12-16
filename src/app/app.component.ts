@@ -9,7 +9,6 @@ import { AfterViewInit, ElementRef, } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  routerlink = "login";
 	public data:any
   constructor(private elRef:ElementRef,public global: GlobalService,private router: Router){
     setTimeout(console.log.bind(console, '%cStop!', 'color: red;font-size:75px;font-weight:bold;-webkit-text-stroke: 1px black;'), 0);
@@ -26,4 +25,5 @@ export class AppComponent {
   logout(){
   	this.global.logout();
   }
+
 }

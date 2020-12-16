@@ -1,7 +1,11 @@
-
-<mat-drawer-container id='main'>
-<mat-drawer mode="side" opened="true" #drawer>
-<div style="width: 285px">
+<style type="text/css">
+  #drawer a{
+      text-decoration:none !important;
+  }
+</style>
+<mat-drawer-container id='main' style="height: calc(100vh - 163px)">
+<mat-drawer mode="side" opened="true" #drawer id="drawer">
+<div style="width: 280px">
 <div style="" id="coverp">
 	<div style="" id="fullname">
 		<table style="width: 100%">
@@ -29,7 +33,7 @@
 </div>
   
           
-<div style="height: calc(100vh - 500px) !importa">
+<div style="height: calc(100vh - 500px) !important">
         <div *ngIf='proposal===1'>
         <p style="margin: 10px 10px 0 10px"></p>
         <mat-chip-list>
@@ -127,7 +131,7 @@
 </div>
   </mat-drawer>
 
-  <mat-drawer-content>
+  <mat-drawer-content style="height: auto !important">
 
   	<div style="margin-left: 10px;margin-top: 8px;" class="hnav">
 
