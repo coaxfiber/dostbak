@@ -19,7 +19,7 @@ export class Research2Component implements OnInit {
 
 
 
-	displayedColumns = ['title','level','company','datecreated','action'];
+	displayedColumns = ['title','level','datecreated','action'];
       @ViewChild(MatSort,{static:false}) sort: MatSort;
        @ViewChild('paginator',{static:false}) paginator: MatPaginator;
 

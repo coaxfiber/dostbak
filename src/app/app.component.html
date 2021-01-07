@@ -1,86 +1,78 @@
-<div id="background-wrapper" class="buildings" data-stellar-background-ratio="0.1" style="position: fixed;z-index: 100;width: 100%">
-    <!-- ======== @Region: #navigation ======== -->
-    <div id="navigation" class="wrapper">
-      <!--Hidden Header Region-->
-      <!--Header & navbar-branding region-->
-      <div class="header">
-        <div class="header-inner container">
-          <div class="row">
-            <div class="col-md-8">
-              <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
-              <a class="navbar-brand" href="./" title="Home">
-                <h1 class="hidden">
-                    <img src="assets/img/logo.png" alt="Flexor Logo">
-                   
-                  </h1>
-              </a>
-              <div class="navbar-slogan">
-                Department of Science and Technology
-                <br> Region II
-              </div>
-            </div>
-            <!--header rightside-->
-            <div class="col-md-4">
-              <!--user menu-->
-              <ul class="list-inline user-menu pull-right">
-                <li class="user-register" *ngIf="global.requestid()==null"><i class="fa fa-edit text-primary "></i> <a  href="javascript:void(0)" [routerLink]="['../registration']" class="text-uppercase">Register</a></li>
-                <li class="user-login" *ngIf="global.requestid()==null"><i class="fa fa-sign-in text-primary"></i> <a  [routerLink]="['../login']" class="text-uppercase" >Login</a></li>
-                <li class="user-login" *ngIf="global.requestid()!=null"><i class="fa fa-sign-in text-primary"></i> <a (click)="logout()" class="text-uppercase" >Logout</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="navbar navbar-default">
-          <!--mobile collapse menu button-->
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <!--social media icons-->
-          <!--everything within this div is collapsed on mobile-->
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" id="main-menu">
-              <li class="icon-link">
-                <a href="javascript:void(0)" [routerLink]="['../front']"><i class="fa fa-home"></i></a>
-
-              </li>
-              <li *ngIf="global.requestid()!=null">
-                <a  href="javascript:void(0)" [routerLink]="['../login']">Dashboard</a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About CVKHub<b class="caret"></b></a>
-                <!-- Dropdown Menu -->
-                <ul class="dropdown-menu">
-                  <li><a href="javascript:void(0)" tabindex="-1" class="menu-item" [routerLink]="['../Overview']">Overview</a></li>
-                  <li><a href="javascript:void(0)" tabindex="-1" class="menu-item" [routerLink]="['../Developers']">Developers</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources<b class="caret"></b></a>
-                <!-- Dropdown Menu -->
-                <ul class="dropdown-menu">
-                  <li><a href="about-us" tabindex="-1" class="menu-item">Proposal Guidelines</a></li>
-                  <li><a href="help" tabindex="-1" class="menu-item">Downloads</a></li>
-                </ul>
-              </li>
-              <!-- <li><a href="#"  class="dropdown-toggle" data-toggle="dropdown">Analytics</a>
-
-                <ul class="dropdown-menu">
-                  <li><a href="analytics-proposal.php" tabindex="-1" class="menu-item">Proposals</a></li>
-                  <li><a href="analytics-research.php" tabindex="-1" class="menu-item">Research</a></li>
-               </ul>
-                </li> -->
-              <li><a href="help/" target="_blank">Help</a></li>
-            </ul>
-          </div>
-          <!--/.navbar-collapse -->
-        </div>
-      </div>
-    </div>
-</div>
-<div style="height: 163px;">
-</div>
+<mat-toolbar *ngIf="global.activepage=='front'" style="position: fixed;
+  top: 0;
+  width: 100%;z-index: 1">
+  <mat-toolbar-row>
+    <a href="http://www.rdc2.gov.ph/invest/cagayan/" target="_blank" style="text-decoration: none;"><table>
+      <tr>
+        <td style="width: 120px">
+          <img src="assets/bclogo.png" style="height: 55px">
+        </td>
+        <td>
+                   <p style="font-size: 16px;margin:0 !important;font:normal;height: 15px;">Bountiful Cagayan</p>
+                   <p style="font-size: 16px;margin:0 !important;margin:0;font:normal;height: 15px;">
+                  Valley Region</p>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table>
+    </a>
+    <span class="example-spacer"></span>
+                <button mat-raised-button  *ngIf="global.requestid()!=null" [routerLink]="['../login']"> 
+                     <mat-icon>dashboard</mat-icon> Dashboard
+                </button>
+                &nbsp;&nbsp;
+                <button class="buttonblue" mat-raised-button *ngIf="global.requestid()!=null" (click)="logout()"> 
+                    <mat-icon>login</mat-icon> Sign Out
+                </button>
+                <button class="buttonblue" mat-raised-button [routerLink]="['../login']"  *ngIf="global.requestid()==null"> 
+                    <mat-icon>input</mat-icon> Sign In
+                </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div style="height: 64px"></div>
+<mat-toolbar *ngIf="global.activepage!='front'" style="position: fixed;
+  top: 0;
+  width: 100%;z-index: 1">
+  <mat-toolbar-row>
+    <table style="width: 100%;max-width: 700px;min-width: 500px">
+      <tr>
+        <td style="width: 155px">
+          <img src="assets/cvkhublogosearch.png" style="height:35px;margin-right: 40px" [routerLink]="['../home']" >
+        </td>
+        <td>
+          <table style="width: 100%">
+            <tr>
+              <td>
+                 <input  class="form-control input-lg" style="border-radius: 40px" [(ngModel)]='global.search' (keyup)="keysearch($event)" id="input">
+              </td>
+              <td style="width: 64px">
+                <button mat-button class="btn btn-default" (click)="keysearch('onoutfocus')" >
+                    <span class="material-icons">
+                  search
+                  </span></button>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <span class="example-spacer"></span>
+                 <button mat-button *ngIf="global.requestid()!=null" [routerLink]="['../login']"> 
+                     <mat-icon>dashboard</mat-icon> Dashboard
+                </button>
+                &nbsp;&nbsp;
+                <button class="buttonblue" mat-raised-button *ngIf="global.requestid()!=null" (click)="logout()"> 
+                    <mat-icon>login</mat-icon> Sign Out
+                </button>
+                <button class="buttonblue" mat-raised-button [routerLink]="['../login']"  *ngIf="global.requestid()==null"> 
+                    <mat-icon>input</mat-icon> Sign In
+                </button>
+  </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>
-<div id="footer" class="block block-bg-grey-dark block-bg-img" data-block-bg-img="assets/img/backgrounds/buildings.png" data-stellar-background-ratio="0.4" style="background-image: url(&quot;assets/img/backgrounds/buildings.png&quot;); background-position: 0px 172.2px;"  *ngIf="global.requestid()==null">
+
+<div id="footer" class="block block-bg-grey-dark block-bg-img" data-block-bg-img="assets/img/backgrounds/buildings.png" data-stellar-background-ratio="0.4" style="background-image: url(&quot;assets/img/backgrounds/buildings.png&quot;); background-position: 0px 172.2px;" >
     <div class="container">
 
       <div class="row" id="contact">
@@ -88,7 +80,7 @@
         <div class="col-md-6">
           <div>
               <h3>
-                  About Us
+                  About CVKHub
                 </h3>
               <p>Originally established as the National Science and Development Board (NSDB) on 13 June 1958, it was reconstituted as the National Science and Technology Authority (NSTA) on 17 March 1981 with the vision of "A competent and competitive science and technology community with a social conscience."...</p>
               <a href="about-us" class="btn btn-more"><i class="fa fa-plus"></i> Learn more</a>
@@ -97,7 +89,7 @@
         <div class="col-md-3">
           <address>
               <h3>
-                  DOST Region II
+                 Bountiful Cagayan Valley Region
                 </h3>
               <i class="fa fa-map-pin fa-fw text-primary"></i> Dalan na Paccurofon, corner Matunung St., Regional Government Center, Carig Sur, Tuguegarao City, Cagayan, 3500 Philippines 
               <br><br>
@@ -128,7 +120,7 @@
       <div class="row subfooter">
         <!--@todo: replace with company copyright details-->
         <div class="col-md-7">
-          <p>Copyright © <a href="http://region2.dost.gov.ph" target="_blank">DOST Region II</a></p>
+          <p>Copyright © <a href="http://region2.dost.gov.ph" target="_blank">CVKHub</a></p>
           <div class="credits">
             <!--
               All the links in the footer should remain intact.

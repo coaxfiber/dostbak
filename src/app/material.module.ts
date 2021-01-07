@@ -27,13 +27,14 @@ import {MatDialogModule} from '@angular/material';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   imports: [MatButtonModule, MatToolbarModule,MatIconModule,MatCardModule,MatStepperModule,
   MatFormFieldModule,FormsModule, ReactiveFormsModule,MatInputModule,MatSelectModule,
   MatCheckboxModule,MatListModule,MatGridListModule,MatSidenavModule,MatExpansionModule,
   MatMenuModule,MatTabsModule,MatTableModule,MatDatepickerModule,MatNativeDateModule,
   MatRadioModule,MatPaginatorModule,MatDialogModule,MatChipsModule,MatProgressSpinnerModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,MatTooltipModule
 
   ],
   exports: [MatButtonModule, MatToolbarModule,MatIconModule,MatCardModule,MatStepperModule,
@@ -41,7 +42,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
   MatCheckboxModule,MatListModule,MatGridListModule,MatSidenavModule,MatExpansionModule,
   MatMenuModule,MatTabsModule,MatTableModule,MatDatepickerModule,MatNativeDateModule,
   MatRadioModule,MatPaginatorModule,MatDialogModule,MatChipsModule,MatProgressSpinnerModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,MatTooltipModule
   
   ],
 })

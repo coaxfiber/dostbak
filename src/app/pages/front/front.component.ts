@@ -13,6 +13,8 @@ export class FrontComponent implements OnInit {
   constructor(public global: GlobalService,private http: Http,private router: Router) { }
   
   ngOnInit() {
+    this.global.activepage='front'
+    document.getElementById("input").focus();
     this.search = this.global.search
   	this.http.get(this.global.api+'api.php?action=spRPTResearch_TotalCount_byStatus&x=3',this.global.option)
           .map(response => response.json())
@@ -33,10 +35,18 @@ export class FrontComponent implements OnInit {
           });
   }
   search=''
+  ngOnDestroy(){
+    this.global.activepage='notfront'
+  }
   keysearch(event){
     if(event.keyCode == 13 || event.keyCode == 9 || event == 'onoutfocus') {
       this.global.search = this.search
-      this.router.navigate(['../Search', { q: this.search }]);
+      if (this.search==null) {
+       this.search = ''
+      }
+      if (this.search!='') {
+          this.router.navigate(['../Search', { q: this.search }]);
+      }
     }
   }
 

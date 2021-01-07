@@ -824,9 +824,11 @@ let x='';
                       }  
                          setTimeout(() => {
                           if (type==0) {
-                             this.router.navigate(['../main',{outlets:{div:'researches-Draft'}}]);                            // code...
+                             this.global.researchstat = 'Draft'
+                             this.router.navigate(['../main',{outlets:{div:'Research'}}]);                            // code...
                           }else{
-                             this.router.navigate(['../main',{outlets:{div:'researches-Pending'}}]);                            // code...
+                             this.global.researchstat = 'Pending'
+                             this.router.navigate(['../main',{outlets:{div:'Research'}}]);                            // code...
                           }
                           }, 1500);
       }     

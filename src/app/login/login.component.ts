@@ -9,6 +9,9 @@ import { HostListener } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 const swal = Swal;
 
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +24,10 @@ export class LoginComponent implements OnInit {
   key = 1
   header = new Headers();
   user
-  constructor(private http: Http, public global: GlobalService,private router: Router) { 
+  disabled = false
+  private loggedIn: boolean;
+  constructor(private authService: SocialAuthService,private http: Http, public global: GlobalService,private router: Router) { 
+     this.global.activepage='search'
     if (window.location.href.includes("registration")) {
       this.router.navigate(['registration']);
     }else
@@ -59,11 +65,11 @@ export class LoginComponent implements OnInit {
        title: 'Logging In...',allowOutsideClick: false,
       });
       swal.showLoading();
-        let urlSearchParams = new URLSearchParams();
+                    let urlSearchParams = new URLSearchParams();
                     urlSearchParams.append("username",this.username);
-                     urlSearchParams.append('password', this.password);
-                     urlSearchParams.append('appname', 'CVRDKMS');
-                     urlSearchParams.append('appsecret', 'admin');
+                    urlSearchParams.append('password', this.password);
+                    urlSearchParams.append('appname', 'CVRDKMS');
+                    urlSearchParams.append('appsecret', 'admin');
                   let body = urlSearchParams.toString()
       var header = new Headers();
                   header.append("Accept", "application/json");
@@ -129,4 +135,61 @@ export class LoginComponent implements OnInit {
             }
         })
   }
+
+signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.loggedIn = (user != null);
+      if (user!=null) {
+        this.username = user.email
+         this.global.email = user.email
+
+          swal({
+           title: 'Logging In...',allowOutsideClick: false,
+          });
+          swal.showLoading();
+      
+            let urlSearchParams = new URLSearchParams();
+            urlSearchParams.append("username",this.username);
+            urlSearchParams.append('password', this.password);
+            urlSearchParams.append('appname', 'CVRDKMS');
+            urlSearchParams.append('appsecret', 'admin');
+          let body = urlSearchParams.toString()
+          var header = new Headers();
+                      header.append("Accept", "application/json");
+                      header.append("Content-Type", "application/x-www-form-urlencoded");    
+                      let option = new RequestOptions({ headers: header });
+                      
+           this.http.post(this.global.api + 'api.php?action=login',
+           body,option)
+              .map(response => response.json())
+              .subscribe(res => {
+                swal.close()
+                 if (res.id==null) {
+                     this.global.removeSession()
+                     this.global.email = user.email
+                     this.router.navigate(['registration']);
+                 }else{
+                   // if (res.confirmed == '0') {
+                   //   this.lockaccount(res);
+                   // }else 
+                   {
+                     this.global.setemail(res.email,res.id);
+                     this.global.setSession(this.username,this.password,'CVRDKMS','admin')
+                     this.router.navigate(['main']);
+                   }
+                 }
+              },error => {
+                console.log(Error); 
+                    this.global.swalAlertError();
+               } );
+          }else{
+            //this.global.swalAlert("Goolge Login Failed!",'Please Check your Internet Connectivity to proceed.','warning')
+          }
+    });
+  }
+  Cookies(){
+    this.global.swalAlert('','<div class=\'no-overflow\' style=\'font-weight: normal;font-size: 15px;\'><p>1 cookie(<i>Session cookie</i>) is used on this site:</p><p>You must allow this cookie in your browser to provide continuity and to remain logged in when browsing the site. When you log out or close the browser, this cookie is destroyed (in your browser and on the server).</p><p>Note: Cookies are not enabled in incognito mode (Don\'t use incognito mode in your browser).</p></div> ', 'info')
+  }
+
 }

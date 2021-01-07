@@ -29,17 +29,47 @@ export class SearchComponent implements OnInit {
 
   tempsearch=''
   search=''
+  tabselectedvalue=0
   ngOnInit() {
+    this.global.activepage='search'
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: 0
+    };
+
+    if (this.global.searchtype=='Author') {
+      this.tabselectedvalue=1
+    }
+    if (this.global.searchtype=='Abstract') {
+      this.tabselectedvalue=2
+    }
+    if (this.global.searchtype=='Company') {
+      this.tabselectedvalue=3
+    }
+    if (this.global.searchtype=='Keyword') {
+      this.tabselectedvalue=4
+    }
+    if (this.global.searchtype=='Program Discipline') {
+      this.tabselectedvalue=5
+    }
+
+    if (this.tempsearch==null) {
+      this.tempsearch=''
+    }
     this.loadsidnav()    
     this.scrolltop()
   	this.route.paramMap.subscribe(params => {
       this.search=params.get("q")
+      this.tempsearch=this.search
+      this.global.search=params.get("q")
+      this.global.activepage='search'
     })
-	this.tempsearch = this.search
-
+	  this.tempsearch = this.search
+    this.global.search = this.search
     if (this.search != null) {
 	    this.global.search = this.search
-    	this.runsearch()
+    	this.optionsearch({tab:{textLabel:this.global.searchtype}})
     }
   }
 
@@ -47,8 +77,8 @@ export class SearchComponent implements OnInit {
   keysearch(event){
     if(event.keyCode == 13 || event.keyCode == 9 || event == 'onoutfocus') {
       this.global.search = this.search
-      this.tempsearch = this.search
-      this.runsearch()
+      this.optionsearch({tab:{textLabel:this.global.searchtype}})
+      this.router.navigate(['../Search', { q: this.search }]);
     }
   }
  sidediscicpline1=[]
@@ -99,21 +129,28 @@ export class SearchComponent implements OnInit {
 
 
   displayarray=[]
-  runsearch(){
-  	if (this.search!='') {
-  		this.global.swalLoading('')
-  		this.http.get(this.global.api+'api.php?action=search&search='+this.search+'&type='+this.global.searchfilter,this.global.option)
+
+  config
+  pageChanged(event){
+    this.
+    config.currentPage = event;
+  }
+  type=''
+  optionsearch(x){
+    if (this.search!='') {
+      this.global.swalLoading('')
+      this.global.searchtype=x.tab.textLabel
+     this.http.get(this.global.api+'api.php?action=search&search='+this.search+'&type='+this.global.searchtype,this.global.option)
           .map(response => response.json())
           .subscribe(res => {
-            this.displayarray = res
-            this.global.swalClose()
-            //console.log(res)
+           this.displayarray = res
+           this.global.swalClose()
+           //console.log(res)
           },Error=>{
             //console.log(Error);
             this.global.swalClose()
             console.log(Error)
           });
-  	}
-    
+    }
   }
 }

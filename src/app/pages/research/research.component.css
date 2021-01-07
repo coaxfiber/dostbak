@@ -1,3 +1,6 @@
 .mat-expansion-panel-body {
   padding: 0;
 }
+.example-spacer {
+  flex: 1 1 auto;
+}

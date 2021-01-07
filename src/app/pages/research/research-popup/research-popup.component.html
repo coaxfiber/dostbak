@@ -1,4 +1,11 @@
-<iframe [src]="url" style="width: 100%;height: calc(100vh - 300px)"></iframe>
+<div *ngIf="url!=undefined">
+	<iframe [src]="url" style="width: 100%;height: calc(100vh - 300px)"></iframe>
+</div>
+<div *ngIf="url==undefined">
+	<p style="text-align: center;margin-top: 50px">
+		Please log in to view PDF.
+	</p>
+</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="onNoClickclose()">Close</button>
             </div>

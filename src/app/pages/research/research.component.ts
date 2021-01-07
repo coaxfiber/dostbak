@@ -25,10 +25,12 @@ export class ResearchComponent implements OnInit {
   constructor(public dialog: MatDialog,public global: GlobalService,private http: Http,private route: ActivatedRoute,private router: Router) { }
   researchpageid
   ngOnInit() {
+    this.global.activepage="research"
     this.loadsidnav()    
     this.scrolltop()
   	this.route.paramMap.subscribe(params => {
       this.researchpageid=params.get("q")
+      //this.global.search = params.get("q")
     })
     this.route.paramMap.subscribe(params => {
       this.discipline=params.get("discipline")
@@ -45,8 +47,15 @@ export class ResearchComponent implements OnInit {
       this.runresearch()	
       }
   }
+  search=''
+  keysearch(event){
+    if(event.keyCode == 13 || event.keyCode == 9 || event == 'onoutfocus') {
 
+      this.router.navigate(['../Search', { q: this.search }]);
+    }
+  }
 runresearch(){
+
   this.http.get(this.global.api+'api.php?action=spResearchAuthor_Select&rid='+this.researchpageid,this.global.option)
           .map(response => response.json())
           .subscribe(res => {
@@ -54,6 +63,7 @@ runresearch(){
             this.http.get(this.global.api+'api.php?action=spResearch_Select&id='+this.researchpageid,this.global.option)
               .map(response => response.json())
               .subscribe(res => {
+                //console.log(res)
                this.array =res  
                this.http.get(this.global.api+'api.php?action=spResearchKeyword_Select&rid='+this.researchpageid,this.global.option)
                   .map(response => response.json())
@@ -129,7 +139,7 @@ runresearch(){
         }, 16);
   }
   Viewpdf(x){ 
-
+  this.global.swalLoading('')
   const dialogRef = this.dialog.open(ResearchPopupComponent, {
       width: '99%',data:{x:x}, disableClose: false });
 

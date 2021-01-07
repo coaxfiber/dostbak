@@ -62,12 +62,20 @@ import { AddUpdateAttachmentComponent } from './control-panel/grant-management/a
 import { FrontComponent } from './pages/front/front.component';
 import { ResearchComponent } from './pages/research/research.component';
 import { ResearchPopupComponent } from './pages/research/research-popup/research-popup.component';
-import { ResearchBycompanyComponent } from './pages/research-bycompany/research-bycompany.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { DevelopersComponent } from './pages/developers/developers.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ResearchesPageComponent } from './pages/researches-page/researches-page.component';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ChartsModule,ThemeService  } from 'ng2-charts';
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -127,7 +135,6 @@ import { ResearchesPageComponent } from './pages/researches-page/researches-page
     FrontComponent,
     ResearchComponent,
     ResearchPopupComponent,
-    ResearchBycompanyComponent,
     OverviewComponent,
     DevelopersComponent,
     SearchComponent,
@@ -165,9 +172,25 @@ import { ResearchesPageComponent } from './pages/researches-page/researches-page
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpModule,StorageServiceModule
+    HttpModule,StorageServiceModule,
+    NgxPaginationModule,
+    SocialLoginModule,
+    ChartsModule
   ],
-  providers: [GlobalService],
+  providers: [GlobalService,ThemeService,{
+    provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '100400588236-rhpnguqginvpo91n12q1e201qe62ce1d.apps.googleusercontent.com'
+            ),
+          }
+        ],
+      } as SocialAuthServiceConfig,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

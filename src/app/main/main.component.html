@@ -3,37 +3,37 @@
       text-decoration:none !important;
   }
 </style>
-<mat-drawer-container id='main' style="height: calc(100vh - 163px)">
-<mat-drawer mode="side" opened="true" #drawer id="drawer">
-<div style="width: 280px">
+<mat-drawer-container id='main' style="min-height: 600px">
+<mat-drawer mode="side" opened="true" #drawer id="drawer" style="">
+<div style="width: 280px;overflow-x: hidden !important;">
 <div style="" id="coverp">
 	<div style="" id="fullname">
-		<table style="width: 100%">
+		<table style="width: 100%;margin-top: 20px">
 			<tr>
-        <td colspan="2" style="text-align: center;">
+        <!-- <td colspan="2" style="text-align: center;">
           <img [src]="image" width="80" id="photop" onError="this.src='assets/noimage.jpg'" style="margin:auto;" />
-        </td>
+        </td> -->
       </tr>
       <tr>
 				<td style="text-align: center;"  colspan="2">
-				  {{user.fname}} {{user.mname}} {{user.surname}} {{user.ext}}<br>
+				  <b>{{user.fname | uppercase}} {{user.mname | uppercase}} {{user.surname | uppercase}} {{user.ext | uppercase}}</b><br>
           <small *ngIf="global.useraccess!=undefined">{{inputcompany}}</small>
 				</td>
 			</tr>
       <tr>
         <td style="width: 45%">
-          <small><a mat-button color='default' style="font-size: 10px" (click)="openDialogeditprofile()">&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  <i class="material-icons iconsize">edit</i> Edit Profile</a></small>
+          <small><a mat-button color='default' style="font-size: 10px" (click)="openDialogeditprofile()"><i class="material-icons iconsize">edit</i> Edit Profile</a></small>&nbsp; &nbsp; &nbsp;
         </td>
-        <td  style="text-align: center;" >
+        <!-- <td  style="text-align: center;" >
           <small><a mat-button color='default' style="font-size: 10px" (click)="openDialogchangepassword()"><i class="material-icons iconsize">lock</i> Change Password</a></small>
-        </td>
+        </td> -->
       </tr>
 		</table>
 	</div> 
 </div>
   
           
-<div style="height: calc(100vh - 500px) !important">
+<div>
         <div *ngIf='proposal===1'>
         <p style="margin: 10px 10px 0 10px"></p>
         <mat-chip-list>
@@ -56,12 +56,8 @@
         </mat-chip-list>
 
         
-        <div style="margin-left: 10px;margin-right: 10px">
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Draft'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">all_inbox</i> Draft</a>
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Pending'}}]"  >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize" >send</i> Pending Approval</a>
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Published'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Published</a>
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-WithIssues'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">assignment_late</i> With Issues</a>
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'researches-Trash'}}]" >&nbsp; &nbsp; &nbsp; &nbsp;<i class="material-icons iconsize">delete</i> Trash</a>
+        <div style="margin-left: 40px;margin-right: 10px">
+          <a mat-button  [routerLink]="['../main',{outlets:{div:'Research'}}]" ><i class="material-icons iconsize">all_inbox</i> Researches&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>
         </div>
 
         <br>
@@ -131,15 +127,13 @@
 </div>
   </mat-drawer>
 
-  <mat-drawer-content style="height: auto !important">
-
+  <mat-drawer-content>
   	<div style="margin-left: 10px;margin-top: 8px;" class="hnav">
 
     </div>
-    <style type="text/css">
-      .matcontainer{overflow-y: scroll;}
-    </style>
-    	<mat-card class="matcontainer" style="padding: 0;overflow: hidden;"> 
+
+    	<mat-card style="padding: 0;"> 
+    <button  mat-button color="primary" style="min-width: 10px;width: 32px;" (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
       <router-outlet name="div"></router-outlet>
     	</mat-card>
   </mat-drawer-content>

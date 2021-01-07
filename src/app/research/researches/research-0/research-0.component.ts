@@ -19,7 +19,7 @@ export class Research0Component implements OnInit {
 
 
 
-	displayedColumns = ['title','level','company','datecreated','status','action'];
+	displayedColumns = ['title','level','datecreated','status','action'];
       @ViewChild(MatSort,{static:false}) sort: MatSort;
        @ViewChild('paginator',{static:false}) paginator: MatPaginator;
 
@@ -28,7 +28,7 @@ export class Research0Component implements OnInit {
 
     injectid
       ngOnInit() {
-        this.createTable();
+        this.createTable('1');
       }
 
       draft=[];
@@ -36,20 +36,93 @@ export class Research0Component implements OnInit {
       researches
       degreelevel
 
-      title
-      level
+      title=''
+      level=''
       status
 
+      stat=''
+      config
+      tabselectedvalue=0
+  constructor(public dialog: MatDialog,public global: GlobalService,private http: Http,private router: Router) {
+    this.stat="Pending"
+    if (this.global.researchstat=='Draft') {
+      this.tabselectedvalue=1
+      this.optionsearch(this.global.researchstat)
+      this.global.researchstat=''
+    }
+    if (this.global.researchstat=='Pending') {
+      this.tabselectedvalue=0
+      this.optionsearch(this.global.researchstat)
+      this.global.researchstat=''
+    }
 
-  constructor(public dialog: MatDialog,private global: GlobalService,private http: Http,private router: Router) {
-    console.log(this.global.useraccess)
     this.http.get(this.global.api + 'api.php?action=degreelevel',
          this.global.option)
             .map(response => response.json())
             .subscribe(res => {
               this.degreelevel= res;
         });
+
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: 0
+    };
   }
+  
+  removepermanent(id){
+    this.swalConfirmperma("Delete Research?","You won't be able to revert this!",'warning','Yes','Research has been Removed','','delete',id);
+  }
+   swalConfirmperma(title,text,type,button,d1,d2,remove,id)
+  {
+    swal({
+        title: title,
+        type: type,
+        html:text,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: button
+      }).then((result) => {
+        if (result.value) {
+          if (remove=='delete') {
+
+            this.global.swalLoading("");
+            this.http.get(this.global.api+'api.php?action=researchdelete&researchid='+id)
+              .map(response => response.text())
+              .subscribe(res => {
+                this.createTable('Trash')
+                this.global.swalSuccess("Research has been Permanently Deleted!")
+              },Error=>{
+                //console.log(Error);
+                this.global.swalAlertError();
+                console.log(Error)
+              });
+          }
+        }
+      })
+  }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
+   optionsearch(x){
+     this.stat = x
+     if (this.stat == 'Draft') {
+      this.createTable('0')
+     }
+     if (this.stat == 'Pending') {
+      this.createTable('1')
+     }
+     if (this.stat == 'Published') {
+      this.createTable('3')
+     }
+     if (this.stat == 'With Issues') {
+      this.createTable('2')
+     }
+     if (this.stat == 'Trash') {
+      this.createTable('6')
+     }
+   }
 
   Viewpdf(id){
     var header = new Headers();
@@ -84,20 +157,20 @@ export class Research0Component implements OnInit {
       }
     });
   }
-
-  createTable() {
-    if (this.global.useraccess.companyid!=undefined) {
-      // code...
-        this.http.get(this.global.api + 'api.php?action=spResearch_List&company=' + this.global.useraccess.companyid+"&status=0",
+  array=[]
+  temparray=[]
+  temparray2=[]
+  createTable(type) {
+    this.level=''
+    this.title=''
+    if (this.global.useraccess!=undefined) {
+      this.array=undefined
+        this.http.get(this.global.api + 'api.php?action=spResearch_List&company=' + this.global.useraccess.companyid+"&status="+type,
          this.global.option)
             .map(response => response.json())
             .subscribe(res => {
-            this.global.swalClose();
-            this.tableArr= res;
-            //console.log(res)
-            this.dataSource = new MatTableDataSource(this.tableArr);
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
+            this.array = res
+            this.temparray = res
         },error=>{
             console.log(error);
             this.global.swalClose();
@@ -114,15 +187,29 @@ updateresearch(id,title,abstract,dlid){
   this.router.navigate(['../main',{outlets:{div:'update-research'}}]);
 }
 
-applyFilter(filterValue: string) {
-  this.dataSource.filterPredicate = (data:
-  {title: string}, filterValue: string) =>
-  data.title.trim().toLowerCase().indexOf(filterValue) !== -1;
+applyFilter(x) {
+  this.array = []
+  if (x=='') {
+    this.array = []
+    for (var i = 0; i < this.temparray.length; ++i) {
+      if (this.temparray[i].title.replace(/^\s+|\s+$/gm,'').toUpperCase().includes(this.title.replace(/^\s+|\s+$/gm,'').toUpperCase())) {
+       this.array.push(this.temparray[i])
+      }
+    }
+  }else{
+    this.temparray2 = []
+    for (var i = 0; i < this.temparray.length; ++i) {
+      if (x==this.temparray[i].dlid) {
+       this.temparray2.push(this.temparray[i])
+      }
+    }
+    for (var i = 0; i < this.temparray2.length; ++i) {
+      if (this.temparray2[i].title.replace(/^\s+|\s+$/gm,'').toUpperCase().includes(this.title.replace(/^\s+|\s+$/gm,'').toUpperCase())) {
+       this.array.push(this.temparray2[i])
+      }
+    }
+  }
 
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-this.level=''
-this.status=''
 
 }
 
@@ -166,41 +253,25 @@ returntoDraft(id){
       }).then((result) => {
         if (result.value) {
           if (remove=='delete') {
-
-            this.global.swalLoading("");
-              let urlSearchParams2 = new URLSearchParams();
-            urlSearchParams2.append("rid",id.toString());
-             urlSearchParams2.append('remarks', null);
-             urlSearchParams2.append('status', '6');
+            this.global.swalLoading('')
+             let urlSearchParams2 = new URLSearchParams();
+                urlSearchParams2.append("rid",id);
+                 urlSearchParams2.append('remarks', null);
+                 urlSearchParams2.append('status', '6');
               let body2 = urlSearchParams2.toString()
               var header = new Headers();
-              header.append("Accept", "application/json");
-              header.append("Content-Type", "application/x-www-form-urlencoded");    
-              let option2 = new RequestOptions({ headers: header });
-              this.http.post(this.global.api + 'api.php?action=spResearchResearchStatus_Insert',body2,option2)
-                .map(response => response.text())
-                .subscribe(res => {
-                    this.global.swalSuccess("Research has been Deleted!")
-                      this.createTable();
-                },Error=>{
-                  this.global.swalAlertError();
-                });
-
-
-
-
-
-            // this.http.get(this.global.api+'api.php?action=researchdelete&researchid='+id)
-            //   .map(response => response.text())
-            //   .subscribe(res => {
-            //     this.createTable();
-            //   },Error=>{
-            //     //console.log(Error);
-            //     this.global.swalAlertError();
-            //     console.log(Error)
-            //   });
+                    header.append("Accept", "application/pdf");
+                    header.append("Content-Type", "application/x-www-form-urlencoded");    
+                    let option2 = new RequestOptions({ headers: header });
+               this.http.post(this.global.api + 'api.php?action=spResearchResearchStatus_Insert',body2,option2)
+                    .map(response => response.text())
+                    .subscribe(res => {
+                      this.global.swalSuccess("Research has been moved to trash!")
+                      this.optionsearch(this.stat);
+                    });
           }else 
           if (remove=='returntodraft') {
+            this.global.swalLoading('')
              let urlSearchParams2 = new URLSearchParams();
                 urlSearchParams2.append("rid",id);
                  urlSearchParams2.append('remarks', null);
@@ -213,10 +284,15 @@ returntoDraft(id){
                this.http.post(this.global.api + 'api.php?action=spResearchResearchStatus_Insert',body2,option2)
                     .map(response => response.text())
                     .subscribe(res => {
-                      this.createTable();
+                      this.optionsearch(this.stat);
+                      this.global.swalSuccess("Changed status to Draft!")
                     });
-          }
+        }
         }
       })
+  }
+
+  ngOnDestroy(){
+    this.global.researchstat=''
   }
 }

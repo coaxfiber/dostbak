@@ -12,44 +12,25 @@
             
             <!-- Template Body starts -->
             <div class="login-box-body" style="margin: 10px">
- 
-                <!-- Markup for getting Username starts -->
-                <mat-grid-list cols="9" rowHeight="75px">
-                    <mat-grid-tile [rowspan]="1" class="login-icon">
-                        <mat-icon>lock</mat-icon>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="7">
-                        <mat-form-field class="justifier">
-                            <input matInput placeholder="Email Address" text="text" [(ngModel)]="username">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                </mat-grid-list>
-                <!-- Markup for getting Username ends -->
- 
-                <!-- Markup for getting Password starts -->
-                <mat-grid-list cols="9" rowHeight="100px">
-                    <mat-grid-tile [rowspan]="1"  class="login-icon">
-                        <mat-icon>remove_red_eye</mat-icon>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="7">
-                        <mat-form-field class="justifier">
-                            <input matInput placeholder="Password" text="password" type="password"  [(ngModel)]="password">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                </mat-grid-list>
-                <!-- Markup for getting Password ends -->
+                 <div class="part1" style="text-align: center;">
+                  <div style="margin-top:20px;margin-bottom: 20px;padding-right: 20px">
+                    <p>
+                      <b>Sign in using your account on Google.</b><br><br>
+                      Cookies must be enabled in your browser <button style="background-color: #3f51b5;color: white;border: none;border-radius:45%;height: 19px" (click)="Cookies()" >?</button>
 
-                <table style="float: left;margin: 10px">
-                    <tr>
-                        <td><a  routerLink="../registration" style="text-decoration: none;color: #294a70;font-size: 13px;">Register</a></td>
-                    </tr>
-                </table>
-                <button  type='submit' class="buttonblue"   mat-raised-button style="float: right;margin: 10px" (click)="login()"> 
-                    <mat-icon>input</mat-icon> Login
-                </button>
-                <br>
-                <br>
-                <br>
+                    </p>
+                    <button mat-raised-button color="primary" style="color: white;width: 90%" (click)="signInWithGoogle()" [disabled]="!disabled">
+                      <span class="material-icons">
+                        account_box
+                      </span>
+                      Google Login
+                    </button>
+                    <p style="width: 85%;margin-right: auto;margin-top: 10px;margin-left: auto;text-align: left;">
+                      <mat-checkbox [(ngModel)]="disabled"> I agree to the&nbsp;</mat-checkbox><a href="javascript:void(0)" (click)="Cookies()"  style=" text-decoration: none;">Policy Acceptance and Data Privacy.</a>
+                    </p>
+                    <div style="height: 20px"></div>
+                  </div>
+                </div>
                 
             </div>
             <!-- Template Body ends -->

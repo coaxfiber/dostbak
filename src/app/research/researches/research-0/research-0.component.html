@@ -1,34 +1,130 @@
-  <div style="padding:  20px 0 0 20px;">
-  <h4>Researches - Draft</h4>
-  <hr>
-  </div>
+<div style="margin-left: 20px" *ngIf="global.useraccess!=undefined">
+
 <style type="text/css">
-  .matcontainer{
-    overflow-y: hidden !important;
-  }
+  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+             min-width: 0!important;
+             padding: 3px!important;
+             margin: 3px!important;
+            }
 </style>
-<table style="width: 97%;margin: auto;background-color: white;">
+          <mat-tab-group (selectedTabChange)="optionsearch($event.tab.textLabel)" [selectedIndex]="tabselectedvalue">
+            <!-- <mat-tab label='All'> 
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">search</mat-icon>
+                All
+              </ng-template>
+             </mat-tab> -->
+            <mat-tab label="Pending" >
+              <ng-template mat-tab-label>
+                &nbsp;<mat-icon class="example-tab-icon">send</mat-icon>
+                &nbsp;Pending&nbsp;&nbsp;
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="Draft">
+              <ng-template mat-tab-label>
+                &nbsp;<mat-icon class="example-tab-icon">all_inbox</mat-icon>
+                &nbsp;Draft&nbsp;&nbsp;
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="Published">
+              <ng-template mat-tab-label>
+                &nbsp;<mat-icon class="example-tab-icon">list_alt</mat-icon>
+                &nbsp;Published&nbsp;&nbsp;
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="With Issues">
+              <ng-template mat-tab-label>
+                &nbsp;<mat-icon class="example-tab-icon">assignment_late</mat-icon>
+                &nbsp;With Issues&nbsp;&nbsp;
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="Trash">
+              <ng-template mat-tab-label>
+                &nbsp;<mat-icon class="example-tab-icon">delete</mat-icon>
+                &nbsp;Trash&nbsp;&nbsp;
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+
+<div>
+    <p style="margin: 10px 0 0 0;font-size: 20px">
+      <span *ngIf="stat=='Pending'">
+        <table>
+          <tr>
+            <td>
+              <div style="height: 3px"></div>
+              <mat-icon class="example-tab-icon">send</mat-icon>&nbsp;</td>
+            <td valign="top"> Pending Researches</td>
+          </tr>
+        </table>
+      </span>
+      <span *ngIf="stat=='Draft'">
+        <table>
+          <tr>
+            <td>
+              <div style="height: 3px"></div>
+              <mat-icon class="example-tab-icon">all_inbox</mat-icon>&nbsp;</td>
+            <td valign="top"> Draft</td>
+          </tr>
+        </table>
+      </span>
+      <span *ngIf="stat=='Published'">
+        <table>
+          <tr>
+            <td>
+              <div style="height: 3px"></div>
+              <mat-icon class="example-tab-icon">list_alt</mat-icon>&nbsp;</td>
+            <td valign="top"> Published Researches</td>
+          </tr>
+        </table>
+      </span>
+      <span *ngIf="stat=='With Issues'">
+        <table>
+          <tr>
+            <td>
+              <div style="height: 3px"></div>
+              <mat-icon class="example-tab-icon">assignment_late</mat-icon>&nbsp;</td>
+            <td valign="top"> Researches With Issues</td>
+          </tr>
+        </table>
+      </span>
+      <span *ngIf="stat=='Trash'">
+        <table>
+          <tr>
+            <td>
+              <div style="height: 3px"></div>
+              <mat-icon class="example-tab-icon">delete</mat-icon>&nbsp;</td>
+            <td valign="top"> Trash</td>
+          </tr>
+        </table>
+      </span>
+    </p>
+</div>
+
+
+
+<div style="height: 20px"></div>
+<table style="width: 100%;background-color: white;">
   <tr><td style="width: 150px  !important">
 <mat-form-field  class="npinput2"  style="width: 250px  !important">
                     <mat-label>Filter by Research Type</mat-label>
-                    <mat-select  [(ngModel)]="level" >
-
+                    <mat-select  [(ngModel)]="level" (ngModelChange)="applyFilter(level)">
                       <mat-option value="" (click)='applyFilter3("")' >
                         - All -
                       </mat-option>
-                      <mat-option value="{{c.id}}"  *ngFor="let c of degreelevel" (click)='applyFilter3(c.id)' >
+                      <mat-option value="{{c.id}}"  *ngFor="let c of degreelevel">
                         {{c.name}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </td>
                 <td>
-  
-                  
+      
+      <span *ngIf="array!=undefined">          &nbsp;&nbsp;{{array.length}} record(s)  </span>
     </td>
     <td style="text-align: right;width: 237px" >
        <mat-form-field style="width: 180px !important">
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search"  [(ngModel)]="title" >
+      <input matInput (keyup)="applyFilter(level)" placeholder="Search"  [(ngModel)]="title" >
 
           </mat-form-field>
         <button mat-mini-fab color="primary">
@@ -37,92 +133,47 @@
     </td>
   </tr>
 </table>
-<div id='research' style="overflow-y: scroll;" class="overflowys">
 
 
-    <mat-table #table [dataSource]="dataSource" matSort>
+  <table style="width: 100%;padding: 20px" class="apptable" *ngIf="array!=undefined">
+    <tr *ngFor="let element of array | paginate: config">
+      <td>
+        <b>Title:</b> {{element.title | uppercase}}<br>
+          <b>Research Level: </b>{{element.level}}<br>
+          <b>Date Created: </b>{{element.datecreated| date :'mediumDate' }} @ {{element.datecreated| date :'shortTime'}}
+      </td>
+      <td style="width: 60px">
+        <div class="rolerow">
+         <b><input type="button" [matMenuTriggerFor]="menu" style="color: white;background-color: #294a70;border: none;width: 60px;padding-top: 5px;padding-bottom: 5px;" value="Options"></b>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="updateresearch(element.id,element.title,element.abstract,element.dlid)"  *ngIf="stat=='Draft'">Update Research</button>
 
-   <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef style="min-width: 200px">Research Title</mat-header-cell>
-      <mat-cell *matCellDef="let element" style="min-width: 200px">
-      <div class="rolerow" style="padding-right:15px;min-width: 200px">
-       <b>{{element.title}}</b>
-    </div>
-    </mat-cell>
-    </ng-container>
+            <button mat-menu-item (click)='removepermanent(element.id)' *ngIf="stat=='Trash'">Permanently Delete</button>
 
-   <ng-container matColumnDef="level">
-      <mat-header-cell *matHeaderCellDef style="flex: 0 0 200px;"> &nbsp; &nbsp;Research Type </mat-header-cell>
-      <mat-cell *matCellDef="let element" style="flex: 0 0 200px;">
-      <div class="rolerow" style="padding-right:15px">
-       <b>{{element.level}}</b>
-    </div>
-    </mat-cell>
-    </ng-container>
-
-   <ng-container matColumnDef="company">
-      <mat-header-cell *matHeaderCellDef  style="flex: 0 0 240px;padding-left: ">  &nbsp; &nbsp;Institution/Company </mat-header-cell>
-      <mat-cell *matCellDef="let element" style="flex: 0 0 240px;">
-      <div class="rolerow" style="padding-right:15px">
-       <b>{{element.company}}</b>
-    </div>
-    </mat-cell>
-    </ng-container>
-
-   <ng-container matColumnDef="datecreated" >
-      <mat-header-cell *matHeaderCellDef style="width: 200px;flex: 0 0 130px;"> &nbsp; &nbsp; Date Created </mat-header-cell>
-      <mat-cell *matCellDef="let element" style="width: 200px;flex: 0 0 130px;">
-      <div class="rolerow" style="padding-right:15px">
-       <b>{{element.datecreated| date :'mediumDate' }} @ <br>{{element.datecreated| date :'shortTime'}}</b>
-    </div>
-    </mat-cell>
-    </ng-container>
+            <button mat-menu-item (click)='returntoDraft(element.id)'  *ngIf="stat=='Pending'||stat=='With Issues'||stat=='Trash'">Return to Draft</button>
+            <button mat-menu-item (click)='removeRole(element.id)'  *ngIf="stat=='Draft'">Delete</button>
 
 
-   <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef style="width: 150px;flex: 0 0 90px;">  &nbsp; &nbsp;Status </mat-header-cell>
-      <mat-cell *matCellDef="let element" style="width: 150px;flex: 0 0 90px;">
-      <div class="rolerow" style="padding-right:15px">
-       <b>{{element.status[0].status}}</b>
-    </div>
-    </mat-cell>
-    </ng-container>
+            <button mat-menu-item (click)='ViewHistory(element.title,element.status)' >View Status History</button>
+            <button mat-menu-item (click)='Viewpdf(element.id)'>View PDF Document</button>
 
 
-   <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef style="width: 150px;flex: 0 0 80px;">  &nbsp; - Action - </mat-header-cell>
-      <mat-cell *matCellDef="let element" style="width: 150px;flex: 0 0 75px;">
-      <div class="rolerow">
-       <b><input type="button" [matMenuTriggerFor]="menu" style="color: white;background-color: #294a70;border: none;width: 60px;padding-top: 5px;padding-bottom: 5px;" value="Options"></b>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="updateresearch(element.id,element.title,element.abstract,element.dlid)">Update Research</button>
-          <button mat-menu-item (click)='removeRole(element.id)'>Delete</button>
-          <button mat-menu-item (click)='ViewHistory(element.title,element.status)'>View Status History</button>
-          <button mat-menu-item (click)='Viewpdf(element.id)'>View PDF Document</button>
-        </mat-menu>
-    </div>
-    </mat-cell>
-    </ng-container>
 
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-        
-        </mat-table>
-        <mat-spinner style="margin-left: auto;margin-right: auto;" *ngIf="tableArr===undefined"></mat-spinner>
-         <div *ngIf="tableArr!=undefined">
-          <p *ngIf="tableArr.length===0" style="text-align: center;"><i>- No researches to show -</i></p>
+          </mat-menu>
         </div>
-        <style type="text/css">
-        .mat-paginator-page-size{
-          display:none !important ;
-        }</style>
-        <mat-paginator 
-             #paginator
-            [length]="100"
-              [pageSize]="10">
-    </mat-paginator>
+      </td>
+    </tr>    
+  </table>
 
+    <div style="height: 20px"></div>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+
+        <mat-spinner style="margin-left: auto;margin-right: auto;" *ngIf="array===undefined"></mat-spinner>
+         <div *ngIf="array!=undefined">
+          <p *ngIf="array.length===0" style="text-align: center;"><i>- No researches to show -</i></p>
+        </div>
+    <div style="height: 20px"></div>
 </div>
 

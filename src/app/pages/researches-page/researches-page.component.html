@@ -1,100 +1,52 @@
-<div class="container">
-    <div class="row">
-     
-        <div class="col-md-3 sidebar">
-            <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Program Discipline</div>
-                <ul class="list-group category_block" style="margin-bottom: 0px">
-                    <li class="list-group-item" *ngFor="let c of sidediscicpline1" (click)="global.openresearchbydiscipline(c.name)"><a class="addContent" href="javascript:void(0)">{{c.name}}</a></li>
-                </ul>
-                <mat-expansion-panel style="padding: 0px !important">
-				    <mat-expansion-panel-header>
-				      <mat-panel-title>
-				        View more...
-				      </mat-panel-title>
-				    </mat-expansion-panel-header>
-					<ul class="list-group category_block" style="margin-bottom: 0px">
-                    <li class="list-group-item" *ngFor="let c of sidediscicpline2"><a class="addContent" href="javascript:void(0)" (click)="global.openresearchbydiscipline(c.name)">{{c.name}}</a></li>
-                </ul>
-				  </mat-expansion-panel>
-				  <br>
-            </div>
-            <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-building"></i> Institutions</div>
-                <ul class="list-group category_block" style="margin-bottom: 0px">
-                    <li class="list-group-item" *ngFor="let c of com1"><a class="addContent" href="javascript:void(0)"
-                    	 (click)="global.openresearchbycompany(c.name)">{{c.name}}</a></li>
-                </ul>
-
-                <mat-expansion-panel style="padding: 0px !important">
-				    <mat-expansion-panel-header>
-				      <mat-panel-title>
-				        View more...
-				      </mat-panel-title>
-				    </mat-expansion-panel-header>
-					<ul class="list-group category_block" style="margin-bottom: 0px">
-                    <li class="list-group-item" *ngFor="let c of com2"><a class="addContent" href="javascript:void(0)" (click)="global.openresearchbycompany(c.name)">{{c.name}}</a></li>
-                </ul>
-				  </mat-expansion-panel>
-				  <br>
-            </div>
-        </div>
+<div class="container" style="margin-left: 135px !important">
+    <div >
+  
 
         <style type="text/css">
-        	tr:hover{
-        		background-color: #E0E0E0 !important;
-        	}
+          tr:hover{
+            background-color: #E0E0E0 !important;
+          }
+          ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+             min-width: 0!important;
+             padding: 3px!important;
+             margin: 3px!important;
+            }
         </style>
         
-        <div class="col-md-9">
-        	
+        <div class="col-md-12">
+          
+
           <div class="page-header" style="margin-bottom: 0;margin-top: 25px !important;">
-              <h2 style="margin:0">
-                <b>ALL PUBLISHED RESEARCHES</b>
-              </h2>
+              <span style="margin:0;font-size: 22px">
+                All Researches<br>
+              </span>
+              <span>About {{displayarray.length}} result(s) </span>
           </div>
           <div style="height: 10px"></div>
 
-          <table  id="example" class="table table-striped table-bordered" style="width:100%">
-          <thead>
-            <tr>
-              <th width="300px">Title</th>
-              <th width="130px">Company</th>
-              <!--<th style="width: 100px">Keywords</th>-->
-              <th width="150px">Program Discipline</th>
-            </tr>
-          </thead>
-          <tbody *ngIf='displayarray.length!=0'>
-            <tr   *ngFor="let c of displayarray">
-              <td ><a href="javascript:void(0)" (click)="global.openresearch(c.id)"><b>{{c.title}}</b></a><br><b>Author(s): </b>
-
-              	 <span *ngFor="let a of c.authors">{{a.name}}, </span></td>
-              <!--<td><?php echo substr(htmlentities($row[2]), 0, 250); ?>...</td>-->
-              <td width="130px">{{c.inst}}</td>
-              <!--<td>
-                </td>-->
-                    <td>
-                    	<a href="javascript:void(0)" *ngFor="let a of c.dis"  (click)="global.openresearchbydiscipline(a.desc)">{{a.desc}}<br> </a>
+          
+        <table  class="table table-striped" style="width:100%" >
+        <tbody>
+            <tr   *ngFor="let c of displayarray | paginate: config">
+              <td >
+                <a href="javascript:void(0)" (click)="global.openresearch(c.id)"><b>{{c.title | uppercase }}</b></a><br><b>Author(s): </b>
+                 <span *ngFor="let a of c.authors;let i = index">{{a.name}}<span *ngIf='i<c.authors.length-1'>, </span></span><br>
+                <b>Company: {{c.inst}} </b><br>
+                <b>Program Discipline:  </b>
+                      <span *ngFor="let a of c.dis;let i = index" >{{a.desc}}<span *ngIf='i<c.dis.length-1'>, </span></span>
 
                     </td>
             </tr>
-            
-          </tbody>
+        </tbody>
+    </table>
 
-            <tfoot>
-            <tr>
-              <tr>
-              <th colspan="6" style="text-align: center;">
-                
-              </th>
-            </tr>
-        </tfoot>
-        </table>
-      <p *ngIf='displayarray.length==0'>
-      	No data available in table
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    <br><br>
+      <p *ngIf='displayarray.length==0' style="text-align: center;">
+         - No Research Found for <b>{{tempsearch}}</b> -
+      <br><br><br>
       </p>
       </div>
-
 
         
     </div>

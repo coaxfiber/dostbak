@@ -181,10 +181,12 @@ more2="More"
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
       if (result==2) {
-        this.router.navigate(['../main',{outlets:{div:'researches-Draft'}}]); 
+        this.global.researchstat = "Draft"
+        this.router.navigate(['../main',{outlets:{div:'Research'}}]);
       }
       if (result==3) {
-         this.router.navigate(['../main',{outlets:{div:'researches-Pending'}}]); 
+        this.global.researchstat = "Pending"
+        this.router.navigate(['../main',{outlets:{div:'Research'}}]);
       }
     });
   }

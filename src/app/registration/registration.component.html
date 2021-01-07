@@ -29,14 +29,14 @@
 		                    </mat-grid-tile>
 		                    <mat-grid-tile [colspan]="7">
 		                        <mat-form-field class="justifier">
-		                            <input autocomplete="off"  matInput placeholder="Email Address" text="text" [(ngModel)]="email">
+		                            <input autocomplete="off"  matInput placeholder="Email Address" text="text" [(ngModel)]="global.email" [disabled]="true">
 		                        </mat-form-field>
 		                    </mat-grid-tile>
 		                </mat-grid-list>
 		                <!-- Markup for getting Username ends -->
 		 
 		                <!-- Markup for getting Password starts -->
-		                <mat-grid-list cols="9" rowHeight="70px">
+		                <!-- <mat-grid-list cols="9" rowHeight="70px">
 		                    <mat-grid-tile [rowspan]="1"  class="login-icon">
 		                        <mat-icon>remove_red_eye</mat-icon>
 		                    </mat-grid-tile>
@@ -56,7 +56,7 @@
 		                            <input autocomplete="off"  matInput placeholder="Confirm Password" text="password" type="password"  [(ngModel)]="cpword">
 		                        </mat-form-field>
 		                    </mat-grid-tile>
-		                </mat-grid-list>
+		                </mat-grid-list> -->
 
 		                <mat-grid-list cols="9" rowHeight="70px">
 		                    <mat-grid-tile [rowspan]="1"  class="login-icon">

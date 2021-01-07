@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
      
-        <div class="col-md-3 sidebar">
+        <!-- <div class="col-md-3 sidebar">
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Program Discipline</div>
                 <ul class="list-group category_block" style="margin-bottom: 0px">
@@ -37,14 +37,14 @@
 				  </mat-expansion-panel>
 				  <br>
             </div>
-        </div>
+        </div> -->
 
         <style type="text/css">
         	tr:hover{
         		background-color: #E0E0E0 !important;
         	}
         </style>
-        <div class="col-md-9 col-lg-9 add_to_cart_block" *ngIf="array.length!=0&&pagestat=='research'">
+        <div class="col-md-12 col-lg-12 add_to_cart_block" *ngIf="array.length!=0&&pagestat=='research'">
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <h3><b>{{array[0].title | uppercase }}</b></h3>

@@ -1,90 +1,40 @@
 
-<style type="text/css">
-.imgfea {
-  margin-left: auto;margin-right: auto;
-    height: 150px;box-shadow: 2px 2px 2px 2px #333;;
-  }
-img.noStretch{
-    object-fit: cover;
-  }</style>
-
-    <div class="hero" id="highlighted" style="background-image: url(assets/img/buntun2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;">
-      <div class="inner">
-        <!--Slideshow-->
-        <div id="highlighted-slider" class="container">
-          <div class="item-slider" data-toggle="owlcarousel" data-owlcarousel-settings='{"singleItem":true, "navigation":true, "transitionStyle":"fadeUp"}'>
-            <!--Slideshow content-->
-            <!--Slide 1-->
-            <!--Slide 2-->
-            <div class="item">
-              <div class="row">
-                <div class="col-md-6 text-right-md item-caption">
-                  <h2 class="h1 text-weight-light">
-                      <span class="text-primary">CVRDKMS</span> Website
-                    </h2>
-                  <h4>
-                      Developed by USL CICT Team
-                    </h4>
-                  <p>Cagayan Valley Research and Development Knowledge Management System is a proposed development of an online repository and research grant monitoring system that aims to promote scholarly studies in the region</p>
-                  <a href="http://192.168.0.29/dost/index" class="btn btn-more btn-lg"><i class="fa fa-plus"></i> Learn More</a>
-                </div>
-                <div class="col-md-6 hidden-xs">
-                  <img src="assets/img/slides/slide2.png" alt="Slide 2" class="center-block img-responsive">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div style="height: 120px"> </div>
 
   <!-- ======== @Region: #content ======== -->
-  <div id="content" style="margin-top: 0 !important">
+  <div id="content" style="margin-top: 0 !important;padding-bottom: 0px">
 
-    <div class="block block-pd-sm block-bg-grey-dark block-bg-overlay block-bg-overlay-6 text-center" data-block-bg-img="https://picjumbo.imgix.net/HNCK1088.jpg?q=40&amp;w=1650&amp;sharp=30" data-stellar-background-ratio="0.3" *ngIf="count!=''">
+   
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
               <div class="row google-logo text-center">
                
-      <h3 class="h-lg m-t-0 m-b-lg" style="margin-bottom: 13px !important">
-          KnowledgeHub Search
-        </h3>
+                <img src="assets/cvklogo.png">
                   
                 </div>
                 <div class="row google-form text-center">
                     <div class="form-group">
                   <table style="width:100%;margin-bottom: 10px">
                     <tr>
-                      <td style="width: 180px">
-                        <select class="form-control input-lg" [(ngModel)]='global.searchfilter' style="width: 180px;">
-                          <option selected="" value="Title">Title</option>
-                          <option value="Abstract">Abstract</option>
-                          <option value="Author">Author</option>
-                          <option value="Company">Company</option>
-                          <option value="Keyword">Keyword</option>
-                          <option value="Program Discipline">Program Discipline</option>
-                        </select>
-                      </td>
                       <td>                        
-                        <input  class="form-control input-lg" [(ngModel)]='search' (keyup)="keysearch($event)">
+                        <input  class="form-control input-lg" style="border-radius: 40px" [(ngModel)]='search' (keyup)="keysearch($event)" id="input">
+                      </td>
+                      <td style="width: 64px">
+                        <button  mat-button class="btn btn-default" (click)="keysearch('onoutfocus')">
+                            <span class="material-icons">
+                          search
+                          </span></button>
                       </td>
                     </tr>
                   </table>    
 
-                  <div class="btn-group">
-                  <button class="btn btn-default" (click)="keysearch('onoutfocus')">Search</button><!-- 
-                  <a type="button" href="https://www.google.com/doodles" class="btn btn-default">I'm Feeling Lucky</a> -->
-                  
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div style="height: 75px"> </div>
     <!-- Mission Statement -->
     <!--<div class="mission text-center block block-pd-sm block-bg-noise">
       <div class="container">
@@ -156,15 +106,15 @@ img.noStretch{
     </div>
     
     <!--Showcase-->
-    <div class="showcase block block-border-bottom-grey">
+    <!-- <div class="showcase block block-border-bottom-grey">
       <div class="container"> 
         <div class="row" style="margin-top: 7px;">
               <div class="col-6 col-md-8">
          <h2 class="block-title">
             Recently Published Researches
           </h2>
-        </div><!-- 
-              <div class="col-6 col-md-4" style="text-align: right;"><a href="researches.php"><button type="button" class="btn btn-primary btn-sm" ><i class="fa fa-search"></i> View More</button></a></div> -->
+        </div><! -->
+             <!--  <div class="col-6 col-md-4" style="text-align: right;"><a href="researches.php"><button type="button" class="btn btn-primary btn-sm" ><i class="fa fa-search"></i> View More</button></a></div> 
             </div>
         <p></p>
         <div  *ngIf="array.length!=0">
@@ -190,7 +140,7 @@ img.noStretch{
         </div>
 
       </div>
-    </div>
+    </div> -->
    
 <!--     <div class="block block-pd-sm block-bg-grey-dark block-bg-overlay block-bg-overlay-6 text-center" data-block-bg-img="https://picjumbo.imgix.net/HNCK1088.jpg?q=40&amp;w=1650&amp;sharp=30" data-stellar-background-ratio="0.3">
       <h2 class="h-xlg h1 m-a-0">

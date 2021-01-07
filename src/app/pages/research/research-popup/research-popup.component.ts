@@ -13,8 +13,11 @@ export class ResearchPopupComponent implements OnInit {
   constructor(public global: GlobalService,private sanitizer: DomSanitizer,public dialog: MatDialog,public dialogRef: MatDialogRef<ResearchPopupComponent>,@Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit() {
-  	this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.global.api+'getpdf.php?data='+this.data.x)
-
+    this.global.swalClose()
+    if (this.global.requestid()!=null) {
+      this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.global.api+'getpdf.php?data='+this.data.x)
+    }
+  	
   }
 
   onNoClickclose(): void {

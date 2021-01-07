@@ -75,32 +75,33 @@ export class RegistrationComponent implements OnInit {
   window.history.back();
 }
   nexttopinfo(stepper){
-  	if (this.email!=''&&this.pword!=''&&this.cpword!=''&&this.inputcompany!='') {
-  		if (this.validateEmail(this.email)) {
-  			if (this.pword.length<6) {
-		       swal(
-		          '',
-		           'Password must be at least 6 characters!',
-		           'info'
-		          )
-  			}else{
-	  			 if (this.pword!=this.cpword) {
-			       swal(
-			          '',
-			           'Passwords does not match!',
-			           'info'
-			          )
-	  			}else
-	  			stepper.next();
-  			}
-  		}else
-  		{
-	       swal(
-	          '',
-	           'Please enter a valid email address!',
-	           'info'
-	          )
-  		}
+  	if (this.email!=''&&this.inputcompany!='') {
+  		// if (this.validateEmail(this.email)) {
+  		// 	if (this.pword.length<6) {
+		  //      swal(
+		  //         '',
+		  //          'Password must be at least 6 characters!',
+		  //          'info'
+		  //         )
+  		// 	}else{
+	  	// 		 if (this.pword!=this.cpword) {
+			 //       swal(
+			 //          '',
+			 //           'Passwords does not match!',
+			 //           'info'
+			 //          )
+	  	// 		}else
+	  	// 		stepper.next();
+  		// 	}
+  		// }else
+  		// {
+	   //     swal(
+	   //        '',
+	   //         'Please enter a valid email address!',
+	   //         'info'
+	   //        )
+  		// }
+  		stepper.next();
   	}else
   		{
 	       swal(
@@ -112,6 +113,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+  	if (this.global.email == '') {
+  		this.global.removeSession()
+  		this.router.navigate(['login']);
+  	}else{
+  		this.email = this.global.email
+  	}
   }
 
 

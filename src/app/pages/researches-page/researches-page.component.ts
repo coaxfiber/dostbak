@@ -30,18 +30,31 @@ export class ResearchesPageComponent implements OnInit {
 
   tempsearch=''
   search=''
+  config
   ngOnInit() {
+     this.global.activepage='search'
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: 0
+    };
     this.loadsidnav()    
     this.scrolltop()
   	this.runsearch()
+
   }
 
+
+  pageChanged(event){
+    this.
+    config.currentPage = event;
+  }
 
   keysearch(event){
     if(event.keyCode == 13 || event.keyCode == 9 || event == 'onoutfocus') {
       this.global.search = this.search
-      this.tempsearch = this.search
-      this.runsearch()
+        this.tempsearch = this.search
+      this.router.navigate(['../Search', { q: this.search }]);
     }
   }
  sidediscicpline1=[]

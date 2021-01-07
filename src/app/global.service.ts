@@ -20,7 +20,7 @@ export class GlobalService {
   user:any;
   userid=1;
   useraccess
-
+  email=''
    researchid;
    researchtitle;
    researchabstract;
@@ -36,6 +36,9 @@ export class GlobalService {
    disciplinelist
    companylist
 
+   activepage="front"
+   researchstat=''
+   searchtype='Title'
   constructor(private domSanitizer: DomSanitizer,@Inject(SESSION_STORAGE) private storage: WebStorageService,private router: Router,private http: Http) { 	
     if(this.storage.get('token')!=null){
       this.requestToken();
@@ -66,6 +69,7 @@ export class GlobalService {
           )
   }
 
+  
 
   swalLoading(val){
      swal({
@@ -81,6 +85,7 @@ export class GlobalService {
   swalAlertError()
   {
    swal('Oops...', 'Connection Error!', 'error');
+   this.logout()
   }
 
   setSession(val1,val2,val3,val4){

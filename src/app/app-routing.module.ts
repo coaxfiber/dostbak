@@ -35,8 +35,6 @@ import { ProposalWithIssuesComponent } from './proposal/proposal-approval/propos
 import { ProposalPendingComponent } from './proposal/proposal-approval/proposal-pending/proposal-pending.component';
 import { FrontComponent } from './pages/front/front.component';
 import { ResearchComponent } from './pages/research/research.component';
-import { ResearchBycompanyComponent } from './pages/research-bycompany/research-bycompany.component';
-
 import { OverviewComponent } from './pages/overview/overview.component';
 import { DevelopersComponent } from './pages/developers/developers.component';
 
@@ -69,10 +67,6 @@ const routes: Routes = [
     component: ResearchComponent
   },
   {
-    path: 'research-by-company',
-    component: ResearchBycompanyComponent
-  },
-  {
     path: 'home',
     component: FrontComponent
   },
@@ -91,7 +85,7 @@ const routes: Routes = [
         { path: 'researches', component: ResearchesComponent, outlet: 'div' },
         { path: 'discipline', component: ProjectDisciplineComponent, outlet: 'div' },
         { path: 'update-research', component: UpdateResearchComponent, outlet: 'div' },
-        { path: 'researches-Draft', component: Research0Component, outlet: 'div' },
+        { path: 'Research', component: Research0Component, outlet: 'div' },
         { path: 'researches-Pending', component: Research1Component, outlet: 'div' },
         { path: 'researches-Published', component: Research2Component, outlet: 'div' },
         { path: 'researches-WithIssues', component: Research3Component, outlet: 'div' },
