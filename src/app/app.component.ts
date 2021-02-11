@@ -34,7 +34,7 @@ export class AppComponent {
   keysearch(event){
     if(event.keyCode == 13 || event.keyCode == 9 || event == 'onoutfocus') {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
-        console.log(this.global.search)
+        
       this.router.navigate(['../Search', { q: this.global.search }])});
     }
   }

@@ -39,6 +39,8 @@ export class GlobalService {
    activepage="front"
    researchstat=''
    searchtype='Title'
+   inputcompanyid = ''
+   proposalid
   constructor(private domSanitizer: DomSanitizer,@Inject(SESSION_STORAGE) private storage: WebStorageService,private router: Router,private http: Http) { 	
     if(this.storage.get('token')!=null){
       this.requestToken();

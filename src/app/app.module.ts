@@ -69,13 +69,24 @@ import { ResearchesPageComponent } from './pages/researches-page/researches-page
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ChartsModule,ThemeService  } from 'ng2-charts';
-
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
-  GoogleLoginProvider,
-  FacebookLoginProvider,
-  AmazonLoginProvider,
-} from 'angularx-social-login';
+    SocialLoginModule,
+    AuthServiceConfig,
+    GoogleLoginProvider,
+    FacebookLoginProvider,
+} from "angular-6-social-login";
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("100400588236-rhpnguqginvpo91n12q1e201qe62ce1d.apps.googleusercontent.com")
+        }
+      ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -174,23 +185,13 @@ import {
     MaterialModule,
     HttpModule,StorageServiceModule,
     NgxPaginationModule,
-    SocialLoginModule,
-    ChartsModule
-  ],
+    ChartsModule,
+    SocialLoginModule
+  ],//100400588236-rhpnguqginvpo91n12q1e201qe62ce1d.apps.googleusercontent.com
   providers: [GlobalService,ThemeService,{
-    provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '100400588236-rhpnguqginvpo91n12q1e201qe62ce1d.apps.googleusercontent.com'
-            ),
-          }
-        ],
-      } as SocialAuthServiceConfig,
-  }],
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -86,6 +86,7 @@ more2="More"
                         this.inputcompany = res.companyname
                         this.global.agency = res.companyname
                         this.inputcompanyid = res.company
+                        this.global.inputcompanyid= res.company
                   });
 
    }

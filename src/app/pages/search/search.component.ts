@@ -137,6 +137,7 @@ export class SearchComponent implements OnInit {
   }
   type=''
   optionsearch(x){
+    this.search=this.global.search
     if (this.search!='') {
       this.global.swalLoading('')
       this.global.searchtype=x.tab.textLabel

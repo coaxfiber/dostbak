@@ -8,9 +8,11 @@ import Swal from 'sweetalert2';
 import { HostListener } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 const swal = Swal;
-
-import { SocialAuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import {
+    AuthService,
+    GoogleLoginProvider
+} from 'angular-6-social-login';
+ 
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   user
   disabled = false
   private loggedIn: boolean;
-  constructor(private authService: SocialAuthService,private http: Http, public global: GlobalService,private router: Router) { 
+  constructor(private socialAuthService: AuthService,private http: Http, public global: GlobalService,private router: Router) { 
      this.global.activepage='search'
     if (window.location.href.includes("registration")) {
       this.router.navigate(['registration']);
@@ -137,8 +139,18 @@ export class LoginComponent implements OnInit {
   }
 
 signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
+  }
+  Cookies(){
+    this.global.swalAlert('','<div class=\'no-overflow\' style=\'font-weight: normal;font-size: 15px;\'><p>1 cookie(<i>Session cookie</i>) is used on this site:</p><p>You must allow this cookie in your browser to provide continuity and to remain logged in when browsing the site. When you log out or close the browser, this cookie is destroyed (in your browser and on the server).</p><p>Note: Cookies are not enabled in incognito mode (Don\'t use incognito mode in your browser).</p></div> ', 'info')
+  }
+socialSignIn() {
+    let socialPlatformProvider;
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+         
+      var user = userData
       this.loggedIn = (user != null);
       if (user!=null) {
         this.username = user.email
@@ -185,11 +197,8 @@ signInWithGoogle(): void {
                } );
           }else{
             //this.global.swalAlert("Goolge Login Failed!",'Please Check your Internet Connectivity to proceed.','warning')
-          }
-    });
+          }            
+      }
+    );
   }
-  Cookies(){
-    this.global.swalAlert('','<div class=\'no-overflow\' style=\'font-weight: normal;font-size: 15px;\'><p>1 cookie(<i>Session cookie</i>) is used on this site:</p><p>You must allow this cookie in your browser to provide continuity and to remain logged in when browsing the site. When you log out or close the browser, this cookie is destroyed (in your browser and on the server).</p><p>Note: Cookies are not enabled in incognito mode (Don\'t use incognito mode in your browser).</p></div> ', 'info')
-  }
-
 }

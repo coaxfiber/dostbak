@@ -40,12 +40,12 @@
                 Abstract
               </ng-template>
             </mat-tab>
-            <mat-tab label="Company">
+            <!-- <mat-tab label="Company">
               <ng-template mat-tab-label>
                 <mat-icon class="example-tab-icon">apartment</mat-icon>
                 Company
               </ng-template>
-            </mat-tab>
+            </mat-tab> -->
             <mat-tab label="Keyword">
               <ng-template mat-tab-label>
                 <mat-icon class="example-tab-icon">view_headline</mat-icon>
@@ -62,7 +62,7 @@
 
           <div class="page-header" style="margin-bottom: 0;margin-top: 25px !important;">
               <span style="margin:0;font-size: 18px">
-                Search Result for <b>{{tempsearch}}</b><br>
+                Search Result for <b>{{search}}</b><br>
               </span>
               <span>About {{displayarray.length}} result(s) </span>
           </div>
@@ -73,15 +73,15 @@
         <tbody>
             <tr   *ngFor="let c of displayarray | paginate: config">
               <td>
-                <a href="javascript:void(0)" (click)="global.openresearch(c.id)"  data-toggle="tooltip" data-placement="bottom" [title]="c.abstract"><b>{{c.title | uppercase }}</b></a><br><b>Author(s): </b>
+                <a href="javascript:void(0)" (click)="global.openresearch(c.id)"  data-toggle="tooltip" data-placement="bottom" [title]="c.abstract"><b>{{c.title | uppercase }}</b></a><br><b></b>
                   <script type="text/javascript">
                     $(function () {
                       $('[data-toggle="tooltip"]').tooltip()
                     })
                   </script>
                  <span *ngFor="let a of c.authors;let i = index">{{a.name}}<span *ngIf='i<c.authors.length-1'>, </span></span><br>
-                <b>Company: {{c.inst}} </b><br>
-                <b>Program Discipline:  </b>
+                <b>{{c.inst}} </b><br>
+                <b></b>
                       <span *ngFor="let a of c.dis;let i = index" >{{a.desc}}<span *ngIf='i<c.dis.length-1'>, </span></span>
 
                     </td>
@@ -91,8 +91,8 @@
 
     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
     <br><br>
-      <p *ngIf='displayarray.length==0' style="text-align: center;">
-         - No Research Found for <b>{{global.search}}</b> -
+      <p *ngIf='displayarray.length==0' style="text-align: left;">
+         - No Research Found for <b>{{search}}</b> -
       <br><br><br><br><br><br><br><br><br>
       </p>
       </div>

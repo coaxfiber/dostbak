@@ -12,13 +12,13 @@
           <ng-template matStepLabel>Proposal Details</ng-template>
 
             <mat-form-field class="npinput"  style="width: 100%">
-              <input matInput placeholder="Title" required  [(ngModel)]="title" disabled="{{proposalcounter}}">
+              <input matInput placeholder="Title" required  [(ngModel)]="title">
               <mat-hint>The identification of the program and the component projects.</mat-hint>
             </mat-form-field>
 
               <div style="height: 10px"></div>
             <mat-form-field class="npinput" style="width: 40%">
-              <input matInput placeholder="Duration" required type="number" min="0"  [(ngModel)]="duration" disabled="{{proposalcounter}}">
+              <input matInput placeholder="Duration" required type="number" min="0"  [(ngModel)]="duration">
               <mat-hint>In Months 
                     <mat-hint><button class="buttonblue" style="border-radius: 10px;border: none;" (click)="infoduration()">?</button></mat-hint> </mat-hint>
             </mat-form-field>
@@ -26,30 +26,33 @@
               <div style="height: 20px"></div>
             <mat-form-field  class="npinput2" style="width: 40%" required>
               <mat-label>Funding Agency</mat-label>
-              <mat-select  [(ngModel)]="fagency" disabled="{{proposalcounter}}">
+              <mat-select  [(ngModel)]="fagency">
                 <mat-option value="{{f.id}}"  *ngFor="let f of fundingagency" (click)="see(f.name)">
                   {{f.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
-          <div style="overflow: hidden;">
+          <!-- <div style="overflow: hidden;">
             <mat-card style="background-color: #f4f4f4;width:calc(100% - 43px);">
               I am applying for<br><br>
               <div style="margin-left: 10px">
-              <mat-checkbox (change)="proposaltype(0)" [checked]="prog"  disabled="{{proposalcounter}}">
-                <h4 style="margin: 0px">Program<!--  <small>(Form 1A)</small> --></h4>
+              <mat-checkbox (change)="proposaltype(0)" [checked]="prog">
+                <h4 style="margin: 0px">Program</h4>
                 <p style="margin: 0px;white-space:normal;">A set of interrelated studies or a component of a program to meet pre-determined objectives within a specific time frame.</p>
                 
               </mat-checkbox>
               <div style="height: 10px"></div>
-              <mat-checkbox (change)="proposaltype(1)" [checked]="proj"  disabled="{{proposalcounter}}">
-                <h4 style="margin: 0px">Project <!-- <small>(Form 1B)</small> --></h4>
+              <mat-checkbox (change)="proposaltype(1)" [checked]="proj">
+                <h4 style="margin: 0px">Project </h4>
                 <p style="margin: 0px;white-space:normal;">a set of interrelated studies to meet pre-determined objective within a specific time frame.</p>
                 
               </mat-checkbox>
             </div>
             </mat-card>
+          </div> -->
+          <div style="margin-bottom: 10px">
+            <b>DOST FORMS 1A AND 1B CAPSULE R&D PROPOSAL</b>&nbsp; &nbsp; <a href="https://www.dost.gov.ph/knowledge-resources/downloads/file/648-dost-forms-1a-and-1b-capsule-r-d-proposal.html" target="_blank"><button>Download here!</button></a>
           </div>
   
             <button mat-button class="buttonblue" style="float: right;"  (click)="proposalinsert(stepper)">Next</button>
@@ -58,7 +61,7 @@
       
       <mat-step>
         
-        <ng-template matStepLabel>Submit Proposal</ng-template>
+        <ng-template matStepLabel></ng-template>
         <div id="1a" *ngIf="prog===true">
           <h4>Program Title: {{title}}</h4>
 
@@ -796,7 +799,21 @@
                 </div>
       </mat-expansion-panel>
 </div>
+<div>  <!-- ETO ANG MAGPAPAKITA -->
+   <h4>Proposal Title: <b>{{title}}</b></h4>
 
+   <table>
+     <tr>
+       <td style="width: 115px">
+        Project Leader: 
+                      
+       </td>
+       <td>
+        <b>{{global.user.fname | uppercase}} {{global.user.mname | uppercase}} {{global.user.surname | uppercase}} {{global.user.ext | uppercase}}</b>&nbsp; <!-- <button>Add Member</button> -->
+       </td>
+     </tr>
+   </table>
+</div>
 <br><br><br>
         <div>
           <button mat-button matStepperPrevious class="buttonblue" >Back</button>

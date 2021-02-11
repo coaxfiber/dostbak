@@ -114,17 +114,20 @@ this.http.get(this.global.api + 'api.php?action=spResearchDocument_Select&rid='+
             .subscribe(res => {
               this.degreelevel= res;
         });
-   
+    if (this.global.useraccess!=undefined) {
     this.inputcompany = this.global.useraccess.companyid;
+    }
 
   }
 getauthorselect(){
+  if (this.global.useraccess!=undefined) {
     this.http.get(this.global.api + 'api.php?action=spAuthor_listnot&cid='+this.global.useraccess.companyid+'&rid='+this.researchid,
                    this.global.option)
                       .map(response => response.json())
                       .subscribe(res => {
                         this.authorsarray =res
                   });
+  }
 }
 onFileChange(event) {
 

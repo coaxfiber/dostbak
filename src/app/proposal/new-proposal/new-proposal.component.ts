@@ -43,7 +43,7 @@ export class NewProposalComponent implements OnInit {
 	fangency;
 
   proposalid=1;
-  programid=24;
+  programid;
 	proposalcounter=false;
   projectlists;
 
@@ -65,7 +65,7 @@ export class NewProposalComponent implements OnInit {
   projectduration;
   coopagency='';
   cagencylist
-  projectid
+  projectid=''
   calists
 
   rndstation
@@ -366,30 +366,34 @@ onFileChange(event) {
   }
 
   proposalinsert(stepper: MatStepper) {
-let x=''
+  let x=''
   	if (this.title==undefined||this.title=="") {
   		x=x+"*Title is required\n";
   	}if (this.duration==undefined||this.duration=="") {
   		x=x+"*Duration is required\n";
   	}if (this.fagency==undefined||this.fagency=="") {
   		x=x+"*Funding Agency is required\n";
-  	}if (this.proj==false&&this.prog==false) {
-      x=x+"*Must select a proposal type!\n";
-    }
+  	}
+    // if (this.proj==false&&this.prog==false) {
+    //   x=x+"*Must select a proposal type!\n";
+    // }
 
-  	if (x==''&&this.proposalcounter==false) {
-                  let urlSearchParams = new URLSearchParams();
-                    urlSearchParams.append("GeneralTitle",this.title);
-        			     	urlSearchParams.append('LeadAgency', this.fagency);
-        			     	urlSearchParams.append('Street', this.global.user.street1);
-        			     	urlSearchParams.append('Address_PSGC', this.global.user.psgc1);
-        			     	urlSearchParams.append('Telephone', this.telephone);
-        			     	urlSearchParams.append('Fax', '');
-        			     	urlSearchParams.append('Email', this.email);
-        			     	urlSearchParams.append('FundingAgency_id', this.fagency);
-        			     	urlSearchParams.append('TotalDuration', this.duration);
-        			     	urlSearchParams.append('createdBy', this.global.userid.toString());
-                  let body = urlSearchParams.toString()
+  	if (x=='') {
+      let urlSearchParams = new URLSearchParams();
+        urlSearchParams.append("GeneralTitle",this.title);
+	     	urlSearchParams.append('LeadAgency', this.fagency);
+	     	urlSearchParams.append('Street', this.global.user.street1);
+	     	urlSearchParams.append('Address_PSGC', this.global.user.psgc1);
+	     	urlSearchParams.append('Telephone', this.telephone);
+	     	urlSearchParams.append('Fax', '');
+	     	urlSearchParams.append('Email', this.email);
+	     	urlSearchParams.append('FundingAgency_id', this.fagency);
+	     	urlSearchParams.append('TotalDuration', this.duration);
+         urlSearchParams.append('createdBy', this.global.userid.toString());
+         if (this.programid!=undefined) {
+           urlSearchParams.append('id', this.programid.toString());
+         }
+      let body = urlSearchParams.toString()
   		var header = new Headers();
                   header.append("Accept", "application/json");
                   header.append("Content-Type", "application/x-www-form-urlencoded");    
@@ -397,20 +401,16 @@ let x=''
   	  this.proposalcounter = true;
   	  this.global.requestToken();
 
-	     this.http.post(this.global.api + 'api.php?action=proposalinsert',
+      if (this.programid==undefined) {
+	    this.http.post(this.global.api + 'api.php?action=proposalinsert',
 	     body,option)
           .map(response => response.json())
           .subscribe(res => {
-             this.global.swalClose();
              this.proposalid=res.id;
              this.http.get(this.global.api + 'api.php?action=programinsert&proposalid='+this.proposalid, option)
                 .map(response => response.json())
                 .subscribe(res => {
-                  console.log(res)
                   this.programid= res.id;
-                  if (this.proj!=true) {
-                    this.getprojectlist(this.programid);
-                  }else{
                     this.projecttitle = this.title;
                     this.projectduration = this.duration;
                          let urlSearchParams = new URLSearchParams();
@@ -427,29 +427,66 @@ let x=''
                            body,option)
                               .map(response => response.json())
                               .subscribe(res => {
-                                 this.global.swalClose();  
-                                 this.getprojectlist(this.programid) 
+                                  let urlSearchParams = new URLSearchParams();
+                                     urlSearchParams.append("ProposalID",this.programid);
+                                     urlSearchParams.append('UserID', this.global.user.id);
+                                     urlSearchParams.append('FName', this.global.user.fname);
+                                     urlSearchParams.append('MName', this.global.user.mname);
+                                     urlSearchParams.append('LName', this.global.user.surname);
+                                     urlSearchParams.append('SName', this.global.user.ext);
+                                  let body = urlSearchParams.toString()
+                                  var header = new Headers();
+                                              header.append("Accept", "application/json");
+                                              header.append("Content-Type", "application/x-www-form-urlencoded");    
+                                              let option = new RequestOptions({ headers: header });
+                                     this.http.post(this.global.api + 'api.php?action=spProposal_Proponent_Insert',body, option)
+                                      .map(response => response.json())
+                                      .subscribe(res => {
+                                            console.log(res)
+                                         this.global.swalClose();  
+                                         this.getprojectlist(this.programid) 
+                                         this.http.get(this.global.api + 'api.php?action=spProposal_Proponent_Select&id='+this.proposalid, option)
+                                          .map(response => response.json())
+                                          .subscribe(res => {
+                                            stepper.next();
+                                        },error => {
+                                          console.log(Error); 
+                                              this.global.swalAlertError();
+                                         } );
+                                      });
                               },error => {
                                 console.log(Error); 
                                     this.global.swalAlertError();
                                } );
-                  }
                 });
-
-
-             
-
           },error => {
           	console.log(Error); 
                 this.global.swalAlertError();
            } );
-	     
-
+        // code...
+      }else{
+        this.http.post(this.global.api + 'api.php?action=spProposal_Update',
+         body,option)
+          .map(response => response.text())
+          .subscribe(res => {
+               this.http.get(this.global.api + 'api.php?action=spProposal_Proponent_Select&id='+this.proposalid, option)
+                .map(response => response.json())
+                .subscribe(res => {
+                   stepper.next();
+              },error => {
+                console.log(Error); 
+                    this.global.swalAlertError();
+               } );
+          },error => {
+            console.log(Error); 
+                this.global.swalAlertError();
+           } );
+      }
   	}
+
   	if (x!='') {
   		alert(x)
-  	}else
-        stepper.next();
+  	}
 
   	
 

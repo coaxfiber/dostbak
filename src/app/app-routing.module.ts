@@ -85,6 +85,7 @@ const routes: Routes = [
         { path: 'researches', component: ResearchesComponent, outlet: 'div' },
         { path: 'discipline', component: ProjectDisciplineComponent, outlet: 'div' },
         { path: 'update-research', component: UpdateResearchComponent, outlet: 'div' },
+        { path: 'update-proposal', component: NewProposalComponent, outlet: 'div' },
         { path: 'Research', component: Research0Component, outlet: 'div' },
         { path: 'researches-Pending', component: Research1Component, outlet: 'div' },
         { path: 'researches-Published', component: Research2Component, outlet: 'div' },
