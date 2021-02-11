@@ -37,20 +37,17 @@ more2="More"
               this.router.navigate(['../main',{outlets:{div:'Company-Management'}}]);
     }
     this.id = this.global.requestid();
-     
      this.global.swalLoading('Loading User Information');
-     this.http.get(this.global.api + 'api.php?action=getuserinfo&id='+this.global.requestid(),
-         this.global.option)
+     this.http.get(this.global.api + 'api.php?action=getuserinfo&id='+this.global.requestid())
             .map(response => response.json())
             .subscribe(res => {
               this.user= res;
                this.global.user=res;
-               this.http.get(this.global.api + 'api.php?action=spUserViewDomain_Company_By_Username&email='+this.global.requestemail(),
-                   this.global.option)
+               this.http.get(this.global.api + 'api.php?action=spUserViewDomain_Company_By_Username&email='+this.global.requestemail())
                       .map(response => response.json())
                       .subscribe(res => {
                         this.res=res[0];
-                      this.http.get(this.global.api+'api.php?action=spUserAccessLevel_By_Username&email='+this.global.requestemail(),this.global.option)
+                      this.http.get(this.global.api+'api.php?action=spUserAccessLevel_By_Username&email='+this.global.requestemail())
                          .map(response => response.json())
                         .subscribe(res => {
                           if (res.length==0) {
@@ -59,12 +56,11 @@ more2="More"
                           this.global.useraccess=this.res;
                           this.assign(res);
                               //console.log(res)
-                              this.http.get(this.global.api+'api.php?action=company_List',this.global.option)
+                              this.http.get(this.global.api+'api.php?action=company_List')
                               .map(response => response.json())
                               .subscribe(res => {
                                this.global.company = res;
-                               this.http.get(this.global.api + 'api.php?action=FundingAgency_List',
-                                     this.global.option)
+                               this.http.get(this.global.api + 'api.php?action=FundingAgency_List')
                                         .map(response => response.json())
                                         .subscribe(res => {
                                           this.global.fundingagency= res;
@@ -79,8 +75,7 @@ more2="More"
                                } );
 
 
-         this.http.get(this.global.api + 'api.php?action=spUser_Select&email='+this.global.requestemail(),
-                   this.global.option)
+         this.http.get(this.global.api + 'api.php?action=spUser_Select&email='+this.global.requestemail())
                       .map(response => response.json())
                       .subscribe(res => {  
                         this.inputcompany = res.companyname
@@ -98,8 +93,7 @@ more2="More"
   }
 
   userfunc(){
-      this.http.get(this.global.api + 'api.php?action=getuserinfo&id='+this.global.requestid(),
-         this.global.option)
+      this.http.get(this.global.api + 'api.php?action=getuserinfo&id='+this.global.requestid())
             .map(response => response.json())
             .subscribe(res => {
               this.user= res;
@@ -198,8 +192,7 @@ more2="More"
 
     dialogRef.afterClosed().subscribe(result => {
       this.userfunc();
-      this.http.get(this.global.api + 'api.php?action=spUser_Select&email='+this.global.requestemail(),
-                   this.global.option)
+      this.http.get(this.global.api + 'api.php?action=spUser_Select&email='+this.global.requestemail())
                       .map(response => response.json())
                       .subscribe(res => {  
                         this.inputcompany = res.companyname

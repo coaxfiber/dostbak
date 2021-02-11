@@ -28,7 +28,7 @@ dataSource;
   }
   createtable(){
 
-       this.http.get(this.global.api+'api.php?action=company_List',this.global.option)
+       this.http.get(this.global.api+'api.php?action=company_List')
           .map(response => response.json())
           .subscribe(res => {
            this.company = res;

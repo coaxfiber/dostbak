@@ -30,7 +30,7 @@ dataSource;
   }
   createtable(){
 
-       this.http.get(this.global.api+'api.php?action=spProgramDiscipline_List',this.global.option)
+       this.http.get(this.global.api+'api.php?action=spProgramDiscipline_List')
           .map(response => response.json())
           .subscribe(res => {
            	this.discipline = res;

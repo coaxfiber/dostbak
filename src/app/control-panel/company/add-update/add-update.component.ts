@@ -53,7 +53,7 @@ export class AddUpdateComponent implements OnInit {
   	}
   }
   getindustry(){
-  	this.http.get(this.global.api+'api.php?action=spIndustryCode_List',this.global.option)
+  	this.http.get(this.global.api+'api.php?action=spIndustryCode_List')
 	  .map(response => response.json())
 	  .subscribe(res => {
 	   this.industrylist = res

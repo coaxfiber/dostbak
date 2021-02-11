@@ -81,7 +81,7 @@ export class EditProfileComponent implements OnInit {
 
 
 
-    this.http.get(this.global.api+'api.php?action=company_List',this.global.option)
+    this.http.get(this.global.api+'api.php?action=company_List')
     .map(response => response.json())
     .subscribe(res => {
      this.company = res
@@ -91,7 +91,7 @@ export class EditProfileComponent implements OnInit {
     });
 
 
-    this.http.get(this.global.api+'api.php?action=spPSGC_Select2&psgc='+this.psgc1,this.global.option)
+    this.http.get(this.global.api+'api.php?action=spPSGC_Select2&psgc='+this.psgc1)
     .map(response => response.json())
     .subscribe(res => {
       if (res.length!=0) {
@@ -101,7 +101,7 @@ export class EditProfileComponent implements OnInit {
       this.global.swalAlertError();
     });
 
-    this.http.get(this.global.api+'api.php?action=spPSGC_Select2&psgc='+this.psgc2,this.global.option)
+    this.http.get(this.global.api+'api.php?action=spPSGC_Select2&psgc='+this.psgc2)
     .map(response => response.json())
     .subscribe(res => {
       if (res.length!=0) {

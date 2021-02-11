@@ -121,8 +121,7 @@ proponenttypeinput='2'
 
     //this.rndstation=this.data.list.duration;
 
-    this.http.get(this.global.api + 'api.php?action=company_List',
-         this.global.option)
+    this.http.get(this.global.api + 'api.php?action=company_List')
             .map(response => response.json())
             .subscribe(res => {
               this.cagencylist= res;
@@ -609,8 +608,7 @@ let x='';
       header.append("Accept", "application/json");
       header.append("Content-Type", "application/x-www-form-urlencoded");    
       let option = new RequestOptions({ headers: header });
-      this.http.get(this.global.api + 'api.php?action=getcoopagency&projectid='+projectid,
-         option)
+      this.http.get(this.global.api + 'api.php?action=getcoopagency&projectid='+projectid)
             .map(response => response.json())
             .subscribe(res => {
               this.calists= res;
@@ -627,8 +625,7 @@ let x='';
       header.append("Accept", "application/json");
       header.append("Content-Type", "application/x-www-form-urlencoded");    
       let option = new RequestOptions({ headers: header });
-      this.http.get(this.global.api + 'api.php?action=getbudget&programid='+programid,
-         option)
+      this.http.get(this.global.api + 'api.php?action=getbudget&programid='+programid)
             .map(response => response.json())
             .subscribe(res => {
               this.budgetlist= res;
@@ -641,8 +638,7 @@ let x='';
       header.append("Accept", "application/json");
       header.append("Content-Type", "application/x-www-form-urlencoded");    
       let option = new RequestOptions({ headers: header });
-      this.http.get(this.global.api + 'api.php?action=getbudget2&projectid='+projectid,
-         option)
+      this.http.get(this.global.api + 'api.php?action=getbudget2&projectid='+projectid)
             .map(response => response.json())
             .subscribe(res => {
               this.budgetlist2= res;
@@ -703,8 +699,7 @@ let x='';
       header.append("Accept", "application/json");
       header.append("Content-Type", "application/x-www-form-urlencoded");    
       let option = new RequestOptions({ headers: header });
-      this.http.get(this.global.api + 'api.php?action=projectdeletecoopagency&id='+id,
-         option)
+      this.http.get(this.global.api + 'api.php?action=projectdeletecoopagency&id='+id)
             .map(response => response.json())
             .subscribe(res => {
              this.getcooperating(this.projectid); 
@@ -718,8 +713,7 @@ let x='';
       header.append("Accept", "application/json");
       header.append("Content-Type", "application/x-www-form-urlencoded");    
       let option = new RequestOptions({ headers: header });
-      this.http.get(this.global.api + 'api.php?action=removebudget&bid='+id,
-         option)
+      this.http.get(this.global.api + 'api.php?action=removebudget&bid='+id)
             .map(response => response.json())
             .subscribe(res => {
        this.balltotal = this.balltotal - (parseInt(ps)+parseInt(moe)+parseInt(co)) ; 

@@ -28,7 +28,7 @@ attachment=null
   }
   createtable(x){
     this.grants=undefined;
-       this.http.get(this.global.api+'api.php?action=spCallForProposal_Select&id='+x,this.global.option)
+       this.http.get(this.global.api+'api.php?action=spCallForProposal_Select&id='+x)
           .map(response => response.json())
           .subscribe(res => {
             this.original=res
@@ -42,7 +42,7 @@ attachment=null
   }
   createtable2(x){
     this.attachment=undefined;
-       this.http.get(this.global.api+'api.php?action=spAttachmentType_Select&id='+x,this.global.option)
+       this.http.get(this.global.api+'api.php?action=spAttachmentType_Select&id='+x)
           .map(response => response.json())
           .subscribe(res => {
             console.log(res)

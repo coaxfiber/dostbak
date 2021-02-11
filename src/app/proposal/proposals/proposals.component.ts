@@ -58,8 +58,7 @@ export class ProposalsComponent implements OnInit {
       this.global.researchstat=''
     }
 
-    this.http.get(this.global.api + 'api.php?action=degreelevel',
-         this.global.option)
+    this.http.get(this.global.api + 'api.php?action=degreelevel')
             .map(response => response.json())
             .subscribe(res => {
               this.degreelevel= res;
@@ -117,8 +116,7 @@ export class ProposalsComponent implements OnInit {
         header.append("Accept", "application/json");
         header.append("Content-Type", "application/x-www-form-urlencoded");    
         let option = new RequestOptions({ headers: header });
-        this.http.get(this.global.api + 'api.php?action=spResearchDocument_Select&rid='+id+"&type=0",
-           option)
+        this.http.get(this.global.api + 'api.php?action=spResearchDocument_Select&rid='+id+"&type=0")
               .map(response => response.json())
               .subscribe(res => {
                 if(res[0].id!=null&&res[0].value!='undefined'){
@@ -154,7 +152,7 @@ export class ProposalsComponent implements OnInit {
     if (this.global.useraccess!=undefined) {
       this.array=undefined
         
-        this.http.get(this.global.api+'api.php?action=proposallists&user='+this.global.userid,this.global.option)
+        this.http.get(this.global.api+'api.php?action=proposallists&user='+this.global.userid)
           .map(response => response.json())
           .subscribe(res => {
             this.global.swalClose();

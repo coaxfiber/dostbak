@@ -46,8 +46,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: Http,public global: GlobalService) {
      this.global.activepage='search'
-  	this.http.get(this.global.api + 'api.php?action=company_List',
-         this.global.option)
+  	this.http.get(this.global.api + 'api.php?action=company_List')
             .map(response => response.json())
             .subscribe(res => {
               this.company= res;
@@ -82,16 +81,14 @@ export class HomeComponent implements OnInit {
     companyresearch(x)
     {
       if (x=='get') {
-       this.http.get(this.global.api + 'api.php?action=spRPTResearch_CountByCompany',
-         this.global.option)
+       this.http.get(this.global.api + 'api.php?action=spRPTResearch_CountByCompany')
             .map(response => response.json())
             .subscribe(res => {
               this.companyresearchcount = this.getresearchcount(res)
               //console.log(res)
         });
       }else
-     this.http.get(this.global.api + 'api.php?action=spRPTResearch_CountByCompany2&id='+x,
-         this.global.option)
+     this.http.get(this.global.api + 'api.php?action=spRPTResearch_CountByCompany2&id='+x)
             .map(response => response.json())
             .subscribe(res => {
               this.companyresearchcount= 0

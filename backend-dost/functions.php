@@ -1,4 +1,16 @@
-<?php 
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+header('Content-Type: application/json');
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+date_default_timezone_set("Asia/Manila");
+
 
 function spProposal_Proponent_Select($id)
 {
