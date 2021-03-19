@@ -3,7 +3,7 @@
 </div>
   <h4>{{labeltitle}}</h4>
   <hr>
-<div style="max-height: calc(100vh - 200px);overflow-y: scroll;" id="new-proposal" >
+<div style="max-height: calc(100vh - 200px);width:700px;overflow-y: scroll;" id="new-proposal" >
 	
 	<mat-horizontal-stepper   labelPostion="botton" [linear]="true" #stepper>
        
@@ -226,86 +226,6 @@
         <div id="1b" *ngIf="proj===true">
               <h4>Program/Project Title: {{title}}</h4>
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title><b>Proponent</b>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-            <table style="width: 100%">
-              <tr>
-                <td style="width: 80%"> 
-                  <table style="width: 100%">
-                    <tr>
-                      <td style="width: 29%">
-                  <mat-form-field  class="npinput2" style="width: 100%">
-                    <input matInput placeholder="First Name"  [(ngModel)]="fname" >
-                  </mat-form-field>
-                      </td>
-                      <td style="width: 18%">
-                  <mat-form-field  class="npinput2" style="width: 100%">
-                    <input matInput placeholder="Middle Name"  [(ngModel)]="mname" >
-                  </mat-form-field>
-                      </td>
-                      <td style="width: 18%">
-                  <mat-form-field  class="npinput2" style="width: 100%">
-                    <input matInput placeholder="Last Name"  [(ngModel)]="lname" >
-                  </mat-form-field>
-                      </td>
-                      <td style="width: 15%">
-                  <mat-form-field  class="npinput2" style="width: 100%">
-                    <input matInput placeholder="Suffix"  [(ngModel)]="suffix" >
-                  </mat-form-field>
-                      </td>
-                      <td>
-                  
-                  <mat-form-field  class="npinput2" style="width: 100%">
-                    <mat-select  [(ngModel)]="proponenttypeinput">
-                      <mat-option value="2" >
-                        Member
-                      </mat-option>
-                      <mat-option value="1" >
-                        Project Leader
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </td>
-                    </tr>
-                  </table>
-                </td>
-                
-                <td>
-                  <button mat-raised-button (click)="insertproponent()" class="buttonblue" >
-                    <mat-icon style="font-size:20px">add</mat-icon> Add Proponent</button>
-                </td>
-              </tr>
-            </table>
-
-
-          <div  *ngIf="proponents!=undefined" >
-            <div  *ngIf="proponents[0].id!=null" >
-              <table style="width: 100%" *ngFor="let list of proponents">
-                <tr>
-                  <td style="width: 80%">
-                    <table style="width: 100%">
-                    <tr>
-                      <td style="width: 80%">
-                        {{list.fname}}  {{list.mname}} {{list.lname}} {{list.sname}}
-                      </td>
-                      <td>
-                        {{list.type}}
-                      </td>
-                    </tr>
-                  </table>
-                  </td>
-                <td style="width: 20%">
-                    <button  mat-button (click)="swalConfirm(list.id,'Remove this Proponent?',5,null,null,null)"  class="buttonred" >
-                        <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
-                </td>
-                </tr>
-              </table>
-          </div>
-          </div>
-    </mat-expansion-panel>
           <div style="height: 10px;"></div>
   <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -391,139 +311,7 @@
           </mat-expansion-panel>
 
 
-
-            <div style="height: 10px;"></div>
-                <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title><b>Priority Agenda&nbsp; </b><button class="buttonblue" style="border-radius: 10px;border: none;" (click)="pagenda()">?</button>
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                  <div style="overflow: hidden;">
-                  <mat-card style="background-color: #f4f4f4;width:calc(100% - 70px);float: left;">
-                    <mat-checkbox (change)="checkbox($event,3,1)">
-                      <p style="margin: 0px;white-space:normal;">Biotechnology</p>
-                    </mat-checkbox><br>
-                    <mat-checkbox (change)="checkbox($event,3,2)">
-                      <p style="margin: 0px;white-space:normal;">ICT</p>
-                    </mat-checkbox><br>
-                    <mat-checkbox (change)="checkbox($event,3,3)">
-                      <p style="margin: 0px;white-space:normal;">Alternative Energy</p>
-                    </mat-checkbox><br>
-                    <mat-checkbox (change)="checkbox($event,3,4)">
-                      <p style="margin: 0px;white-space:normal;">Environment</p>
-                    </mat-checkbox><br>
-                    <mat-checkbox (change)="checkbox($event,3,5)">
-                      <p style="margin: 0px;white-space:normal;">Health Products</p>
-                    </mat-checkbox><br>
-                    <mat-checkbox (change)="checkbox($event,3,6)">
-                      <p style="margin: 0px;white-space:normal;">Basic Research</p>
-                    </mat-checkbox><br>
-                    <mat-checkbox (change)="checkbox($event,3,7)">
-                      <p style="margin: 0px;white-space:normal;">others</p>
-                    </mat-checkbox><br>
-
-                    </mat-card>
-                </div>
-              </mat-expansion-panel>
-
-            <div style="height: 10px;"></div>
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title><b>Sector Commodity  &nbsp;</b><button class="buttonblue" style="border-radius: 10px;border: none;" (click)="sectorc()">?</button>
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                    <div style="overflow: hidden;">
-                    <mat-card style="background-color: #f4f4f4;width:calc(100% - 70px);float: left;">
-                      <mat-checkbox (change)="checkbox($event,4,1)">
-                        <p style="margin: 0px;white-space:normal;">Crops</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,2)">
-                        <p style="margin: 0px;white-space:normal;">Livestock</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,3)">
-                        <p style="margin: 0px;white-space:normal;">Forestry</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,4)">
-                        <p style="margin: 0px;white-space:normal;">Agricultural Resources</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,5)">
-                        <p style="margin: 0px;white-space:normal;">Socio Economics</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,6)">
-                        <p style="margin: 0px;white-space:normal;">Fisheries or Aquatic resources</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,7)">
-                        <p style="margin: 0px;white-space:normal;">Biotechnical</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,8)">
-                        <p style="margin: 0px;white-space:normal;">Pharmaceutical</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,9)">
-                        <p style="margin: 0px;white-space:normal;">Health Services</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,10)">
-                        <p style="margin: 0px;white-space:normal;">Information Technology</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,11)">
-                        <p style="margin: 0px;white-space:normal;">Material Science</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,12)">
-                        <p style="margin: 0px;white-space:normal;">Photonics or Space Technology</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,13)">
-                        <p style="margin: 0px;white-space:normal;">Industry</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,14)">
-                        <p style="margin: 0px;white-space:normal;">Energy</p>
-                      </mat-checkbox><br>
-                      <mat-checkbox (change)="checkbox($event,4,15)">
-                        <p style="margin: 0px;white-space:normal;">Utilities or Infrastructure</p>
-                      </mat-checkbox><br>
-
-                      </mat-card>
-                  </div>
-                </mat-expansion-panel>
-
-            <div style="height: 10px;"></div>
-
-              <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title><b>Discipline &nbsp;</b><button class="buttonblue" style="border-radius: 10px;border: none;" (click)="disciplineinfo()">?</button>
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                <div style="overflow: hidden;">
-                <mat-card style="background-color: #f4f4f4;width:calc(100% - 70px);float: left;">
-                  <mat-checkbox (change)="checkbox($event,5,1)">
-                    <p style="margin: 0px;white-space:normal;">Plant Breeding</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,2)">
-                    <p style="margin: 0px;white-space:normal;">Taxonomy</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,3)">
-                    <p style="margin: 0px;white-space:normal;">Communicable and Degenerative Diseases</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,4)">
-                    <p style="margin: 0px;white-space:normal;">Drug Formulation</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,5)">
-                    <p style="margin: 0px;white-space:normal;">Maternal and Child Health</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,6)">
-                    <p style="margin: 0px;white-space:normal;">Process</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,7)">
-                    <p style="margin: 0px;white-space:normal;">Food and Feed</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,8)">
-                    <p style="margin: 0px;white-space:normal;">Metals</p>
-                  </mat-checkbox><br>
-                  <mat-checkbox (change)="checkbox($event,5,9)">
-                    <p style="margin: 0px;white-space:normal;">Engineering</p>
-                  </mat-checkbox><br>
-                  </mat-card>
-              </div>
-            </mat-expansion-panel>
-                          
+                        
             <div style="height: 20px;"></div>
                <p style="margin: 0"><b>Significance </b><small><button class="buttonblue" style="border-radius: 10px;border: none;" (click)="significanceinfo()">?</button></small></p>
               <mat-form-field  class="npinput" style="width: 100%"> 
@@ -802,17 +590,139 @@
 <div>  <!-- ETO ANG MAGPAPAKITA -->
    <h4>Proposal Title: <b>{{title}}</b></h4>
 
-   <table>
+<!--    <table>
      <tr>
        <td style="width: 115px">
         Project Leader: 
                       
        </td>
        <td>
-        <b>{{global.user.fname | uppercase}} {{global.user.mname | uppercase}} {{global.user.surname | uppercase}} {{global.user.ext | uppercase}}</b>&nbsp; <!-- <button>Add Member</button> -->
+        <b>{{global.user.fname | uppercase}} {{global.user.mname | uppercase}} {{global.user.surname | uppercase}} {{global.user.ext | uppercase}}</b>&nbsp;
        </td>
      </tr>
-   </table>
+   </table> -->
+   
+  <mat-expansion-panel [expanded]='true'>
+    <mat-expansion-panel-header>
+      <mat-panel-title><b>Proponent</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+            <table style="width: 100%">
+              <tr>
+                <td style="width: 80%"> 
+                  <table style="width: 100%">
+                    <tr>
+                      <td style="width: 29%">
+                  <mat-form-field  class="npinput2" style="width: 100%">
+                    <input matInput placeholder="First Name"  [(ngModel)]="fname" >
+                  </mat-form-field>
+                      </td>
+                      <td style="width: 18%">
+                  <mat-form-field  class="npinput2" style="width: 100%">
+                    <input matInput placeholder="Middle Name"  [(ngModel)]="mname" >
+                  </mat-form-field>
+                      </td>
+                      <td style="width: 18%">
+                  <mat-form-field  class="npinput2" style="width: 100%">
+                    <input matInput placeholder="Last Name"  [(ngModel)]="lname" >
+                  </mat-form-field>
+                      </td>
+                      <td style="width: 15%">
+                  <mat-form-field  class="npinput2" style="width: 100%">
+                    <input matInput placeholder="Suffix"  [(ngModel)]="suffix" >
+                  </mat-form-field>
+                      </td>
+                      <td>
+                  
+                  <!-- <mat-form-field  class="npinput2" style="width: 100%">
+                    <mat-select  [(ngModel)]="proponenttypeinput">
+                      <mat-option value="2" >
+                        Member
+                      </mat-option>
+                      <mat-option value="1" >
+                        Project Leader
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                </td>
+                    </tr>
+                  </table>
+                </td>
+                
+                <td>
+                  <button mat-raised-button (click)="insertproponent('2')" class="buttonblue" >
+                    <mat-icon style="font-size:20px">add</mat-icon> Add Proponent</button>
+                </td>
+              </tr>
+            </table>
+
+
+          <div  *ngIf="proponents!=undefined" >
+            <div  *ngIf="proponents[0].id!=null" >
+              <table style="width: 100%" *ngFor="let list of proponents; let i = index ">
+                <tr>
+                  <td style="width: 80%">
+                    <table style="width: 100%">
+                    <tr>
+                      <td style="width: 80%">
+                        {{list.fname | titlecase}}  {{list.mname | titlecase}} {{list.lname | titlecase}} {{list.sname | titlecase}}
+                      </td>
+                      <td>
+                        {{list.type}}
+                      </td>
+                    </tr>
+                  </table>
+                  </td>
+                <td style="width: 20%">
+                    <button  mat-button (click)="swalConfirm(list.id,'Remove this Proponent?',5,null,null,null)"  class="buttonred" *ngIf="i!=0">
+                    <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                </td>
+                </tr>
+              </table>
+          </div>
+          </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]='true'>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <b>File Upload</b>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                   <p><b>Main Document</b> <small>(1A AND 1B CAPSULE R&D PROPOSAL Excel file.)</small></p>
+            <form [formGroup]="form">
+              <div class="form-group">
+                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput class="inputfile" />
+                <label for="avatar">{{maindoclabel}}</label>
+                <button mat-button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+              </div>
+            </form>
+
+
+
+            <p><b>Supporting Documents</b> <small>(PDF File, Optional)</small></p>
+            <form [formGroup]="form">
+              <div class="form-group">
+                <input type="file" id="avatar2" (change)="onFileChange2($event)" #fileInput2 class="inputfile" />
+                <label for="avatar2">{{supdoclabel}}</label>
+                <button mat-button type="button" class="btn btn-sm btn-default" (click)="clearFile2()">clear file</button>&nbsp;&nbsp;
+                <button mat-button class="buttonblue" (click)='insertdocument()' >Add</button>
+              </div>
+              </form>
+              <div style="height: 10px"></div>
+          <div  *ngIf="documentarray!=undefined" >
+            <div  *ngIf="documentarray[0].id!=null" >
+              <table style="width: 100%">
+                <tr  *ngFor="let list of documentarray">
+                  <td style="width: 70%"><b>{{list.name}}</b></td>
+                <td style="width: 30%">
+                    <button  mat-button (click)="swalConfirm(list.id,'Remove Supporting Document?',5,null,null,null)"  class="buttonred" >
+                        <mat-icon style="font-size:20px">remove</mat-icon> Remove</button>
+                </td>
+                </tr>
+              </table>
+          </div>
+          </div>
+              </mat-expansion-panel>
 </div>
 <br><br><br>
         <div>

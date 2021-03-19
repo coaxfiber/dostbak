@@ -780,6 +780,7 @@ insertkeyword(){
 	          .subscribe(res => {  
 	             this.global.swalClose();
 	             this.researchid = res.id;
+               console.log(res)
                      let urlSearchParams2 = new URLSearchParams();
                         urlSearchParams2.append("rid",this.researchid.toString());
                          urlSearchParams2.append('remarks', null);

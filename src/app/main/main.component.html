@@ -52,7 +52,7 @@
           <br>
         </div>
 
-      <div *ngIf='proposal===1'>
+      <div *ngIf='research===1&&this.global.useraccess!=undefined'>
         <mat-chip-list style>
           <mat-chip class="buttonblue"  (click)="openDialogUpdate2()" style="margin-left: 50px;margin-bottom: 10px;margin-top:10px;background-color: #294a70;color:white;padding-right: 10px;width: 180px;">&nbsp;&nbsp; <i class="material-icons iconsize">add</i>&nbsp; Submit Research</mat-chip>
         </mat-chip-list>

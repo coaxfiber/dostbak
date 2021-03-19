@@ -21,6 +21,7 @@ const swal = Swal;
 export class NewProposalComponent implements OnInit {
 
   form: FormGroup;
+  form2: FormGroup;
   loading: boolean = false;
   @ViewChild('fileInput',{static:false}) fileInput: ElementRef;
   yeararr=[];
@@ -168,33 +169,72 @@ proponenttypeinput='2'
       name: ['', Validators.required],
       avatar: null
     });
+    this.form2 = this.fb.group({
+      name: ['', Validators.required],
+      avatar: null
+    });
   }
 
-onFileChange(event) {
-  let reader = new FileReader();
-    if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.form.get('avatar').setValue({
-          filename: file.name,
-          filetype: file.type,
-          value: reader.result.toString().split(',')[1]
-        })
-        if (this.form.value.avatar!=null) {
-            this.majoralabel = file.name;
-          }else{
-            this.majoralabel = "Choose a file";
-          }
-      };
-    }
-  }
+// onFileChange(event) {
+//   let reader = new FileReader();
+//     if(event.target.files && event.target.files.length > 0) {
+//       let file = event.target.files[0];
+//       reader.readAsDataURL(file);
+//       reader.onload = () => {
+//         this.form.get('avatar').setValue({
+//           filename: file.name,
+//           filetype: file.type,
+//           value: reader.result.toString().split(',')[1]
+//         })
+//         if (this.form.value.avatar!=null) {
+//             this.majoralabel = file.name;
+//           }else{
+//             this.majoralabel = "Choose a file";
+//           }
+//       };
+//     }
+//   }
 
 
   clearFile() {
     this.majoralabel = "Choose a file...";
     this.form.get('avatar').setValue(null);
     this.fileInput.nativeElement.value = '';
+  }
+
+insertdocument(){
+    
+    let x='';
+    if (this.supdoclabel=='Choose a file...') {
+      x=x+"*Supporting document is required\n";
+    }
+
+    if (x=='') {
+     let urlSearchParams = new URLSearchParams();
+                     urlSearchParams.append("rid",this.proposalid.toString());
+                     urlSearchParams.append('name', this.form2.value.avatar.filename );
+                     urlSearchParams.append('doc', this.form2.value.avatar.value);
+                     urlSearchParams.append('type', '1' );  
+                     urlSearchParams.append('status', '0' );  
+                  let body = urlSearchParams.toString()
+      var header = new Headers();
+                  header.append("Accept", "application/json");
+                  header.append("Content-Type", "application/x-www-form-urlencoded");    
+                  let option = new RequestOptions({ headers: header });
+      this.global.swalLoading('');
+
+       this.http.post(this.global.api + 'api.php?action=spResearchDocument_Insert',
+       body,option)
+          .map(response => response.json())
+          .subscribe(res => {
+             this.getdocument(this.proposalid);  
+                this.global.swalClose();
+          },error => {
+            console.log(Error); 
+                this.global.swalAlertError();
+           } );
+        }else
+          alert(x)
   }
 
   checkbox(event,type,text){
@@ -442,12 +482,16 @@ onFileChange(event) {
                                      this.http.post(this.global.api + 'api.php?action=spProposal_Proponent_Insert',body, option)
                                       .map(response => response.json())
                                       .subscribe(res => {
-                                            console.log(res)
                                          this.global.swalClose();  
                                          this.getprojectlist(this.programid) 
                                          this.http.get(this.global.api + 'api.php?action=spProposal_Proponent_Select&id='+this.proposalid, option)
                                           .map(response => response.json())
                                           .subscribe(res => {
+                                            this.lname=this.global.user.surname
+                                            this.fname=this.global.user.fname
+                                            this.mname=this.global.user.mname
+                                            this.suffix=this.global.user.ext
+                                            this.insertproponent('1')
                                             stepper.next();
                                         },error => {
                                           console.log(Error); 
@@ -562,7 +606,7 @@ let x='';
         });
   }
 
-  insertproponent(){
+  insertproponent(g){
 
 let x='';
     if (this.fname==undefined||this.fname=="") {
@@ -579,7 +623,7 @@ let x='';
                     urlSearchParams.append("mname",this.mname.toString());
                     urlSearchParams.append("sname",this.suffix.toString());
                     urlSearchParams.append("percent","0");
-                     urlSearchParams.append('type', this.proponenttypeinput.toString() );
+                     urlSearchParams.append('type', g );
                   let body = urlSearchParams.toString()
       var header = new Headers();
                   header.append("Accept", "application/json");
@@ -949,39 +993,13 @@ let x='';
         }
      }else{
        let x='';
-        if (this.rndstation==''||this.rndstation==null) {
-          x=x+"*Research & Development Station is required\n";
-        }if (this.clss == 0) {
-          x=x+"*Classification is required\n";
-        }if (this.projectpa.length < 1) {
-          x=x+"*Please check at least 1 Priority Agenda is required\n";
-        }if (this.projectsector.length < 1) {
-          x=x+"*Please check at least 1 Sector Commodity is required\n";
-        }if (this.projectdiscipline.length < 1) {
-          x=x+"*Please check at least 1 Discipline is required\n";
-        }if (this.significance==''||this.significance==null) {
-          x=x+"*Significance is required\n";
-        }if (this.objectives==''||this.objectives==null) {
-          x=x+"*Objectives is required\n";
-        }if (this.methodology==''||this.methodology==null) {
-          x=x+"*Methodology is required\n";
-        }if (this.form.value.avatar==null) {
-          x=x+"*Major Activities is required\n";
+       if (this.form.value.avatar==null) {
+          x=x+"*DOST FORMS 1A AND 1B CAPSULE R&D PROPOSAL is required\n";
         }else{
           if (this.form.value.avatar.filetype!='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'&&'application/vnd.ms-excel'!=this.form.value.avatar.filetype)
           x=x+"*Major Activities attachment must be in xlsx or xls format(excel).\n";
         }
-         if (this.targetb==''||this.targetb==null) {
-          x=x+"*Target Beneficiaries is required\n";
-        }if (this.expectedo==''||this.expectedo==null) {
-          x=x+"*Expected Output is required\n";
-        }if ((this.month1==''||this.month1==undefined)&&(this.year1==''||this.year1==undefined)) {
-          x=x+"*Planned Start date is required\n";
-        }if ((this.month2==''||this.month2==undefined)&&(this.year2==''||this.year2==undefined)) {
-          x=x+"*Planned Completion date is required\n";
-        }if (!(this.budgetlist2!=undefined&&this.budgetlist2[0].id!=null)) {
-          x=x+"*At least 1 Estimated Budget is required\n";
-        }
+        
         if (x=='') {
           let start = this.year1.toString()+'-'+this.month1.toString()+'-'+'15';
           let completion = this.year2.toString()+'-'+this.month2.toString()+'-'+'15';
@@ -1123,5 +1141,51 @@ let x='';
       this.month2 = text
       this.year2 =   date.getFullYear().toString()
     }
+  }
+
+maindoclabel='Choose a file...'
+supdoclabel="Choose a file..."
+onFileChange(event) {
+
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form.get('avatar').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.toString().split(',')[1]
+        })
+        if (this.form.value.avatar!=null) {
+            this.maindoclabel = file.name;
+          }else{
+            this.maindoclabel = "Choose a file";
+          }
+      };
+    }
+
+  }
+
+onFileChange2(event) {
+
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form2.get('avatar').setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.toString().split(',')[1]
+        })
+        if (this.form2.value.avatar!=null) {
+            this.supdoclabel = file.name;
+          }else{
+            this.supdoclabel = "Choose a file";
+          }
+      };
+    }
+
   }
 }

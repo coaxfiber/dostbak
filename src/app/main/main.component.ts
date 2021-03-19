@@ -47,13 +47,16 @@ more2="More"
                       .map(response => response.json())
                       .subscribe(res => {
                         this.res=res[0];
+                        //onsole.log(res)
                       this.http.get(this.global.api+'api.php?action=spUserAccessLevel_By_Username&email='+this.global.requestemail())
                          .map(response => response.json())
                         .subscribe(res => {
                           if (res.length==0) {
                             this.router.navigate(['../login']);
                           }
+                          //console.log(res)
                           this.global.useraccess=this.res;
+                          //console.log(this.global.useraccess)
                           this.assign(res);
                               //console.log(res)
                               this.http.get(this.global.api+'api.php?action=company_List')
@@ -146,7 +149,7 @@ more2="More"
 
   openDialogUpdate(): void {
     const dialogRef = this.dialog.open(NewProposalComponent, {
-      width: '99%',data:{company:this.inputcompanyid}, disableClose: true });
+      width: '750px',data:{company:this.inputcompanyid}, disableClose: true });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result==5) {
@@ -171,10 +174,10 @@ more2="More"
 
   openDialogUpdate2(): void {
     const dialogRef = this.dialog.open(NewResearchComponent, {
-      width: '99%',data:{programid:'none'}, disableClose: true });
+      width: '750px',data:{programid:'none'}, disableClose: true });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
+      //console.log(result)
       if (result==2) {
         this.global.researchstat = "Draft"
         this.router.navigate(['../main',{outlets:{div:'Research'}}]);
