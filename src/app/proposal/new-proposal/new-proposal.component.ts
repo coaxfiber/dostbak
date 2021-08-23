@@ -227,7 +227,7 @@ insertdocument(){
        body,option)
           .map(response => response.json())
           .subscribe(res => {
-             this.getdocument(this.proposalid);  
+             //this.getdocument(this.proposalid);  
                 this.global.swalClose();
           },error => {
             console.log(Error); 
@@ -955,6 +955,7 @@ let x='';
   }
 
  proposaldone(type){
+   console.log('reasda')
    if (this.prog==true) {
       let x=''
         if (!(this.projectlists!=undefined&&this.projectlists[0].id!=null)) {
