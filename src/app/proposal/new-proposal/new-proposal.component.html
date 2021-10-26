@@ -704,12 +704,12 @@
               <div class="form-group">
                 <input type="file" id="avatar2" (change)="onFileChange2($event)" #fileInput2 class="inputfile" />
                 <label for="avatar2">{{supdoclabel}}</label>
-                <button mat-button type="button" class="btn btn-sm btn-default" (click)="clearFile2()">clear file</button>&nbsp;&nbsp;
-                <button mat-button class="buttonblue" (click)='insertdocument()' >Add</button>
+                <!-- <button mat-button type="button" class="btn btn-sm btn-default" (click)="clearFile2()">clear file</button>&nbsp;&nbsp;
+                <button mat-button class="buttonblue" (click)='insertdocument()' >Add</button> -->
               </div>
               </form>
               <div style="height: 10px"></div>
-          <div  *ngIf="documentarray!=undefined" >
+          <!-- <div  *ngIf="documentarray!=undefined" >
             <div  *ngIf="documentarray[0].id!=null" >
               <table style="width: 100%">
                 <tr  *ngFor="let list of documentarray">
@@ -721,7 +721,7 @@
                 </tr>
               </table>
           </div>
-          </div>
+          </div> -->
               </mat-expansion-panel>
 </div>
 <br><br><br>
