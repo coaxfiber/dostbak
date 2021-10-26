@@ -19,7 +19,8 @@
                       Cookies must be enabled in your browser <button style="background-color: #3f51b5;color: white;border: none;border-radius:45%;height: 19px" (click)="Cookies()" >?</button>
 
                     </p>
-                    <button mat-raised-button color="primary" style="color: white;width: 90%" (click)="socialSignIn()" [disabled]="!disabled">
+                    <input type="text" name="" [(ngModel)]="username"><br><br>
+                    <button mat-raised-button color="primary" style="color: white;width: 90%" (click)="login2()" [disabled]="!disabled">
                       <span class="material-icons">
                         account_box
                       </span>

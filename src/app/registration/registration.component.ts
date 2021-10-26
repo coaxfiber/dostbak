@@ -115,7 +115,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   	if (this.global.email == '') {
   		this.global.removeSession()
-  		this.router.navigate(['login']);
+  		//this.router.navigate(['login']);
   	}else{
   		this.email = this.global.email
   	}

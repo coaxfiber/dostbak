@@ -91,7 +91,7 @@ export class Research0Component implements OnInit {
             this.http.get(this.global.api+'api.php?action=researchdelete&researchid='+id)
               .map(response => response.text())
               .subscribe(res => {
-                this.createTable('Trash')
+                this.createTable('6')
                 this.global.swalSuccess("Research has been Permanently Deleted!")
               },Error=>{
                 //console.log(Error);
@@ -171,6 +171,7 @@ export class Research0Component implements OnInit {
             .subscribe(res => {
             this.array = res
             this.temparray = res
+            console.log(type)
         },error=>{
             console.log(error);
             this.global.swalClose();

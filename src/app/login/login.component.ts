@@ -47,7 +47,41 @@ export class LoginComponent implements OnInit {
       }
   }
 
-  login2(){this.router.navigate(['../main']);}
+  login2(){
+    let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append("username",this.username);
+      urlSearchParams.append('password', this.password);
+      urlSearchParams.append('appname', 'CVRDKMS');
+      urlSearchParams.append('appsecret', 'admin');
+      let body = urlSearchParams.toString()
+      var header = new Headers();
+        header.append("Accept", "application/json");
+        header.append("Content-Type", "application/x-www-form-urlencoded");    
+        let option = new RequestOptions({ headers: header });
+                      
+    this.http.post(this.global.api + 'api.php?action=login',
+       body,option)
+          .map(response => response.json())
+          .subscribe(res => {
+            swal.close()
+             if (res.id==null) {
+                 this.global.removeSession()
+                 this.global.email = this.username
+                 this.router.navigate(['registration']);
+             }else{               if (res.confirmed == '0') {
+                 this.lockaccount(res);
+               }else 
+               {
+                 this.global.setemail(res.email,res.id);
+                 this.global.setSession(this.username,this.password,'CVRDKMS','admin')
+                 this.router.navigate(['main']);
+               }
+             }
+          },error => {
+            console.log(Error); 
+                this.global.swalAlertError();
+           } );
+     }
 
   login(){
     if (this.username == undefined || this.username ==  ''  || this.password == undefined  || this.password ==  '') {
@@ -66,43 +100,43 @@ export class LoginComponent implements OnInit {
       swal({
        title: 'Logging In...',allowOutsideClick: false,
       });
-      swal.showLoading();
-                    let urlSearchParams = new URLSearchParams();
-                    urlSearchParams.append("username",this.username);
-                    urlSearchParams.append('password', this.password);
-                    urlSearchParams.append('appname', 'CVRDKMS');
-                    urlSearchParams.append('appsecret', 'admin');
+            swal.showLoading();
+                let urlSearchParams = new URLSearchParams();
+                urlSearchParams.append("username",this.username);
+                urlSearchParams.append('password', this.password);
+                urlSearchParams.append('appname', 'CVRDKMS');
+                urlSearchParams.append('appsecret', 'admin');
                   let body = urlSearchParams.toString()
-      var header = new Headers();
+                  var header = new Headers();
                   header.append("Accept", "application/json");
                   header.append("Content-Type", "application/x-www-form-urlencoded");    
                   let option = new RequestOptions({ headers: header });
                   
-       this.http.post(this.global.api + 'api.php?action=login',
-       body,option)
-          .map(response => response.json())
-          .subscribe(res => {
-             swal.close();
-               console.log(res)
-             if (res.id==null) {
-               swal(
-                  '',
-                   'Incorrect Username or Password',
-                   'info'
-                  )
-             }else{
-               if (res.confirmed == '0') {
-                 this.lockaccount(res);
-               }else {
-                 this.global.setemail(res.email,res.id);
-                 this.global.setSession(this.username,this.password,'CVRDKMS','admin')
-                 this.router.navigate(['main']);
-               }
-             }
-          },error => {
-            console.log(Error); 
-                this.global.swalAlertError();
-           } );
+             this.http.post(this.global.api + 'api.php?action=login',
+             body,option)
+                .map(response => response.json())
+                .subscribe(res => {
+                   swal.close();
+                     console.log(res)
+                   if (res.id==null) {
+                     swal(
+                        '',
+                         'Incorrect Username or Password',
+                         'info'
+                        )
+                   }else{
+                     if (res.confirmed == '0') {
+                       this.lockaccount(res);
+                     }else {
+                       this.global.setemail(res.email,res.id);
+                       this.global.setSession(this.username,this.password,'CVRDKMS','admin')
+                       this.router.navigate(['main']);
+                     }
+                   }
+                },error => {
+                  console.log(Error); 
+                      this.global.swalAlertError();
+                 } );
     }
   }
   ngOnInit() {
@@ -161,11 +195,11 @@ socialSignIn() {
           });
           swal.showLoading();
       
-            let urlSearchParams = new URLSearchParams();
-            urlSearchParams.append("username",this.username);
-            urlSearchParams.append('password', this.password);
-            urlSearchParams.append('appname', 'CVRDKMS');
-            urlSearchParams.append('appsecret', 'admin');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append("username",this.username);
+          urlSearchParams.append('password', this.password);
+          urlSearchParams.append('appname', 'CVRDKMS');
+          urlSearchParams.append('appsecret', 'admin');
           let body = urlSearchParams.toString()
           var header = new Headers();
                       header.append("Accept", "application/json");

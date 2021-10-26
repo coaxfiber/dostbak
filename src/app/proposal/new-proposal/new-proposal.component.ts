@@ -69,7 +69,7 @@ export class NewProposalComponent implements OnInit {
   projectid=''
   calists
 
-  rndstation
+  rndstation=''
   scommodity
   descipline
 
@@ -78,12 +78,12 @@ export class NewProposalComponent implements OnInit {
  projectpa = [];
  projectsector = [];
  projectdiscipline = [];
- significance
- objectives
- methodology
- majora
+ significance=''
+ objectives=''
+ methodology=''
+ majora=''
  expectedo=''
-   targetb
+   targetb=''
   year1=''
   year2=''
   month1=''
@@ -997,8 +997,8 @@ let x='';
        if (this.form.value.avatar==null) {
           x=x+"*DOST FORMS 1A AND 1B CAPSULE R&D PROPOSAL is required\n";
         }else{
-          if (this.form.value.avatar.filetype!='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'&&'application/vnd.ms-excel'!=this.form.value.avatar.filetype)
-          x=x+"*Major Activities attachment must be in xlsx or xls format(excel).\n";
+          //if (this.form.value.avatar.filetype!='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'&&'application/vnd.ms-excel'!=this.form.value.avatar.filetype)
+         // x=x+"*Major Activities attachment must be in xlsx or xls format(excel).\n";
         }
         
         if (x=='') {

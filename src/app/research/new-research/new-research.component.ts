@@ -917,16 +917,20 @@ insertkeyword(){
                            this.http.post(this.global.api + 'api.php?action=spResearchResearchStatus_Insert',body2,option2)
                                 .map(response => response.text())
                                 .subscribe(res => {
+                                    this.router.navigate(['../main',{outlets:{div:'home'}}]);
+                                    
+                                     setTimeout(() => {
+                                      if (type==0) {
+                                                this.router.navigate(['../main',{outlets:{div:'Research'}}]);
+                                        this.dialogRef.close(2);
+                                        // code...
+                                      }else{
+                                                this.router.navigate(['../main',{outlets:{div:'Research'}}]);
+                                        this.dialogRef.close(3);
+                                      }
+                                      }, 1500);
                                 });
                       }  
-                         setTimeout(() => {
-                          if (type==0) {
-                            this.dialogRef.close(2);
-                            // code...
-                          }else{
-                            this.dialogRef.close(3);
-                          }
-                          }, 1500);
       }     
     }else
       alert(x)
