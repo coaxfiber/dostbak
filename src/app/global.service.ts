@@ -13,7 +13,8 @@ const swal = Swal;
 export class GlobalService {
 	token: any;
   //api = "http://localhost/backend-dost/";
-  api = "http://usl.edu.ph/pages/testdost/backend-dost/";
+  //api = "http://usl.edu.ph/pages/testdost/backend-dost/";
+  api = "http://cvkhub.com/backend-dost/";
 	header = new Headers();
   option:any;
 

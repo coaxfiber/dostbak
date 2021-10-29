@@ -135,7 +135,7 @@ more2="More"
           
     }
     
-       this.router.navigate(['../main',{outlets:{div:'home'}}]);
+       this.router.navigate(['../main',{outlets:{div:'proposals'}}]);
     // if (this.controlpanel==1||this.usermanagement==1)
     //    this.router.navigate(['../main',{outlets:{div:'home'}}]);
     //  else if (this.proposalapproval==1||this.researchapproval==1)
@@ -153,10 +153,10 @@ more2="More"
 
     dialogRef.afterClosed().subscribe(result => {
       if (result==5) {
-        this.router.navigate(['../main',{outlets:{div:'proposals-Draft'}}]); 
+        this.router.navigate(['../main',{outlets:{div:'proposals'}}]); 
       }
       if (result==6) {
-        this.router.navigate(['../main',{outlets:{div:'proposals-Pending'}}]); 
+        this.router.navigate(['../main',{outlets:{div:'proposals'}}]); 
       }
     });
   }  

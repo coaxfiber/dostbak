@@ -69,7 +69,17 @@ export class LoginComponent implements OnInit {
                  this.global.email = this.username
                  this.router.navigate(['registration']);
              }else{               if (res.confirmed == '0') {
-                 this.lockaccount(res);
+               //check
+                 this.global.setemail(res.email,res.id);
+                 this.global.setSession(this.username,this.password,'CVRDKMS','admin')
+                  this.http.get(this.global.api+'api.php?action=spUser_EmailConfirmationDetail_Update&id='+res.id,this.global.option)
+                  .map(response => response.json())
+                  .subscribe(res => {
+                     this.router.navigate(['main']);
+                  },Error=>{
+                    this.global.swalAlertError();
+                  });
+                  // code...
                }else 
                {
                  this.global.setemail(res.email,res.id);

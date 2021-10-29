@@ -100,7 +100,7 @@ const routes: Routes = [
         { path: 'Company-Management', component: CompanyComponent, outlet: 'div' },
         { path: 'Call-for-proposals', component: GrantManagementComponent, outlet: 'div' },
 
-        { path: 'proposals-Draft', component: ProposalsComponent, outlet: 'div' },
+        { path: 'proposals', component: ProposalsComponent, outlet: 'div' },
         { path: 'proposals-Pending', component: ProposalPendingOwnerComponent, outlet: 'div' },
         { path: 'proposals-Published', component: ProposalPublishedOwnerComponent, outlet: 'div' },
         { path: 'proposals-WithIssues', component: ProposalWithIssuesOwnerComponent, outlet: 'div' },
