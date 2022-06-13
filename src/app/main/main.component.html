@@ -34,23 +34,16 @@
   
           
 <div>
-        <div *ngIf='proposal===1'>
+        <!-- <div *ngIf='proposal===1'>
         <p style="margin: 20px 10px 0 10px"></p>
         <mat-chip-list>
           <mat-chip class="buttonblue"  (click)="openDialogUpdate()" style="margin-left: 50px;margin-bottom: 10px;margin-top:0px;background-color: #294a70;color:white;padding-right: 10px;width: 180px;">&nbsp;&nbsp;<i class="material-icons iconsize">add</i>&nbsp; Submit Proposal&nbsp; &nbsp; </mat-chip>
         </mat-chip-list>
-          
-
         <div style="margin-left: 40px;margin-right: 10px">
           <a mat-button  [routerLink]="['../main',{outlets:{div:'proposals'}}]" ><i class="material-icons iconsize">all_inbox</i> Proposals&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>
         </div>
-
-        <!-- <div style="margin-left: 40px;margin-right: 10px">
-          <a mat-button  [routerLink]="['../main',{outlets:{div:'proposals-Pending'}}]" ><i class="material-icons iconsize">all_inbox</i> Proposals&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>
-        </div> -->
-
           <br>
-        </div>
+        </div> -->
 
       <div *ngIf='research===1&&this.global.useraccess!=undefined'>
         <mat-chip-list style>
@@ -65,7 +58,7 @@
         <br>
       </div>
 
-<div *ngIf='proposalapproval===1'>
+<!-- <div *ngIf='proposalapproval===1'>
       <mat-expansion-panel  [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -78,7 +71,7 @@
           <a mat-button [routerLink]="['../main',{outlets:{div:'proposal-Management-Published'}}]" >&nbsp; &nbsp;<i class="material-icons iconsize" >list_alt</i> Approved</a>
         </div>
       </mat-expansion-panel>
-</div>
+</div> -->
       <div *ngIf='researchapproval===1'>
             <mat-expansion-panel  [expanded]="true">
               <mat-expansion-panel-header>

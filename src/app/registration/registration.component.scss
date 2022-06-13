@@ -12,7 +12,9 @@
 Login template using Angular Material
 @author Shashank Tiwari
 */
- 
+ .errorshow{
+   border: 1px solid #a64452;
+ }
 .login-container{
   margin: 0 auto;
   width: 600px;

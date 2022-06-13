@@ -15,21 +15,31 @@
                  <div class="part1" style="text-align: center;">
                   <div style="margin-top:20px;margin-bottom: 20px;padding-right: 20px">
                     <p>
-                      <b>Sign in using your account on Google.</b><br><br>
+                      <!-- <b>Sign in using your account on Google.</b><br><br> -->
                       Cookies must be enabled in your browser <button style="background-color: #3f51b5;color: white;border: none;border-radius:45%;height: 19px" (click)="Cookies()" >?</button>
 
                     </p>
-                    <input type="text" name="" [(ngModel)]="username"><br><br>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+                    </mat-form-field><br>
+                        
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
+                    </mat-form-field>
+                        
+                    <!-- <input type="text" name="" [(ngModel)]="username"><br><br> -->
                     <button mat-raised-button color="primary" style="color: white;width: 90%" (click)="login2()" [disabled]="!disabled">
                       <span class="material-icons">
                         account_box
                       </span>
-                      Google Login
+                       Login
                     </button>
                     <p style="width: 85%;margin-right: auto;margin-top: 10px;margin-left: auto;text-align: left;">
                       <mat-checkbox [(ngModel)]="disabled"> I agree to the&nbsp;</mat-checkbox><a href="javascript:void(0)" (click)="Cookies()"  style=" text-decoration: none;">Policy Acceptance and Data Privacy.</a>
                     </p>
-                    <div style="height: 20px"></div>
+                    <div style="height: 10px"></div>
+                    <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="register()" style="cursor: pointer;">Register here.</a></p>
+                    <div style="height: 10px"></div>
                   </div>
                 </div>
                 

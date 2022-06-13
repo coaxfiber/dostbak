@@ -21,8 +21,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
-	username:any="admin@gmail.com";
-	password:any="admin1";
+	username:any="";
+	password:any="";
+  
+	// username:any="admin@gmail.com";
+	// password:any="admin1";
   key = 1
   header = new Headers();
   user
@@ -52,13 +55,17 @@ export class LoginComponent implements OnInit {
       urlSearchParams.append("username",this.username);
       urlSearchParams.append('password', this.password);
       urlSearchParams.append('appname', 'CVRDKMS');
-      urlSearchParams.append('appsecret', 'admin');
+      urlSearchParams.append('appkey', 'ghvasdghfvatgrevfhabvdatgrkfahjfgeryu');
       let body = urlSearchParams.toString()
       var header = new Headers();
         header.append("Accept", "application/json");
         header.append("Content-Type", "application/x-www-form-urlencoded");    
         let option = new RequestOptions({ headers: header });
-                      
+    if(this.username == ''||this.password == '')  {
+      
+      this.global.swalAlert("Field Required","","warning")
+      return
+    }         
     this.http.post(this.global.api + 'api.php?action=login',
        body,option)
           .map(response => response.json())
@@ -67,11 +74,12 @@ export class LoginComponent implements OnInit {
              if (res.id==null) {
                  this.global.removeSession()
                  this.global.email = this.username
-                 this.router.navigate(['registration']);
+                 this.global.swalAlert("Login error","Incorrect Username or password.","error")
+                 //this.router.navigate(['registration']);
              }else{               if (res.confirmed == '0') {
                //check
                  this.global.setemail(res.email,res.id);
-                 this.global.setSession(this.username,this.password,'CVRDKMS','admin')
+                 this.global.setSession(this.username,this.password,'CVRDKMS','ghvasdghfvatgrevfhabvdatgrkfahjfgeryu')
                   this.http.get(this.global.api+'api.php?action=spUser_EmailConfirmationDetail_Update&id='+res.id,this.global.option)
                   .map(response => response.json())
                   .subscribe(res => {
@@ -83,7 +91,7 @@ export class LoginComponent implements OnInit {
                }else 
                {
                  this.global.setemail(res.email,res.id);
-                 this.global.setSession(this.username,this.password,'CVRDKMS','admin')
+                 this.global.setSession(this.username,this.password,'CVRDKMS','ghvasdghfvatgrevfhabvdatgrkfahjfgeryu')
                  this.router.navigate(['main']);
                }
              }
@@ -107,46 +115,60 @@ export class LoginComponent implements OnInit {
       } if (this.password==undefined) {
         this.password = "";
       }
+console.log(this.password)
       swal({
        title: 'Logging In...',allowOutsideClick: false,
       });
             swal.showLoading();
-                let urlSearchParams = new URLSearchParams();
-                urlSearchParams.append("username",this.username);
-                urlSearchParams.append('password', this.password);
-                urlSearchParams.append('appname', 'CVRDKMS');
-                urlSearchParams.append('appsecret', 'admin');
-                  let body = urlSearchParams.toString()
-                  var header = new Headers();
-                  header.append("Accept", "application/json");
-                  header.append("Content-Type", "application/x-www-form-urlencoded");    
-                  let option = new RequestOptions({ headers: header });
+            let urlSearchParams = new URLSearchParams();
+            urlSearchParams.append("username",this.username);
+            urlSearchParams.append('password', this.password);
+            urlSearchParams.append('appname', 'CVRDKMS');
+            urlSearchParams.append('appkey', 'ghvasdghfvatgrevfhabvdatgrkfahjfgeryu');
+            let body = urlSearchParams.toString()
+            var header = new Headers();
+              header.append("Accept", "application/json");
+              header.append("Content-Type", "application/x-www-form-urlencoded");    
+              let option = new RequestOptions({ headers: header });
+          if(this.username == ''||this.password == '')  {
+            
+            this.global.swalAlert("Field Required","","warning")
+            return
+          }         
                   
              this.http.post(this.global.api + 'api.php?action=login',
-             body,option)
-                .map(response => response.json())
-                .subscribe(res => {
-                   swal.close();
-                     console.log(res)
-                   if (res.id==null) {
-                     swal(
-                        '',
-                         'Incorrect Username or Password',
-                         'info'
-                        )
-                   }else{
-                     if (res.confirmed == '0') {
-                       this.lockaccount(res);
-                     }else {
-                       this.global.setemail(res.email,res.id);
-                       this.global.setSession(this.username,this.password,'CVRDKMS','admin')
-                       this.router.navigate(['main']);
-                     }
-                   }
-                },error => {
-                  console.log(Error); 
-                      this.global.swalAlertError();
-                 } );
+       body,option)
+          .map(response => response.json())
+          .subscribe(res => {
+            swal.close()
+             if (res.id==null) {
+                 this.global.removeSession()
+                 this.global.email = this.username
+                 this.global.swalAlert("Login error","Incorrect Username or password.","error")
+                 //this.router.navigate(['registration']);
+             }else{               if (res.confirmed == '0') {
+               //check
+                 this.global.setemail(res.email,res.id);
+                 this.global.setSession(this.username,this.password,'CVRDKMS','ghvasdghfvatgrevfhabvdatgrkfahjfgeryu')
+                  this.http.get(this.global.api+'api.php?action=spUser_EmailConfirmationDetail_Update&id='+res.id,this.global.option)
+                  .map(response => response.json())
+                  .subscribe(res => {
+                     this.router.navigate(['main']);
+                  },Error=>{
+                    this.global.swalAlertError();
+                  });
+                  // code...
+               }else 
+               {
+                 this.global.setemail(res.email,res.id);
+                 this.global.setSession(this.username,this.password,'CVRDKMS','ghvasdghfvatgrevfhabvdatgrkfahjfgeryu')
+                 this.router.navigate(['main']);
+               }
+             }
+          },error => {
+            console.log(Error); 
+                this.global.swalAlertError();
+           } );
     }
   }
   ngOnInit() {
@@ -244,5 +266,9 @@ socialSignIn() {
           }            
       }
     );
+  }
+
+  register(){
+    this.router.navigate(['registration']);
   }
 }

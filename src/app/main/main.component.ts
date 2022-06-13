@@ -56,6 +56,7 @@ more2="More"
                           }
                           //console.log(res)
                           this.global.useraccess=this.res;
+                          this.global.swalClose();
                           //console.log(this.global.useraccess)
                           this.assign(res);
                               //console.log(res)
@@ -67,7 +68,7 @@ more2="More"
                                         .map(response => response.json())
                                         .subscribe(res => {
                                           this.global.fundingagency= res;
-                                           this.global.swalClose();
+                                          
                                     });
                               });
                       });
@@ -134,8 +135,14 @@ more2="More"
           }
           
     }
+    //this.router.navigate(['../main',{outlets:{div:'proposals'}}]);
+
+    if(res.length==1&&this.proposal==1){
+      this.proposal=0
+      console.log('res')
+      this.global.swalAlert('No Role',"You are not yet assigned to any role. Please contact your administrator.","warning")
+    }
     
-       this.router.navigate(['../main',{outlets:{div:'proposals'}}]);
     // if (this.controlpanel==1||this.usermanagement==1)
     //    this.router.navigate(['../main',{outlets:{div:'home'}}]);
     //  else if (this.proposalapproval==1||this.researchapproval==1)

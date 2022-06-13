@@ -74,8 +74,14 @@ export class RegistrationComponent implements OnInit {
  goBack() {
   window.history.back();
 }
+password=''
+cpassword=''
   nexttopinfo(stepper){
-  	if (this.email!=''&&this.inputcompany!='') {
+  	if (this.email!=''&&this.inputcompany!=''
+	 	&& this.password!=''&&
+		 this.password ==  this.cpassword &&
+		 this.validateEmail(this.email)
+	  ) {
   		// if (this.validateEmail(this.email)) {
   		// 	if (this.pword.length<6) {
 		  //      swal(
@@ -104,10 +110,28 @@ export class RegistrationComponent implements OnInit {
   		stepper.next();
   	}else
   		{
+			console.log(this.email)
+			console.log(this.inputcompany)
+		   var text = ''
+		   if(this.email=='')
+			text += 'Email is Required!<br>'
+			else{
+				if(!this.validateEmail(this.email))
+				text += 'Email is invalid!<br>'
+			}
+			if(this.inputcompany=='')
+			 text += 'Company is Required!<br>'
+			 if(this.password=='')
+			  text += 'Password is Required!<br>'
+			 else{
+				 if(this.password!=this.cpassword)
+				 text += 'Confirm password does not match password.<br>'
+
+			 }
 	       swal(
-	          '',
-	           'All fields are required!',
-	           'info'
+	          'Error',
+	           text,
+	           'warning'
 	          )
   		}
   }
@@ -117,7 +141,7 @@ export class RegistrationComponent implements OnInit {
   		this.global.removeSession()
   		//this.router.navigate(['login']);
   	}else{
-  		this.email = this.global.email
+  		this.email = ''
   	}
   }
 
@@ -174,7 +198,7 @@ export class RegistrationComponent implements OnInit {
   	}
 
   	if (x=='') {
-  		stepper.next();
+		this.submit(stepper)
   	}else
   		swal(
 	          '',
@@ -183,13 +207,14 @@ export class RegistrationComponent implements OnInit {
 	          )
   }
   x=true;
-  submit(){
-  	console.log(this.x)
-  	if (this.x==true) {
-  	this.x=false
+
+  registrationloader=false
+  submit(stepper){
+
+  	this.registrationloader=true
   	 let urlSearchParams = new URLSearchParams();
                     urlSearchParams.append("email",this.email.toString());
-                    urlSearchParams.append("password",this.pword.toString());
+                    urlSearchParams.append("password",this.password.toString());
                      urlSearchParams.append('company', this.inputcompany.toString());
                   let body = urlSearchParams.toString()
       var header = new Headers();
@@ -202,13 +227,14 @@ export class RegistrationComponent implements OnInit {
        body,option)
           .map(response => response.json())
           .subscribe(res => {
+			this.registrationloader=false
           		if (res.id==null) {
 			       swal(
 			           'Email already in use!',
 			           'If the email address is still not working for you, please get in touch with us and we will look into it further!',
 			           'info'
 			          )
-          		}else{
+          		}else{this.registrationloader=true
 				  	 let urlSearchParams = new URLSearchParams();
 				                    urlSearchParams.append("id",res.id);
 				                    urlSearchParams.append("lname",this.lname);
@@ -235,10 +261,11 @@ export class RegistrationComponent implements OnInit {
 				          .subscribe(res => {
                 				this.global.swalClose();
                 				this.global.swalSuccess('Account has been Registered!');
-
-                				this.router.navigate(['login']);
+								stepper.next()
+								this.registrationloader=false
 				          },error => {
 				            console.log(Error); 
+							this.registrationloader=false
 				                this.global.swalAlertError();
 				           } );
           		}
@@ -246,8 +273,11 @@ export class RegistrationComponent implements OnInit {
           },error => {
             console.log(Error); 
                 this.global.swalAlertError();
+				this.registrationloader=false
            } );
-		  	}
   }
-
+  contbutton(){
+	  
+	this.router.navigate(['login']);
+  }
 }

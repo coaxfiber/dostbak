@@ -25,11 +25,31 @@
 		                <!-- Markup for getting Username starts -->
 		                <mat-grid-list cols="9" rowHeight="70px">
 		                    <mat-grid-tile [rowspan]="1" class="login-icon">
+		                        <mat-icon>email</mat-icon>
+		                    </mat-grid-tile>
+		                    <mat-grid-tile [colspan]="7">
+		                        <mat-form-field class="justifier">
+		                            <input autocomplete="off"  matInput placeholder="Email Address" text="text" [(ngModel)]="email">
+		                        </mat-form-field>
+		                    </mat-grid-tile>
+		                </mat-grid-list>
+		                <mat-grid-list cols="9" rowHeight="70px">
+		                    <mat-grid-tile [rowspan]="1" class="login-icon">
 		                        <mat-icon>lock</mat-icon>
 		                    </mat-grid-tile>
 		                    <mat-grid-tile [colspan]="7">
 		                        <mat-form-field class="justifier">
-		                            <input autocomplete="off"  matInput placeholder="Email Address" text="text" [(ngModel)]="global.email" [disabled]="true">
+		                            <input autocomplete="off"  matInput placeholder="Password" text="text" [(ngModel)]="password" type="password">
+		                        </mat-form-field>
+		                    </mat-grid-tile>
+		                </mat-grid-list>
+		                <mat-grid-list cols="9" rowHeight="70px">
+		                    <mat-grid-tile [rowspan]="1" class="login-icon">
+		                        <mat-icon>lock</mat-icon>
+		                    </mat-grid-tile>
+		                    <mat-grid-tile [colspan]="7">
+		                        <mat-form-field class="justifier">
+		                            <input autocomplete="off"  matInput placeholder="Confirm Password" text="text" [(ngModel)]="cpassword" type="password">
 		                        </mat-form-field>
 		                    </mat-grid-tile>
 		                </mat-grid-list>
@@ -86,7 +106,7 @@
 			      <table cellspacing="0" style="width: 100%">
 			      	<tr>
 			      		<td style="width: 30%">
-					      <mat-form-field class="npinput"  style="width: 100%">
+					      <mat-form-field class="npinput "  style="width: 100%">
 				              <input autocomplete="off"  matInput placeholder="Last name" required  [(ngModel)]="lname">
 				          </mat-form-field>
 			      		</td>
@@ -111,9 +131,9 @@
 			      		<td colspan="4" style="width: 40%">	
 			      			<table style="width:100%">
 			      				<tr><td style="width: 33%">
-						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						            <mat-form-field  class="npinput2" style="width: 100%" >
 						              <mat-label>Gender</mat-label>
-						              <mat-select  [(ngModel)]="gender">
+						              <mat-select  [(ngModel)]="gender" required>
 						                <mat-option value="M">
 						                  Male
 						                </mat-option>
@@ -124,9 +144,9 @@
 						            </mat-form-field>	
 			      				</td>
 					      		<td style="width: 33%">	
-						            <mat-form-field  class="npinput2" style="width: 100%" required>
+						            <mat-form-field  class="npinput2" style="width: 100%" >
 						              <mat-label>Civil Status</mat-label>
-						              <mat-select  [(ngModel)]="civilstatus">
+						              <mat-select  [(ngModel)]="civilstatus" required>
 						                <mat-option value="Single">
 						                  Single
 						                </mat-option>
@@ -144,7 +164,7 @@
 					      		</td>
 					      		<td>
 						            <mat-form-field class="npinput" style="width: 100%">
-						              <input autocomplete="off"  matInput placeholder="Citizenship" required type="text" [(ngModel)]="citizenship">
+						              <input autocomplete="off"   matInput placeholder="Citizenship" required type="text" [(ngModel)]="citizenship">
 						              <mat-hint>E.G. Filipino</mat-hint>
 				            		</mat-form-field>
 					      		</td>
@@ -163,7 +183,7 @@
 		      						</td>
 		      						<td style="width: 50%">
 							            <mat-form-field class="npinput" style="width: 100%">
-							              <input autocomplete="off"  matInput placeholder="Cellphone Number" type="text" [(ngModel)]="mobileno">
+							              <input autocomplete="off" maxlength="13" matInput placeholder="Cellphone Number" type="text" [(ngModel)]="mobileno">
 					            		</mat-form-field>
 		      						</td>
 		      					</tr>
@@ -177,11 +197,11 @@
 							  <tr>
 							    <td width="30%">
 							  	<mat-form-field style="width: 100%">
-							      <input autocomplete="off"  matInput placeholder="Street" [(ngModel)]="street1" name="lrno">
+							      <input autocomplete="off"  matInput placeholder="Street" [(ngModel)]="street1" name="lrno" >
 							    </mat-form-field></td>
 							  	<td style="padding-left: 10px">
 							    <mat-form-field style="width: calc(100% - 50px)">
-							      <input autocomplete="off"  autofocus matInput  placeholder="Permanent Address" [(ngModel)]="perma" readonly="readonly">
+							      <input autocomplete="off" autofocus matInput  placeholder="Permanent Address" [(ngModel)]="perma" readonly="readonly">
 							      
 							    </mat-form-field>
 							    <button mat-mini-fab color="primary"  (click)="openDialog(1)">
@@ -218,7 +238,7 @@
 			      <br><br>
 			      <div>
 			        <button  class="buttonblue" mat-raised-button style="margin: 10px" matStepperPrevious>Back</button> 
-			        <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="nexttosubmit(stepper)">Next</button>
+			        <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="nexttosubmit(stepper)" [disabled]="registrationloader">Next</button>
 			      </div>
 			  </mat-step>
 			  <mat-step>
@@ -228,8 +248,8 @@
 			    	Congratulations, your account has been successfully created
 			    </p>
 			    <div>
-			        <button  class="buttonblue" mat-raised-button style="margin: 10px" matStepperPrevious>Back</button> 
-			       <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="submit()">Continue</button>
+			        <!-- <button  class="buttonblue" mat-raised-button style="margin: 10px" matStepperPrevious>Back</button>  -->
+			       <button class="buttonblue" mat-raised-button style="float: right;margin: 10px" (click)="contbutton()">Continue</button>
 			      
 			    </div>
 			  </mat-step>
